@@ -36,7 +36,7 @@ export default function NavBar() {
           </li>
           <li className="menu__item">
             <a
-              href="../signin.html"
+              href="../signin.html" // add correct way for sing in
               className="menu__link"
             >
               Войти

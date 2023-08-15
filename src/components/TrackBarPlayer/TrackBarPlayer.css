@@ -1,3 +1,13 @@
+.player__track-play {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
 .track-play__contain {
   width: auto;
   display: -ms-grid;
