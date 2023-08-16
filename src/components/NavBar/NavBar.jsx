@@ -1,5 +1,6 @@
 import React from "react";
 import "./NavBar.css";
+import NavBarItem from "../NavBarItem/NavBarItem";
 
 export default function NavBar() {
   return (
@@ -18,30 +19,18 @@ export default function NavBar() {
       </div>
       <div className="nav__menu menu">
         <ul className="menu__list">
-          <li className="menu__item">
-            <a
-              href="#"
-              className="menu__link"
-            >
-              Главное
-            </a>
-          </li>
-          <li className="menu__item">
-            <a
-              href="#"
-              className="menu__link"
-            >
-              Мой плейлист
-            </a>
-          </li>
-          <li className="menu__item">
-            <a
-              href="../signin.html" // add correct way for sing in
-              className="menu__link"
-            >
-              Войти
-            </a>
-          </li>
+          <NavBarItem
+            menuName="Главная"
+            menuLink="#"
+          />
+          <NavBarItem
+            menuName="Мой плейлист"
+            menuLink="#"
+          />
+          <NavBarItem
+            menuName="Войти"
+            menuLink="../signin.html" // add correct way for sing in
+          />
         </ul>
       </div>
     </nav>
