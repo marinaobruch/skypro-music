@@ -1,7 +1,7 @@
 import React from "react";
-import "./NavBarBlockItem.css";
+import "./SideBarBlockItem.css";
 
-export default function NavBarBlockItem({
+export default function SideBarBlockItem({
   playlistLink,
   playlistName,
   playlistAlt,

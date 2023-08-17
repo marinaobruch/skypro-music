@@ -1,0 +1,30 @@
+.playlist__skeleton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skeleton__track{
+	width: 51px;
+	height: 51px;
+	background: #313131;
+}
+
+.skeleton__track-name {
+    width: 356px;
+	height: 19px;
+	background: #313131;
+}
+
+.skeleton__author{
+    width: 271px;
+	height: 19px;
+	background: #313131;
+}
+
+.skeleton__album{
+    width: 305px;
+	height: 19px;
+	background: #313131;
+}

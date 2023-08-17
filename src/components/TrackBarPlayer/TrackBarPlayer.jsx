@@ -1,10 +1,14 @@
 import React from "react";
 import "./TrackBarPlayer.css";
+import SkeletonTrack from "../SkeletonTrack/SkeletonTrack";
 
 export default function TrackBarPlayer() {
   return (
     <div className="player__track-play track-play">
+
+      <SkeletonTrack />
       <div className="track-play__contain">
+
         <div className="track-play__image">
           <svg
             className="track-play__svg"

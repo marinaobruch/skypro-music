@@ -1,10 +1,12 @@
 import React from "react";
 import "./PlayList.css";
 import Track from "../Track/Track";
+import SkeletonPlaylist from "../SkeletonPlaylist/SkeletonPlaylist";
 
 export default function PlayList() {
   return (
     <div className="content__playlist playlist">
+      <SkeletonPlaylist />
       <Track
         track="Guilt"
         artist="Nero"
