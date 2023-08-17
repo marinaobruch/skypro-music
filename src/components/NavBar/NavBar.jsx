@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavBar.css";
-import NavBarItem from "../NavBarItem/NavBarItem";
+import NavBarMenu from "../NavBarMenu/NavBarMenu";
 
 export default function NavBar() {
+  const [open, setOpen] = useState(false);
+
+  function toggleOlen() {
+    setOpen(!open)
+  }
+
   return (
     <nav className="main__nav nav">
       <div className="nav__logo logo">
@@ -12,27 +18,17 @@ export default function NavBar() {
           alt="logo"
         />
       </div>
-      <div className="nav__burger burger">
+
+      <div
+      className="nav__burger burger"
+      onClick={toggleOlen}
+      >
         <span className="burger__line"></span>
         <span className="burger__line"></span>
         <span className="burger__line"></span>
       </div>
-      <div className="nav__menu menu">
-        <ul className="menu__list">
-          <NavBarItem
-            menuName="Главная"
-            menuLink="#"
-          />
-          <NavBarItem
-            menuName="Мой плейлист"
-            menuLink="#"
-          />
-          <NavBarItem
-            menuName="Войти"
-            menuLink="../signin.html" // add correct way for sing in
-          />
-        </ul>
-      </div>
+
+      {open ? <NavBarMenu /> : null}
     </nav>
   );
 }

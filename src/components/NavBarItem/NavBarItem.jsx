@@ -5,7 +5,7 @@ export default function NavBarItem({ menuName, menuLink }) {
   return (
     <li className="menu__item">
       <a
-        href="{menuLink}"
+        href={menuLink}
         className="menu__link"
       >
         {menuName}
