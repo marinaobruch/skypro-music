@@ -3,11 +3,11 @@ import "./SideBar.css";
 import SideBarPersonal from "../SideBarPersonal/SideBarPersonal";
 import SideBarBlock from "../SideBarBlock/SideBarBlock";
 
-export default function SideBar() {
+export default function SideBar({ loading }) {
   return (
     <div className="main__sidebar sidebar">
-      <SideBarPersonal />
-      <SideBarBlock />
+      <SideBarPersonal loading={loading} />
+      <SideBarBlock loading={loading} />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import TrackBarPanel from "../TrackBarPanel/TrackBarPanel";
 import TrackBarPlayer from "../TrackBarPlayer/TrackBarPlayer";
 import TrackBarVolume from "../TrackBarVolume/TrackBarVolume";
 
-export default function TrackBar() {
+export default function TrackBar({ loading }) {
   return (
     <div className="bar">
       <div className="bar__content">
@@ -13,7 +13,7 @@ export default function TrackBar() {
         <div className="bar__player-block">
           <div className="bar__player player">
             <TrackBarPanel />
-            <TrackBarPlayer />
+            <TrackBarPlayer loading={loading} />
           </div>
           <TrackBarVolume />
         </div>

@@ -8,14 +8,13 @@ import SideBar from "./components/SideBar/SideBar";
 import TrackBar from "./components/TrackBar/TrackBar";
 
 function App() {
-  const [loading, setLoading] = useState(true)
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false)
-    },2000)
-  },[])
-
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   return (
     <div className="wrapper">
@@ -26,11 +25,11 @@ function App() {
             <Search />
             <h2 className="centerblock__h2">Треки</h2>
             <Filter />
-            <Content />
+            <Content loading={loading} />
           </div>
-          <SideBar />
+          <SideBar loading={loading} />
         </main>
-        <TrackBar />
+        <TrackBar loading={loading} />
 
         <footer className="footer"></footer>
       </div>
