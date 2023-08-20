@@ -13,8 +13,8 @@ export default function Filter() {
   const arrayOfYearNoFilter = tracksArray.map((item) => item.user.releaseDate);
   let arrayOfYear = [...new Set(arrayOfYearNoFilter)];
 
-  const arrayOfGengeNoFilter = tracksArray.map((item) => item.user.genre);
-  let arrayOfGenge = [...new Set(arrayOfGengeNoFilter)];
+  const arrayOfGenreNoFilter = tracksArray.map((item) => item.user.genre);
+  let arrayOfGenre = [...new Set(arrayOfGenreNoFilter)];
 
   const handleFilter = (i) => {
     setFilter(!filter);
@@ -46,7 +46,7 @@ export default function Filter() {
         value="жанры"
         onFilterClick={() => handleFilter("2")}
         filter={filter}
-        arrays={arrayOfGenge}
+        arrays={arrayOfGenre}
         open={open}
         id="2"
       />
