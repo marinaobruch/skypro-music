@@ -9,26 +9,15 @@ export default function FilterItem({
   open,
   id,
 }) {
-  const [isHover, setIsHover] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
   return (
     <div>
       <div
         className="filter__button _btn-text"
         style={{
-          color:
-            filter && id === open ? "#ad61ff" : isHover ? "#d9b6ff" : "#ffffff",
+          color: filter && id === open ? "#ad61ff" : "#ffffff",
 
-          borderColor:
-            filter && id === open ? "#ad61ff" : isHover ? "#d9b6ff" : "#ffffff",
+          borderColor: filter && id === open ? "#ad61ff" : "#ffffff",
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         onClick={onFilterClick}
       >
         {value}
@@ -39,9 +28,9 @@ export default function FilterItem({
           {arrays.map((option) => (
             <option
               className="filter__item"
-              key={option.id}
+              key={new Date().getTime()}
             >
-              {option.name}
+              {option}
             </option>
           ))}
         </div>

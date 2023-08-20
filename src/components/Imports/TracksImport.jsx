@@ -8,6 +8,7 @@ const tracksArray = [
       time: "4:44",
       genre: "Хип-хоп",
       modify: "",
+      releaseDate: "2021",
     },
   },
   {
@@ -19,6 +20,7 @@ const tracksArray = [
       time: "2:22",
       genre: "Рок",
       modify: "",
+      releaseDate: "2019",
     },
   },
   {
@@ -30,6 +32,7 @@ const tracksArray = [
       time: "4:44",
       genre: "Поп-музыка",
       modify: "",
+      releaseDate: "2002",
     },
   },
   {
@@ -41,6 +44,7 @@ const tracksArray = [
       time: "2:22",
       genre: "Техно",
       modify: "",
+      releaseDate: "2002",
     },
   },
   {
@@ -52,6 +56,7 @@ const tracksArray = [
       time: "4:12",
       genre: "Техно",
       modify: "(Remix)",
+      releaseDate: "2015",
     },
   },
   {
@@ -63,6 +68,7 @@ const tracksArray = [
       time: "2:54",
       genre: "Поп-музыка",
       modify: "(feat. AR/CO)",
+      releaseDate: "2023",
     },
   },
   {
@@ -74,6 +80,7 @@ const tracksArray = [
       time: "5:20",
       genre: "Ремикс",
       modify: "(Zeds Dead Remix)",
+      releaseDate: "2013",
     },
   },
   {
@@ -85,6 +92,7 @@ const tracksArray = [
       time: "3:41",
       genre: "Ремикс",
       modify: "(Hi Profile Remix)",
+      releaseDate: "1998",
     },
   },
   {
@@ -94,8 +102,9 @@ const tracksArray = [
       artist: "minthaze",
       album: "Captivating",
       time: "1:48",
-      genre: "Мнди",
+      genre: "Инди",
       modify: "(Zeds Dead Remix)",
+      releaseDate: "2021",
     },
   },
 ];
