@@ -15,12 +15,6 @@
   cursor: pointer;
 }
 
-._btn-text:active {
-  border-color: #ad61ff;
-  color: #ad61ff;
-  cursor: pointer;
-}
-
 .filter__form {
   width: 150px;
   height: 196px;
@@ -31,6 +25,7 @@
 
 .filter__item {
   font-size: 20px;
+  line-height: 24px;
   padding-left: 34px;
   color: #ffffff;
 }

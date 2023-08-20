@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FilterItem.css";
 
 export default function FilterItem({
@@ -9,10 +9,31 @@ export default function FilterItem({
   open,
   id,
 }) {
+  const [isHover, setIsHover] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHover(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHover(false);
+  };
   return (
     <div>
       <div
         className="filter__button _btn-text"
+        style={{
+          color: isHover
+            ? "#d9b6ff"
+            : filter && id === open
+            ? "#ad61ff"
+            : "#ffffff",
+          borderColor: isHover
+            ? "#d9b6ff"
+            : filter && id === open
+            ? "#ad61ff"
+            : "#ffffff",
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onClick={onFilterClick}
       >
         {value}
