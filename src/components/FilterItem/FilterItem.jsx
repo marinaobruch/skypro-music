@@ -1,7 +1,14 @@
 import React from "react";
 import "./FilterItem.css";
 
-export default function FilterItem({ value, onFilterClick, filter }) {
+export default function FilterItem({
+  value,
+  onFilterClick,
+  arrays,
+  filter,
+  open,
+  id,
+}) {
   return (
     <div>
       <div
@@ -10,13 +17,17 @@ export default function FilterItem({ value, onFilterClick, filter }) {
       >
         {value}
       </div>
-      {filter ? (
+
+      {filter && id === open ? (
         <div className="filter__form">
-          <p className="filter__item">111111</p>
-          <p className="filter__item">111111</p>
-          <p className="filter__item">111111</p>
-          <p className="filter__item">111111</p>
-          <p className="filter__item">111111</p>
+          {arrays.map((option) => (
+            <option
+              className="filter__item"
+              key={option.id}
+            >
+              {option.name}
+            </option>
+          ))}
         </div>
       ) : null}
     </div>
