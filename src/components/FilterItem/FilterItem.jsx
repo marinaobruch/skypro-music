@@ -21,16 +21,11 @@ export default function FilterItem({
       <div
         className="filter__button _btn-text"
         style={{
-          color: isHover
-            ? "#d9b6ff"
-            : filter && id === open
-            ? "#ad61ff"
-            : "#ffffff",
-          borderColor: isHover
-            ? "#d9b6ff"
-            : filter && id === open
-            ? "#ad61ff"
-            : "#ffffff",
+          color:
+            filter && id === open ? "#ad61ff" : isHover ? "#d9b6ff" : "#ffffff",
+
+          borderColor:
+            filter && id === open ? "#ad61ff" : isHover ? "#d9b6ff" : "#ffffff",
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
