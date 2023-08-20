@@ -8,7 +8,6 @@ export default function SkeletonPlaylist() {
       <div className="skeleton__track-name"></div>
       <div className="skeleton__author"></div>
       <div className="skeleton__album"></div>
-      <div className="skeleton__time"></div>
     </div>
   );
 }

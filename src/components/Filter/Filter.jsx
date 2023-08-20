@@ -8,20 +8,28 @@ export default function Filter() {
 
   let arrayOfArtist = [
     { id: 0, name: "Nero" },
-    { id: 1, name: "Dynoro" },
+    { id: 1, name: "Dynoro, Outwork, Mr. Gee" },
     { id: 2, name: "Ali Bakgor" },
+    { id: 3, name: "Стоункат, Psychopath" },
+    { id: 4, name: "Jaded, Will Clarke, AR/CO" },
+    { id: 5, name: "Blue Foundation, Zeds Dead" },
+    { id: 6, name: "HYBIT, Mr. Black, Offer Nissim, Hi Profile" },
+    { id: 7, name: "minthaze" },
   ];
 
   let arrayOfYears = [
-    { id: 0, name: "2000" },
-    { id: 1, name: "2002" },
-    { id: 2, name: "2012" },
+    { id: 0, name: "По умолчанию" },
+    { id: 1, name: "Сначала новые" },
+    { id: 2, name: "Сначала старые" },
   ];
 
   let arrayOfGanre = [
-    { id: 0, name: "Pop" },
-    { id: 1, name: "Funk" },
-    { id: 2, name: "Dance" },
+    { id: 0, name: "Рок" },
+    { id: 1, name: "Хип-хоп" },
+    { id: 2, name: "Поп-музыка" },
+    { id: 4, name: "Техно" },
+    { id: 5, name: "Мнди" },
+    { id: 6, name: "Ремикс" },
   ];
 
   const handleFilter = (i) => {
@@ -51,7 +59,7 @@ export default function Filter() {
       />
 
       <FilterItem
-        value="жанру"
+        value="жанры"
         onFilterClick={() => handleFilter("2")}
         filter={filter}
         arrays={arrayOfGanre}
