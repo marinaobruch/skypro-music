@@ -1,34 +1,30 @@
 import React, { useState } from "react";
-import "./NavBar.css";
+import * as S from "./NavBar.styles.js";
 import NavBarMenu from "../NavBarMenu/NavBarMenu";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
 
   function toggleOlen() {
-    setOpen(!open)
+    setOpen(!open);
   }
 
   return (
-    <nav className="main__nav nav">
-      <div className="nav__logo logo">
-        <img
-          className="logo__image"
+    <S.MainNav>
+      <S.Logo>
+        <S.LogoImg
           src="./img/logo.png"
           alt="logo"
         />
-      </div>
+      </S.Logo>
 
-      <div
-      className="nav__burger burger"
-      onClick={toggleOlen}
-      >
-        <span className="burger__line"></span>
-        <span className="burger__line"></span>
-        <span className="burger__line"></span>
-      </div>
+      <S.Burger onClick={toggleOlen}>
+        <S.BurgerLine></S.BurgerLine>
+        <S.BurgerLine></S.BurgerLine>
+        <S.BurgerLine></S.BurgerLine>
+      </S.Burger>
 
       {open ? <NavBarMenu /> : null}
-    </nav>
+    </S.MainNav>
   );
 }

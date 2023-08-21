@@ -1,18 +1,18 @@
-.main__nav {
+import { styled } from "styled-components";
+
+export const MainNav = styled.nav`
   width: 244px;
   background-color: #181818;
   padding: 20px 0 20px 36px;
-}
-
-.nav__logo {
+`;
+export const Logo = styled.div`
   width: 113.33px;
   height: 43px;
   padding: 13px 0 13px 0;
   background-color: transparent;
   margin-bottom: 20px;
-}
-
-.nav__burger {
+`;
+export const Burger = styled.div`
   width: 20px;
   height: 36px;
   padding: 13px 0;
@@ -26,17 +26,15 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-}
-
-.logo__image {
+`;
+export const LogoImg = styled.img`
   width: 113.33px;
   height: 17px;
   color: #181818;
-}
-
-.burger__line {
+`;
+export const BurgerLine = styled.span`
   display: inline-block;
   width: 100%;
   height: 1px;
   background-color: #d3d3d3;
-}
+`;

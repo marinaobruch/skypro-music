@@ -1,5 +1,5 @@
 import React from "react";
-import "./SideBarBlockItem.css";
+import * as S from "./SideBarBlockItem.styles.js";
 import SkeletonSidebar from "../SkeletonSidebar/SkeletonSidebar";
 
 export default function SideBarBlockItem({
@@ -9,21 +9,17 @@ export default function SideBarBlockItem({
   loading,
 }) {
   return (
-    <div className="sidebar__item">
+    <S.SidebarItem>
       {loading ? (
         <SkeletonSidebar />
       ) : (
-        <a
-          className="sidebar__link"
-          href={playlistLink}
-        >
-          <img
-            className="sidebar__img"
+        <S.SidebarLink href={playlistLink}>
+          <S.SidebarImgItem
             src={playlistName}
             alt={playlistAlt}
           />
-        </a>
+        </S.SidebarLink>
       )}
-    </div>
+    </S.SidebarItem>
   );
 }

@@ -1,4 +1,6 @@
-.sidebar__block {
+import { styled } from "styled-components";
+
+export const SidebarBlock = styled.div`
   height: 100%;
   padding: 240px 0 0 0;
   display: -webkit-box;
@@ -11,9 +13,9 @@
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-}
+`;
 
-.sidebar__list {
+export const SidebarList = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -24,4 +26,4 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-}
+`;
