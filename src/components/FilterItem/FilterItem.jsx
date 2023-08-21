@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./FilterItem.css";
 
 export default function FilterItem({
@@ -12,19 +11,16 @@ export default function FilterItem({
   return (
     <div>
       <div
-        className="filter__button _btn-text"
-        style={{
-          color: filter && id === open ? "#ad61ff" : "#ffffff",
-
-          borderColor: filter && id === open ? "#ad61ff" : "#ffffff",
-        }}
+        className={`${
+          filter && id === open ? "filter__button_active" : "filter__button"
+        }`}
         onClick={onFilterClick}
       >
         {value}
       </div>
 
       {filter && id === open ? (
-        <div className="filter__form">
+        <div className="filter__form _active">
           {arrays.map((option) => (
             <option
               className="filter__item"
