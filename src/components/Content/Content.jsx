@@ -2,7 +2,7 @@ import React from "react";
 import "./Content.css";
 import PlayList from "../PlayList/PlayList";
 
-export default function Content() {
+export default function Content({ loading }) {
   return (
     <div className="centerblock__content">
       <div className="content__title playlist-title">
@@ -18,8 +18,7 @@ export default function Content() {
           </svg>
         </div>
       </div>
-
-      <PlayList />
+      <PlayList loading={loading} />
     </div>
   );
 }

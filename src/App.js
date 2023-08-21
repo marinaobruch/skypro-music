@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import Content from "./components/Content/Content";
 import Filter from "./components/Filter/Filter";
@@ -7,6 +8,14 @@ import SideBar from "./components/SideBar/SideBar";
 import TrackBar from "./components/TrackBar/TrackBar";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -16,11 +25,11 @@ function App() {
             <Search />
             <h2 className="centerblock__h2">Треки</h2>
             <Filter />
-            <Content />
+            <Content loading={loading} />
           </div>
-          <SideBar />
+          <SideBar loading={loading} />
         </main>
-        <TrackBar />
+        <TrackBar loading={loading} />
 
         <footer className="footer"></footer>
       </div>
