@@ -22,12 +22,16 @@
   background-color: #313131;
   position: absolute;
   border-radius: 12px;
+
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .filter__item {
   font-size: 20px;
   line-height: 24px;
   padding-left: 34px;
+  padding-right: 34px;
   padding-bottom: 28px;
   color: #ffffff;
 }
@@ -38,4 +42,19 @@
 
 .filter__item:hover {
   color: #b672ff;
+  cursor: pointer;
+}
+
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+  width: 4px; /* ширина для вертикального скролла */
+  height: 0px; /* высота для горизонтального скролла */
+  background-color: #4b4949;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+  background-color: #4b4949;
+  border-radius: 9em;
+  box-shadow: inset 1px 1px 10px #ffffff;
 }

@@ -28,7 +28,7 @@ export default function FilterItem({
           {arrays.map((option) => (
             <option
               className="filter__item"
-              key={new Date().getTime()}
+              key={option}
             >
               {option}
             </option>
