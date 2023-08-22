@@ -1,19 +1,19 @@
 import React from "react";
-import "./SideBarPersonal.css";
+import * as S from "./SideBarPersonal.styles.js";
 
 export default function SideBarPersonal({ loading }) {
   return (
-    <div className="sidebar__personal">
+    <S.SidebarPersonal>
       {loading ? (
-        <p className="sidebar__personal-name">User</p>
+        <S.SidebarPersonalName>User</S.SidebarPersonalName>
       ) : (
-        <p className="sidebar__personal-name">Sergey.Ivanov</p>
+        <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
       )}
-      <div className="sidebar__icon">
+      <S.SidebarIcon>
         <svg alt="logout">
           <use xlinkHref="img/icon/sprite.svg#logout"></use>
         </svg>
-      </div>
-    </div>
+      </S.SidebarIcon>
+    </S.SidebarPersonal>
   );
 }

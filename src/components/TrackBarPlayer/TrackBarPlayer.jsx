@@ -37,7 +37,7 @@ export default function TrackBarPlayer({ loading }) {
       )}
       {loading ? null : (
         <div className="track-play__like-dis">
-          <div className="track-play__like _btn-icon">
+          <div className="track-play__like btn-icon">
             <svg
               className="track-play__like-svg"
               alt="like"
@@ -45,7 +45,7 @@ export default function TrackBarPlayer({ loading }) {
               <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
             </svg>
           </div>
-          <div className="track-play__dislike _btn-icon">
+          <div className="track-play__dislike btn-icon">
             <svg
               className="track-play__dislike-svg"
               alt="dislike"
