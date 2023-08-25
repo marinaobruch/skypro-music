@@ -1,26 +1,22 @@
 import React from "react";
-import "./TrackBarVolume.css";
+import * as S from "./TrackBarVolume.styles.js";
 
 export default function TrackBarVolume() {
   return (
-    <div className="bar__volume-block volume">
-      <div className="volume__content">
-        <div className="volume__image">
-          <svg
-            className="volume__svg"
-            alt="volume"
-          >
+    <S.BarVolumeBlock>
+      <S.VolumeContent>
+        <S.VolumeImg>
+          <S.VolumeSvg alt="volume">
             <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-          </svg>
-        </div>
-        <div className="volume__progress _btn">
-          <input
-            className="volume__progress-line _btn"
+          </S.VolumeSvg>
+        </S.VolumeImg>
+        <S.VolumeProgress>
+          <S.VolumeProgressLine
             type="range"
             name="range"
           />
-        </div>
-      </div>
-    </div>
+        </S.VolumeProgress>
+      </S.VolumeContent>
+    </S.BarVolumeBlock>
   );
 }

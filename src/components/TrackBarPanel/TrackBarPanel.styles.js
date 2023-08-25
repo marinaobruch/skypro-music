@@ -21,24 +21,15 @@ export const CommonBtn = styled.div`
   -ms-flex-align: center;
   align-items: center;
 `;
-export const BthHover = styled.div`
-  padding: 5px;
-
-  &:hover svg {
+export const BtnPrev = styled(CommonBtn)`
+  margin-right: 23px;
+  &:hover {
     fill: #696969;
     stroke: #ffffff;
     cursor: pointer;
   }
   &:active svg {
     fill: transparent;
-    stroke: #ffffff;
-    cursor: pointer;
-  }
-`;
-export const BtnPrev = styled(CommonBtn)`
-  margin-right: 23px;
-  &:hover {
-    fill: #696969;
     stroke: #ffffff;
     cursor: pointer;
   }
@@ -50,16 +41,37 @@ export const BtnNext = styled(CommonBtn)`
   margin-right: 28px;
   fill: #a53939;
 `;
-export const BtnRepeat = styled(CommonBtn && BthHover)`
+export const BtnRepeat = styled(CommonBtn)`
   margin-right: 24px;
+  &:hover svg {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+  &:active svg {
+    fill: transparent;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 `;
-export const BtnShuffle = styled(CommonBtn && BthHover)`
+export const BtnShuffle = styled(CommonBtn)`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+
+  &:hover svg {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+  &:active svg {
+    fill: transparent;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 `;
 export const BtnPrevSvg = styled.svg`
   width: 15px;

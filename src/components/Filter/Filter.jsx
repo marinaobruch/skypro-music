@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Filter.css";
+import * as S from "./Filter.styles.js";
 import FilterItem from "../FilterItem/FilterItem";
 import { tracksArray } from "../Imports/TracksImport";
 
@@ -22,8 +22,8 @@ export default function Filter() {
   };
 
   return (
-    <div className="centerblock__filter filter">
-      <div className="filter__title">Искать по:</div>
+    <S.CenterblockFilter>
+      <S.FilterTitle>Искать по:</S.FilterTitle>
       <FilterItem
         value="исполнителю"
         onFilterClick={() => handleFilter("0")}
@@ -50,6 +50,6 @@ export default function Filter() {
         open={open}
         id="2"
       />
-    </div>
+    </S.CenterblockFilter>
   );
 }

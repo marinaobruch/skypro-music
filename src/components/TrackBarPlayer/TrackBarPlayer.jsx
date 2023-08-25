@@ -1,60 +1,41 @@
 import React from "react";
-import "./TrackBarPlayer.css";
+import * as S from "./TrackBarPlayer.styles.js";
 import SkeletonTrack from "../SkeletonTrack/SkeletonTrack";
 
 export default function TrackBarPlayer({ loading }) {
   return (
-    <div className="player__track-play track-play">
+    <S.PlayerTrackPlay>
       {loading ? (
         <SkeletonTrack />
       ) : (
-        <div className="track-play__contain">
-          <div className="track-play__image">
-            <svg
-              className="track-play__svg"
-              alt="music"
-            >
+        <S.TrackPlayContain>
+          <S.TrackPlayImg>
+            <S.TrackPlaySvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-            </svg>
-          </div>
-          <div className="track-play__author">
-            <a
-              className="track-play__author-link"
-              href="http://"
-            >
-              Ты та...
-            </a>
-          </div>
-          <div className="track-play__album">
-            <a
-              className="track-play__album-link"
-              href="http://"
-            >
-              Баста
-            </a>
-          </div>
-        </div>
+            </S.TrackPlaySvg>
+          </S.TrackPlayImg>
+          <S.TrackAuthor>
+            <S.TrackAuthorLink href="http://">Ты та...</S.TrackAuthorLink>
+          </S.TrackAuthor>
+          <S.TrackPlayAlbum>
+            <S.TrackPlayAlbumLink href="http://">Баста</S.TrackPlayAlbumLink>
+          </S.TrackPlayAlbum>
+        </S.TrackPlayContain>
       )}
       {loading ? null : (
-        <div className="track-play__like-dis">
-          <div className="track-play__like btn-icon">
-            <svg
-              className="track-play__like-svg"
-              alt="like"
-            >
+        <S.TrackPlayLikeDis>
+          <S.TrackPlayLike>
+            <S.TrackPlayLikeSvg alt="like">
               <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-            </svg>
-          </div>
-          <div className="track-play__dislike btn-icon">
-            <svg
-              className="track-play__dislike-svg"
-              alt="dislike"
-            >
+            </S.TrackPlayLikeSvg>
+          </S.TrackPlayLike>
+          <S.TrackPlayDislike>
+            <S.TrackPlayDislikeSvg alt="dislike">
               <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
-            </svg>
-          </div>
-        </div>
+            </S.TrackPlayDislikeSvg>
+          </S.TrackPlayDislike>
+        </S.TrackPlayLikeDis>
       )}
-    </div>
+    </S.PlayerTrackPlay>
   );
 }
