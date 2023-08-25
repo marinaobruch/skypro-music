@@ -1,18 +1,18 @@
 import React from "react";
-import "./Search.css";
+import * as S from "./Search.styles.js";
 
 export default function Search() {
   return (
-    <div className="centerblock__search search">
-      <svg className="search__svg">
+    <S.CentreBlockSearch>
+      <S.SearchSvg>
         <use xlinkHref="img/icon/sprite.svg#icon-search"></use>
-      </svg>
-      <input
+      </S.SearchSvg>
+      <S.SearchText
         className="search__text"
         type="search"
         placeholder="Поиск"
         name="search"
       />
-    </div>
+    </S.CentreBlockSearch>
   );
 }

@@ -1,15 +1,10 @@
 import React from "react";
-import "./NavBarItem.css";
+import * as S from "./NavBarItem.styles.js";
 
 export default function NavBarItem({ menuName, menuLink }) {
   return (
-    <li className="menu__item">
-      <a
-        href={menuLink}
-        className="menu__link"
-      >
-        {menuName}
-      </a>
-    </li>
+    <S.MenuItem>
+      <S.MenuLink href={menuLink}>{menuName}</S.MenuLink>
+    </S.MenuItem>
   );
 }

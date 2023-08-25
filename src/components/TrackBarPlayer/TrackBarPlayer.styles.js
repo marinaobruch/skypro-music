@@ -1,4 +1,6 @@
-.player__track-play {
+import { styled } from "styled-components";
+
+export const PlayerTrackPlay = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6,9 +8,8 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-}
-
-.track-play__contain {
+`;
+export const TrackPlayContain = styled.div`
   width: auto;
   display: -ms-grid;
   display: grid;
@@ -18,9 +19,8 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.track-play__image {
+`;
+export const TrackPlayImg = styled.div`
   width: 51px;
   height: 51px;
   background-color: #313131;
@@ -38,47 +38,41 @@
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
   grid-area: image;
-}
-
-.track-play__svg {
+`;
+export const TrackPlaySvg = styled.svg`
   width: 18px;
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
-}
-
-.track-play__author {
+`;
+export const TrackAuthor = styled.div`
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: author;
   min-width: 49px;
-}
-
-.track-play__author-link {
+`;
+export const TrackAuthorLink = styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
   white-space: nowrap;
-}
-
-.track-play__album {
+`;
+export const TrackPlayAlbum = styled.div`
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: album;
   min-width: 49px;
-}
-
-.track-play__album-link {
+`;
+export const TrackPlayAlbumLink = styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
   color: #ffffff;
-}
-
-.track-play__like-dis {
+`;
+export const TrackPlayLikeDis = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -90,46 +84,45 @@
   -ms-flex-align: center;
   align-items: center;
   margin-left: 26%;
-}
-
-.track-play__like,
-.track-play__dislike {
+  cursor: pointer;
+`;
+export const TrackPlayLike = styled.div`
   padding: 5px;
-}
-
-.track-play__like-svg {
+  cursor: pointer;
+`;
+export const TrackPlayDislike = styled.div`
+  padding: 5px;
+  margin-left: 28.5px;
+`;
+export const TrackPlayLikeSvg = styled.svg`
   width: 14px;
   height: 12px;
   fill: transparent;
   stroke: #696969;
-}
-
-.track-play__dislike {
-  margin-left: 28.5px;
-}
-
-.track-play__dislike-svg {
+  &:hover {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
+  &:active {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+`;
+export const TrackPlayDislikeSvg = styled.svg`
   width: 14.34px;
   height: 13px;
   fill: transparent;
   stroke: #696969;
-}
-
-._btn-icon:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
-}
-
-._btn-icon:active svg {
-  fill: transparent;
-  stroke: #ffffff;
-  cursor: pointer;
-}
-
-._btn-icon:active .track-play__like-svg,
-._btn-icon:active .track-play__dislike-svg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
-}
+  &:hover {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
+  &:active {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+`;

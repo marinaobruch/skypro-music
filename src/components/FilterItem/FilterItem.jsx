@@ -1,4 +1,4 @@
-import "./FilterItem.css";
+import * as S from "./FilterItem.styles.js";
 
 export default function FilterItem({
   value,
@@ -10,26 +10,19 @@ export default function FilterItem({
 }) {
   return (
     <div>
-      <div
-        className={`${
-          filter && id === open ? "filter__button_active" : "filter__button"
-        }`}
+      <S.FilterButton
+        isClicked={filter && id === open}
         onClick={onFilterClick}
       >
         {value}
-      </div>
+      </S.FilterButton>
 
       {filter && id === open ? (
-        <div className="filter__form _active">
+        <S.FilterForm>
           {arrays.map((option) => (
-            <option
-              className="filter__item"
-              key={option}
-            >
-              {option}
-            </option>
+            <S.FilterItem key={option}>{option}</S.FilterItem>
           ))}
-        </div>
+        </S.FilterForm>
       ) : null}
     </div>
   );

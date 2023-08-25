@@ -1,4 +1,6 @@
-.centerblock__content {
+import { styled } from "styled-components";
+
+export const CenterblockCntent = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6,9 +8,8 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-}
-
-.content__title {
+`;
+export const ContentTitle = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -23,9 +24,8 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 24px;
-}
-
-.playlist-title__col {
+`;
+export const PlaylistTitleCol = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -33,28 +33,23 @@
   letter-spacing: 2px;
   color: #696969;
   text-transform: uppercase;
-}
-
-.playlist-title__svg {
+`;
+export const PlaylistTitleSvg = styled.svg`
   width: 12px;
   height: 12px;
   fill: transparent;
   stroke: #696969;
-}
-
-.col01 {
+`;
+export const PlaylistTitleCol1 = styled(PlaylistTitleCol)`
   width: 447px;
-}
-
-.col02 {
+`;
+export const PlaylistTitleCol2 = styled(PlaylistTitleCol)`
   width: 321px;
-}
-
-.col03 {
+`;
+export const PlaylistTitleCol3 = styled(PlaylistTitleCol)`
   width: 245px;
-}
-
-.col04 {
+`;
+export const PlaylistTitleCol4 = styled(PlaylistTitleCol)`
   width: 60px;
   text-align: end;
-}
+`;

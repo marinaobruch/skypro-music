@@ -1,12 +1,15 @@
-.bar {
+import { styled } from "styled-components";
+
+// export const  = styled.div``;
+
+export const Bar = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   background: rgba(28, 28, 28, 0.5);
-}
-
-.bar__content {
+`;
+export const BarContent = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14,15 +17,13 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-}
-
-.bar__player-progress {
+`;
+export const BarPlayerProgress = styled.div`
   width: 100%;
   height: 5px;
   background: #2e2e2e;
-}
-
-.bar__player-block {
+`;
+export const BarPlayerBlock = styled.div`
   height: 73px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -34,9 +35,8 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-}
-
-.bar__player {
+`;
+export const BarPlayer = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -50,23 +50,4 @@
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-}
-
-._btn-icon:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
-}
-
-._btn-icon:active svg {
-  fill: transparent;
-  stroke: #ffffff;
-  cursor: pointer;
-}
-
-._btn-icon:active .track-play__like-svg,
-._btn-icon:active .track-play__dislike-svg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
-}
+`;

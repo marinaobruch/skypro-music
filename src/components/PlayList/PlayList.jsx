@@ -1,11 +1,11 @@
 import React from "react";
-import "./PlayList.css";
+import * as S from "./PlayList.styles.js";
 import Track from "../Track/Track";
 
 export default function PlayList({ loading }) {
   return (
-    <div className="content__playlist playlist">
+    <S.ContentPlaylist>
       <Track loading={loading} />
-    </div>
+    </S.ContentPlaylist>
   );
 }

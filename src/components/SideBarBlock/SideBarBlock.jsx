@@ -1,11 +1,11 @@
 import React from "react";
-import "./SideBarBlock.css";
+import * as S from "./SideBarBlock.styles.js";
 import SideBarBlockItem from "../SideBarBlockItem/SideBarBlockItem";
 
 export default function SideBarBlock({ loading }) {
   return (
-    <div className="sidebar__block">
-      <div className="sidebar__list">
+    <S.SidebarBlock>
+      <S.SidebarList>
         <SideBarBlockItem
           loading={loading}
           playlistLink="#"
@@ -17,16 +17,16 @@ export default function SideBarBlock({ loading }) {
           loading={loading}
           playlistLink="#"
           playlistName="./img/playlist02.png"
-          playlistAlt="day's playlist"
+          playlistAlt="100 hits playlist"
         />
 
         <SideBarBlockItem
           loading={loading}
           playlistLink="#"
           playlistName="./img/playlist03.png"
-          playlistAlt="day's playlist"
+          playlistAlt="indi playlist"
         />
-      </div>
-    </div>
+      </S.SidebarList>
+    </S.SidebarBlock>
   );
 }

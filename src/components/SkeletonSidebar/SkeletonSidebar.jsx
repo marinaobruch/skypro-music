@@ -1,10 +1,10 @@
 import React from "react";
-import "./SkeletonSidebar.css";
+import * as S from "./SkeletonSidebar.styles.js";
 
 export default function SkeletonSidebar() {
   return (
     <div className="sidebar_skeleton">
-      <div className="skeleton_item"></div>
+      <S.SkeletonItem></S.SkeletonItem>
     </div>
   );
 }

@@ -1,74 +1,57 @@
 import React from "react";
-import "./Track.css";
+import * as S from "./Track.styles.js";
 import SkeletonPlaylist from "../SkeletonPlaylist/SkeletonPlaylist";
 import { tracksArray } from "../Imports/TracksImport";
 
 export default function Track({ loading }) {
   return (
-    <div className="playlist__item">
+    <S.PlaylistItem>
       {tracksArray.map((option) => (
-        <div
-          className="playlist__track track"
-          key={option.user.id}
-        >
+        <S.PlaylistTrack key={option.user.id}>
           {loading ? (
             <SkeletonPlaylist />
           ) : (
             <>
-              <div className="track__title">
-                <div className="track__title-image">
-                  <svg
-                    className="track__title-svg"
-                    alt="music"
-                  >
+              <S.TrackTitle>
+                <S.TrackTitleImg>
+                  <S.TrackTitleSvg alt="music">
                     <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                  </svg>
-                </div>
+                  </S.TrackTitleSvg>
+                </S.TrackTitleImg>
 
                 <div className="track__title-text">
-                  <a
-                    className="track__title-link"
-                    href="http://"
-                  >
+                  <S.TrackTitleLink href="http://">
                     {option.user.track}{" "}
-                    <span className="track__title-span">
-                      {option.user.modify}
-                    </span>
-                  </a>
+                    <S.TrackTitleSpan>{option.user.modify}</S.TrackTitleSpan>
+                  </S.TrackTitleLink>
                 </div>
-              </div>
+              </S.TrackTitle>
 
-              <div className="track__author">
-                <a
+              <S.TrackAuthor>
+                <S.TrackAuthorLink
                   className="track__author-link"
                   href="http://"
                 >
                   {option.user.artist}
-                </a>
-              </div>
+                </S.TrackAuthorLink>
+              </S.TrackAuthor>
 
-              <div className="track__album">
-                <a
-                  className="track__album-link"
-                  href="http://"
-                >
+              <S.TrackAlbom>
+                <S.TrackAlbomLink href="http://">
                   {option.user.album}
-                </a>
-              </div>
+                </S.TrackAlbomLink>
+              </S.TrackAlbom>
 
-              <div className="track__time">
-                <svg
-                  className="track__time-svg"
-                  alt="time"
-                >
+              <S.TrackTimeText>
+                <S.TrackTimeSvg alt="time">
                   <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-                </svg>
+                </S.TrackTimeSvg>
                 <span className="track__time-text">{option.user.time}</span>
-              </div>
+              </S.TrackTimeText>
             </>
           )}
-        </div>
+        </S.PlaylistTrack>
       ))}
-    </div>
+    </S.PlaylistItem>
   );
 }

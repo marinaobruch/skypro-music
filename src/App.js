@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import * as S from "./App.styles";
 import Content from "./components/Content/Content";
 import Filter from "./components/Filter/Filter";
 import NavBar from "./components/NavBar/NavBar";
@@ -17,23 +17,25 @@ function App() {
   }, []);
 
   return (
-    <div className="wrapper">
-      <div className="container">
-        <main className="main">
-          <NavBar />
-          <div className="main__centerblock centerblock">
-            <Search />
-            <h2 className="centerblock__h2">Треки</h2>
-            <Filter />
-            <Content loading={loading} />
-          </div>
-          <SideBar loading={loading} />
-        </main>
-        <TrackBar loading={loading} />
-
-        <footer className="footer"></footer>
-      </div>
-    </div>
+    <>
+      <S.GlobalStyle />
+      <S.Wrapper>
+        <S.Container>
+          <S.Main>
+            <NavBar />
+            <S.MainCenterblock>
+              <Search />
+              <S.MainCenterblockH2>Треки</S.MainCenterblockH2>
+              <Filter />
+              <Content loading={loading} />
+            </S.MainCenterblock>
+            <SideBar loading={loading} />
+          </S.Main>
+          <TrackBar loading={loading} />
+          <footer className="footer"></footer>
+        </S.Container>
+      </S.Wrapper>
+    </>
   );
 }
 

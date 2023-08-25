@@ -1,4 +1,11 @@
-.playlist__track {
+import { styled } from "styled-components";
+
+export const PlaylistItem = styled.div`
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+`;
+export const PlaylistTrack = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -13,9 +20,8 @@
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 8px;
-}
-
-.track__title {
+`;
+export const TrackTitle = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -27,9 +33,8 @@
   -ms-flex-align: center;
   align-items: center;
   width: 447px;
-}
-
-.track__title-image {
+`;
+export const TrackTitleImg = styled.div`
   width: 51px;
   height: 51px;
   padding: 16px;
@@ -44,32 +49,28 @@
   -ms-flex-pack: center;
   justify-content: center;
   margin-right: 17px;
-}
-
-.track__title-svg {
+`;
+export const TrackTitleSvg = styled.svg`
   width: 18px;
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
-}
-
-.track__title-link {
+`;
+export const TrackTitleLink = styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
-}
-
-.track__title-span {
+`;
+export const TrackTitleSpan = styled.span`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #4e4e4e;
-}
-
-.track__author {
+`;
+export const TrackAuthor = styled.div`
   width: 321px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -77,42 +78,37 @@
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-}
-
-.track__author-link {
+`;
+export const TrackAuthorLink = styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
   text-align: left;
-}
-
-.track__album {
+`;
+export const TrackAlbom = styled.div`
   width: 245px;
-}
-
-.track__album-link {
+`;
+export const TrackAlbomLink = styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #696969;
-}
-
-.track__time-svg {
+`;
+export const TrackTimeSvg = styled.svg`
   width: 14px;
   height: 12px;
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
-}
-
-.track__time-text {
+`;
+export const TrackTimeText = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   text-align: right;
   color: #696969;
-}
+`;
