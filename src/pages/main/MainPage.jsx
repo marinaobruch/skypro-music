@@ -6,6 +6,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import Search from "../../components/Search/Search";
 import SideBar from "../../components/SideBar/SideBar";
 import TrackBar from "../../components/TrackBar/TrackBar";
+import { ALBUMS } from "../../constants.js";
 
 export const MainPage = () => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,10 @@ export const MainPage = () => {
               <Filter />
               <Content loading={loading} />
             </S.MainCenterblock>
-            <SideBar loading={loading} />
+            <SideBar
+              loading={loading}
+              albums={ALBUMS}
+            />
           </S.Main>
           <TrackBar loading={loading} />
           <footer className="footer"></footer>
