@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import * as S from "./NavBarMenu.styles.js";
 import NavBarItem from "../NavBarItem/NavBarItem";
 
@@ -5,18 +6,15 @@ export default function NavBarMenu() {
   return (
     <S.NavMenu>
       <S.MenuList>
-        <NavBarItem
-          menuName="Главная"
-          menuLink="#"
-        />
-        <NavBarItem
-          menuName="Мой плейлист"
-          menuLink="#"
-        />
-        <NavBarItem
-          menuName="Войти"
-          menuLink="../signin.html" // add correct way for sing in
-        />
+        <NavLink to="/">
+          <NavBarItem menuName="Главная" />
+        </NavLink>
+        <NavLink to="/favorites">
+          <NavBarItem menuName="Мой плейлист" />
+        </NavLink>
+        <NavLink to="/login">
+          <NavBarItem menuName="Выйти" />
+        </NavLink>
       </S.MenuList>
     </S.NavMenu>
   );
