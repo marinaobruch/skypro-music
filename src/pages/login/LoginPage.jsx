@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
+import * as S from "./LoginPage.styles";
 
 export const LoginPage = ({ onAuthButtonClick }) => {
   return (
-    <div>
-      <h1>Страница логина</h1>
+    <S.LoginBclock>
+      <S.LoginBclock_Header>Страница логина</S.LoginBclock_Header>
 
-      <Link to="/">
-        <button onClick={onAuthButtonClick}>Войти</button>
-      </Link>
+      <S.LoginBclock_Buttons>
+        <Link to="/">
+          <S.LoginButton onClick={onAuthButtonClick}>Войти</S.LoginButton>
+        </Link>
 
-      <Link to="/register">
-        <div>Перейти к регистрации</div>
-      </Link>
-    </div>
+        <Link to="/register">
+          <S.RegButton>Зарегистрироваться</S.RegButton>
+        </Link>
+      </S.LoginBclock_Buttons>
+    </S.LoginBclock>
   );
 };
