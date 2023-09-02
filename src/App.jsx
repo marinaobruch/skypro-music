@@ -8,6 +8,9 @@ function App() {
   const handleLogin = () => setUser("taradam");
   const handleLogout = () => setUser(null);
 
+  // const handleLogin = () => setUser(localStorage.setItem("user", "token"));
+  // const handleLogout = () => setUser(localStorage.clear());
+
   return (
     <div className="App">
       <div className="App-layout">

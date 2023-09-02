@@ -8,44 +8,43 @@ import { RegPage } from "./pages/reg/RegPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 export const AppRoutes = ({ user, onAuthButtonClick }) => {
-  const isAllowed = Boolean(user);
-  // console.log(isAllowed);
+  const isUser = Boolean(user);
 
   return (
     <Routes>
       <Route
         path="/login"
-        element={<LoginPage />}
-        isAllowed={isAllowed}
-        onAuthButtonClick={onAuthButtonClick}
+        element={
+          <LoginPage
+            isAllowed={isUser}
+            onAuthButtonClick={onAuthButtonClick}
+          />
+        }
       />
       <Route
         path="/register"
         element={<RegPage />}
       />
-
       <Route
         path="/"
         element={
-          <ProtectedRoute isAllowed={isAllowed}>
+          <ProtectedRoute isAllowed={isUser}>
             <MainPage />
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/favorites"
         element={
-          <ProtectedRoute isAllowed={isAllowed}>
+          <ProtectedRoute isAllowed={isUser}>
             <FavoritesPage />
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/category/:id"
         element={
-          <ProtectedRoute isAllowed={isAllowed}>
+          <ProtectedRoute isAllowed={isUser}>
             <CategoriesPage />
           </ProtectedRoute>
         }

@@ -5,7 +5,7 @@ export const LoginPage = ({ onAuthButtonClick }) => {
     <div>
       <h1>Страница логина</h1>
 
-      <Link to={"/"}>
+      <Link to="/">
         <button onClick={onAuthButtonClick}>Войти</button>
       </Link>
 
