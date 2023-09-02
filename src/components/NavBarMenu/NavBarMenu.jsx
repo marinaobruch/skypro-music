@@ -1,8 +1,9 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import * as S from "./NavBarMenu.styles.js";
 import NavBarItem from "../NavBarItem/NavBarItem";
 
-export default function NavBarMenu() {
+export default function NavBarMenu({ setUser }) {
+  const handleLogout = () => setUser(localStorage.clear());
   return (
     <S.NavMenu>
       <S.MenuList>
@@ -12,7 +13,10 @@ export default function NavBarMenu() {
         <NavLink to="/favorites">
           <NavBarItem menuName="Мой плейлист" />
         </NavLink>
-        <NavLink to="/login">
+        <NavLink
+          onClick={handleLogout}
+          to="/login"
+        >
           <NavBarItem menuName="Выйти" />
         </NavLink>
       </S.MenuList>

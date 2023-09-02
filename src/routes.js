@@ -7,19 +7,12 @@ import { LoginPage } from "./pages/login/LoginPage";
 import { RegPage } from "./pages/reg/RegPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
-export const AppRoutes = ({ user, onAuthButtonClick }) => {
-  const isUser = Boolean(user);
-
+export const AppRoutes = ({ setUser, onAuthButtonClick }) => {
   return (
     <Routes>
       <Route
         path="/login"
-        element={
-          <LoginPage
-            isAllowed={isUser}
-            onAuthButtonClick={onAuthButtonClick}
-          />
-        }
+        element={<LoginPage onAuthButtonClick={onAuthButtonClick} />}
       />
       <Route
         path="/register"
@@ -28,15 +21,15 @@ export const AppRoutes = ({ user, onAuthButtonClick }) => {
       <Route
         path="/"
         element={
-          <ProtectedRoute isAllowed={isUser}>
-            <MainPage />
+          <ProtectedRoute>
+            <MainPage setUser={setUser} />
           </ProtectedRoute>
         }
       />
       <Route
         path="/favorites"
         element={
-          <ProtectedRoute isAllowed={isUser}>
+          <ProtectedRoute>
             <FavoritesPage />
           </ProtectedRoute>
         }
@@ -44,7 +37,7 @@ export const AppRoutes = ({ user, onAuthButtonClick }) => {
       <Route
         path="/category/:id"
         element={
-          <ProtectedRoute isAllowed={isUser}>
+          <ProtectedRoute>
             <CategoriesPage />
           </ProtectedRoute>
         }
