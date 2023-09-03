@@ -24,11 +24,11 @@ export const LoginBclock_Buttons = styled.h1`
 export const LoginButton = styled.button`
   width: 278px;
   height: 52px;
-  font-weight: 40px;
-  font-size: 24px;
+  font-weight: 400px;
+  font-size: 18px;
   background-color: #580ea2;
   color: #ffffff;
-  padding: 10px 36px;
+  padding: 12px;
   border: none;
   border-radius: 12px;
 `;
@@ -36,11 +36,11 @@ export const LoginButton = styled.button`
 export const RegButton = styled.button`
   width: 278px;
   height: 52px;
-  font-weight: 40px;
-  font-size: 24px;
+  font-weight: 400px;
+  font-size: 18px;
   background-color: #ffffff;
   color: #000000;
-  padding: 10px 36px;
+  padding: 12px;
   border: none;
   border-radius: 12px;
 `;

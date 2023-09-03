@@ -6,9 +6,6 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleLogin = () => setUser(localStorage.setItem("user", "token"));
-  const handleLogout = () => setUser(localStorage.clear());
-  console.log(localStorage);
-  console.log(localStorage.getItem("user"));
 
   return (
     <div className="App">
@@ -16,9 +13,7 @@ function App() {
         <AppRoutes
           user={user}
           setUser={setUser}
-          onAuthButtonClick={
-            localStorage.getItem("user") ? handleLogout : handleLogin
-          }
+          onAuthButtonClick={handleLogin}
         />
       </div>
     </div>
