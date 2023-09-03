@@ -1,46 +1,131 @@
 import styled from "styled-components";
 
-export const LoginBclock = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+export const LoginWrap = styled.div`
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+`;
+export const LoginContainer = styled.div`
+  max-width: 100%;
   height: 100vh;
-  background-color: #000000d9;
+  margin: 0 auto;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.85);
 `;
-export const LoginBclock_Header = styled.h1`
-  color: #ffffff;
-`;
-
-export const LoginBclock_Buttons = styled.h1`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-`;
-
-export const LoginButton = styled.button`
+export const LoginBtnEnter = styled.button`
   width: 278px;
   height: 52px;
-  font-weight: 400px;
-  font-size: 18px;
   background-color: #580ea2;
-  color: #ffffff;
-  padding: 12px;
+  border-radius: 6px;
+  margin-top: 60px;
+  margin-bottom: 20px;
   border: none;
-  border-radius: 12px;
-`;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 
-export const RegButton = styled.button`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+  color: #ffffff;
+
+  &:hover {
+    background-color: #3f007d;
+  }
+  &:active {
+    background-color: #271a58;
+  }
+`;
+export const LoginBtnSignup = styled.button`
   width: 278px;
   height: 52px;
-  font-weight: 400px;
+  background-color: transparent;
+  border: 1px solid #d0cece;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 400;
   font-size: 18px;
-  background-color: #ffffff;
+  line-height: 24px;
+  letter-spacing: -0.05px;
   color: #000000;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #f4f5f6;
+  }
+  &:active {
+    background-color: #d9d9d9;
+  }
 `;
+export const LoginModalBlock = styled.div`
+  position: absolute;
+  z-index: 2;
+  left: calc(50% - (366px / 2));
+  top: calc(50% - (439px / 2));
+  opacity: 1;
+`;
+export const LoginModalFormLogin = styled.form`
+  width: 366px;
+  height: 439px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 43px 47px 47px 40px;
+
+  &:first-child {
+    margin-bottom: 30px;
+  }
+`;
+export const LoginModalLogo = styled.div`
+  width: 140px;
+  height: 21px;
+  margin-bottom: 34px;
+  background-color: transparent;
+`;
+export const LoginModalLogoImg = styled.img`
+  width: 140px;
+  height: auto;
+`;
+export const LoginModalInput = styled.input`
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #d0cece;
+  padding: 8px 1px;
+
+  ::placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #d0cece;
+  }
+`;
+// export const Login = styled.div``;

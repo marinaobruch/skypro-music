@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import * as S from "./MainPage.styles";
-import Content from "../../components/Content/Content";
+import { Content } from "../../components/Content/Content";
 import Filter from "../../components/Filter/Filter";
 import NavBar from "../../components/NavBar/NavBar";
 import Search from "../../components/Search/Search";

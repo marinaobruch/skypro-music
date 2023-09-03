@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AppRoutes } from "./routes";
-import "./App.styles";
 
 function App() {
   const [user, setUser] = useState(null);
