@@ -5,6 +5,8 @@ export const NavMenu = styled.div`
   visibility: visible;
 `;
 
+export const NavItem = styled.div``;
+
 export const MenuList = styled.ul`
   padding: 18px 0 10px 0;
 `;

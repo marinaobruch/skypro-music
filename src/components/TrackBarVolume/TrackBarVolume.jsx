@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./TrackBarVolume.styles.js";
 
-export default function TrackBarVolume() {
+export function TrackBarVolume() {
   return (
     <S.BarVolumeBlock>
       <S.VolumeContent>

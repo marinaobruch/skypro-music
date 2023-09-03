@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import * as S from "./NavBar.styles.js";
-import NavBarMenu from "../NavBarMenu/NavBarMenu";
+import { NavBarMenu } from "../NavBarMenu/NavBarMenu";
 
-export default function NavBar() {
+export function NavBar({ setUser }) {
   const [open, setOpen] = useState(false);
-
   function toggleOlen() {
     setOpen(!open);
   }
@@ -24,7 +23,7 @@ export default function NavBar() {
         <S.BurgerLine></S.BurgerLine>
       </S.Burger>
 
-      {open ? <NavBarMenu /> : null}
+      {open ? <NavBarMenu setUser={setUser} /> : null}
     </S.MainNav>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import * as S from "./Track.styles.js";
-import SkeletonPlaylist from "../SkeletonPlaylist/SkeletonPlaylist";
+import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
 import { tracksArray } from "../Imports/TracksImport";
 
-export default function Track({ loading }) {
+export function Track({ loading }) {
   return (
     <S.PlaylistItem>
       {tracksArray.map((option) => (

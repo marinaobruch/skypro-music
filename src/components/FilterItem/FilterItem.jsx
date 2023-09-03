@@ -1,13 +1,6 @@
 import * as S from "./FilterItem.styles.js";
 
-export default function FilterItem({
-  value,
-  onFilterClick,
-  arrays,
-  filter,
-  open,
-  id,
-}) {
+export function FilterItem({ value, onFilterClick, arrays, filter, open, id }) {
   return (
     <div>
       <S.FilterButton

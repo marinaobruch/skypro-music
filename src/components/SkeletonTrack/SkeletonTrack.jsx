@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./SkeletonTrack.styles.js";
 
-export default function SkeletonTrack() {
+export function SkeletonTrack() {
   return (
     <S.TrackPlayContainSkeleton>
       <S.TrackPlayImgSkeleton></S.TrackPlayImgSkeleton>

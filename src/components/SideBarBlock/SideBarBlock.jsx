@@ -1,32 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as S from "./SideBarBlock.styles.js";
-import SideBarBlockItem from "../SideBarBlockItem/SideBarBlockItem";
+import { SkeletonSidebar } from "../SkeletonSidebar/SkeletonSidebar";
 
-export default function SideBarBlock({ loading }) {
+export function SideBarBlock({ loading, albums }) {
   return (
     <S.SidebarBlock>
-      <S.SidebarList>
-        <SideBarBlockItem
-          loading={loading}
-          playlistLink="#"
-          playlistName="./img/playlist01.png"
-          playlistAlt="day's playlist"
-        />
-
-        <SideBarBlockItem
-          loading={loading}
-          playlistLink="#"
-          playlistName="./img/playlist02.png"
-          playlistAlt="100 hits playlist"
-        />
-
-        <SideBarBlockItem
-          loading={loading}
-          playlistLink="#"
-          playlistName="./img/playlist03.png"
-          playlistAlt="indi playlist"
-        />
-      </S.SidebarList>
+      {albums.map((album) => (
+        <S.SidebarList key={album.id}>
+          <S.SidebarItem>
+            {loading ? (
+              <SkeletonSidebar />
+            ) : (
+              <Link to={`category/${album.id}`}>
+                <S.SidebarLink href={album.playlistImg}>
+                  <S.SidebarImgItem
+                    src={album.playlistImg}
+                    alt={album.playlistAlt}
+                  />
+                </S.SidebarLink>
+              </Link>
+            )}
+          </S.SidebarItem>
+        </S.SidebarList>
+      ))}
     </S.SidebarBlock>
   );
 }

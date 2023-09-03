@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
 
-export default function TrackBarPanel() {
+export function TrackBarPanel() {
   return (
     <S.Controls>
       <S.BtnPrev>

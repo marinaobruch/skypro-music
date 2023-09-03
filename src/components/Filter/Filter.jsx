@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import * as S from "./Filter.styles.js";
-import FilterItem from "../FilterItem/FilterItem";
+import { FilterItem } from "../FilterItem/FilterItem";
 import { tracksArray } from "../Imports/TracksImport";
 
-export default function Filter() {
+export function Filter() {
   const [filter, setFilter] = useState(false);
   const [open, setOpen] = useState("");
 

@@ -1,8 +1,8 @@
 import React from "react";
 import * as S from "./Content.styles.js";
-import PlayList from "../PlayList/PlayList";
+import { PlayList } from "../PlayList/PlayList";
 
-export default function Content({ loading }) {
+export function Content({ loading }) {
   return (
     <S.CenterblockCntent>
       <S.ContentTitle>

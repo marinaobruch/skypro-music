@@ -1,10 +1,10 @@
 import React from "react";
 import * as S from "./TrackBar.styles.js";
-import TrackBarPanel from "../TrackBarPanel/TrackBarPanel";
-import TrackBarPlayer from "../TrackBarPlayer/TrackBarPlayer";
-import TrackBarVolume from "../TrackBarVolume/TrackBarVolume";
+import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
+import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
+import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 
-export default function TrackBar({ loading }) {
+export function TrackBar({ loading }) {
   return (
     <S.Bar>
       <S.BarContent>

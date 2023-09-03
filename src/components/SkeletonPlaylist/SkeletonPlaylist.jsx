@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./SkeletonPlaylist.styles.js";
 
-export default function SkeletonPlaylist() {
+export function SkeletonPlaylist() {
   return (
     <S.PlaylistSkeleton>
       <S.SkeletonTrack></S.SkeletonTrack>
