@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AppRoutes } from "./routes";
+import { GlobalStyle } from "./pages/main/MainPage.styles";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -7,15 +8,18 @@ function App() {
   const handleLogin = () => setUser(localStorage.setItem("user", "token"));
 
   return (
-    <div className="App">
-      <div>
-        <AppRoutes
-          user={user}
-          setUser={setUser}
-          onAuthButtonClick={handleLogin}
-        />
+    <>
+      <GlobalStyle />
+      <div className="App">
+        <div>
+          <AppRoutes
+            user={user}
+            setUser={setUser}
+            onAuthButtonClick={handleLogin}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
