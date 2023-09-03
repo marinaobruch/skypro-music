@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import * as S from "./NavBar.styles.js";
-import NavBarMenu from "../NavBarMenu/NavBarMenu";
+import { NavBarMenu } from "../NavBarMenu/NavBarMenu";
 
-export default function NavBar({ setUser }) {
+export function NavBar({ setUser }) {
   const [open, setOpen] = useState(false);
   function toggleOlen() {
     setOpen(!open);

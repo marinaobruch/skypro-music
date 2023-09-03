@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./Search.styles.js";
 
-export default function Search() {
+export function Search() {
   return (
     <S.CentreBlockSearch>
       <S.SearchSvg>

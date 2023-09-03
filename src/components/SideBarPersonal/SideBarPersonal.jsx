@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./SideBarPersonal.styles.js";
 
-export default function SideBarPersonal({ loading }) {
+export function SideBarPersonal({ loading }) {
   return (
     <S.SidebarPersonal>
       {loading ? (

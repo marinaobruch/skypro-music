@@ -1,8 +1,8 @@
 import React from "react";
 import * as S from "./TrackBarPlayer.styles.js";
-import SkeletonTrack from "../SkeletonTrack/SkeletonTrack";
+import { SkeletonTrack } from "../SkeletonTrack/SkeletonTrack";
 
-export default function TrackBarPlayer({ loading }) {
+export function TrackBarPlayer({ loading }) {
   return (
     <S.PlayerTrackPlay>
       {loading ? (
