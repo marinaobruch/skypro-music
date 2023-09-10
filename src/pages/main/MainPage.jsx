@@ -8,7 +8,7 @@ import { SideBar } from "../../components/SideBar/SideBar";
 import { TrackBar } from "../../components/TrackBar/TrackBar";
 import { ALBUMS } from "../../constants.js";
 
-export const MainPage = ({ setUser }) => {
+export const MainPage = ({ user, setUser }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +23,10 @@ export const MainPage = ({ setUser }) => {
       <S.Wrapper>
         <S.Container>
           <S.Main>
-            <NavBar setUser={setUser} />
+            <NavBar
+              user={user}
+              setUser={setUser}
+            />
             <S.MainCenterblock>
               <Search />
               <S.MainCenterblockH2>Треки</S.MainCenterblockH2>

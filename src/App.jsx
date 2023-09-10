@@ -5,7 +5,10 @@ import { GlobalStyle } from "./pages/main/MainPage.styles";
 function App() {
   const [user, setUser] = useState(null);
 
-  const handleLogin = () => setUser(localStorage.setItem("user", "token"));
+  const handleLogin = () => {
+    setUser(localStorage.setItem("user", "token"), user === "taradam");
+  };
+  console.log(user);
 
   return (
     <>

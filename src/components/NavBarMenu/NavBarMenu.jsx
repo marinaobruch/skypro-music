@@ -2,8 +2,10 @@ import { NavLink } from "react-router-dom";
 import * as S from "./NavBarMenu.styles.js";
 import { NavBarItem } from "../NavBarItem/NavBarItem";
 
-export function NavBarMenu({ setUser }) {
-  const handleLogout = () => setUser(localStorage.clear());
+export function NavBarMenu({ user, setUser }) {
+  const handleLogout = () => {
+    setUser(localStorage.clear(), user === null);
+  };
   return (
     <S.NavMenu>
       <S.MenuList>

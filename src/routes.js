@@ -7,7 +7,7 @@ import { LoginPage } from "./pages/login/LoginPage";
 import { RegPage } from "./pages/reg/RegPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
-export const AppRoutes = ({ setUser, onAuthButtonClick }) => {
+export const AppRoutes = ({ user, setUser, onAuthButtonClick }) => {
   return (
     <Routes>
       <Route
@@ -22,7 +22,10 @@ export const AppRoutes = ({ setUser, onAuthButtonClick }) => {
         path="/"
         element={
           <ProtectedRoute>
-            <MainPage setUser={setUser} />
+            <MainPage
+              user={user}
+              setUser={setUser}
+            />
           </ProtectedRoute>
         }
       />
