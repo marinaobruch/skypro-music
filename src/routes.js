@@ -11,7 +11,7 @@ export const AppRoutes = ({
   user,
   setUser,
   onAuthButtonClick,
-  tracks,
+  allTracks,
   setCurrentTrack,
 }) => {
   return (
@@ -31,7 +31,7 @@ export const AppRoutes = ({
             <MainPage
               user={user}
               setUser={setUser}
-              tracks={tracks}
+              allTracks={allTracks}
               setCurrentTrack={setCurrentTrack}
             />
           </ProtectedRoute>

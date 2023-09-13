@@ -8,7 +8,7 @@ import { SideBar } from "../../components/SideBar/SideBar";
 import { TrackBar } from "../../components/TrackBar/TrackBar";
 import { ALBUMS } from "../../constants.js";
 
-export const MainPage = ({ user, setUser, tracks, setCurrentTrack }) => {
+export const MainPage = ({ user, setUser, allTracks, setCurrentTrack }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const MainPage = ({ user, setUser, tracks, setCurrentTrack }) => {
               <Filter />
               <Content
                 loading={loading}
-                tracks={tracks}
+                allTracks={allTracks}
                 setCurrentTrack={setCurrentTrack}
               />
             </S.MainCenterblock>
@@ -42,7 +42,6 @@ export const MainPage = ({ user, setUser, tracks, setCurrentTrack }) => {
               albums={ALBUMS}
             />
           </S.Main>
-          {/* <TrackBar loading={loading} /> */}
           <footer className="footer"></footer>
         </S.Container>
       </S.Wrapper>

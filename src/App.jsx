@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
-import { tracksArray } from "./components/Imports/TracksImport";
 import { TrackBar } from "./components/TrackBar/TrackBar";
+import { getAllTracks } from "./api";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -10,17 +10,19 @@ function App() {
     setUser(localStorage.setItem("user", "token"), user === "taradam");
   };
 
-  const [tracks, setTracks] = useState(tracksArray);
+  const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
 
-  // useEffect(() => {
-  //   getAllTracks()
-  //     .then((tracks) => setTracks(tracks))
-  //     .catch((error) => {
-  //       setGetAllTracksError(error.message);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getAllTracks()
+      .then((allTracks) => setAllTracks(allTracks))
+      .catch((error) => {
+        setGetAllTracksError(error.message);
+      });
+  }, []);
+
+  // getAllTracks().then((allTracks) => console.log(allTracks));
 
   return (
     <>
@@ -28,7 +30,7 @@ function App() {
       <div className="App">
         <div>
           <AppRoutes
-            tracks={tracks}
+            allTracks={allTracks}
             setCurrentTrack={setCurrentTrack}
             user={user}
             setUser={setUser}

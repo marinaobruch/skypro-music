@@ -11,13 +11,11 @@ export function TrackBarPlayer({ currentTrack }) {
           </S.TrackPlaySvg>
         </S.TrackPlayImg>
         <S.TrackAuthor>
-          <S.TrackAuthorLink href="http://">
-            {currentTrack.user.track}
-          </S.TrackAuthorLink>
+          <S.TrackAuthorLink href="#">{currentTrack.name}</S.TrackAuthorLink>
         </S.TrackAuthor>
         <S.TrackPlayAlbum>
-          <S.TrackPlayAlbumLink href="http://">
-            {currentTrack.user.artist}
+          <S.TrackPlayAlbumLink href="#">
+            {currentTrack.author}
           </S.TrackPlayAlbumLink>
         </S.TrackPlayAlbum>
       </S.TrackPlayContain>

@@ -2,14 +2,13 @@ import React from "react";
 import * as S from "./Track.styles.js";
 import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
 
-export function Track({ loading, tracks, setCurrentTrack }) {
+export function Track({ loading, allTracks, setCurrentTrack }) {
   return (
     <S.PlaylistItem>
-      {tracks.map((track) => (
+      {allTracks.map((track) => (
         <S.PlaylistTrack
-          key={track.user.id}
+          key={track.id}
           onClick={() => setCurrentTrack(track)}
-          // onClick={() => console.log("1")}
         >
           {loading ? (
             <SkeletonPlaylist />
@@ -23,9 +22,9 @@ export function Track({ loading, tracks, setCurrentTrack }) {
                 </S.TrackTitleImg>
 
                 <div className="track__title-text">
-                  <S.TrackTitleLink href="http://">
-                    {track.user.track}{" "}
-                    <S.TrackTitleSpan>{track.user.modify}</S.TrackTitleSpan>
+                  <S.TrackTitleLink href="#">
+                    {track.name}
+                    <S.TrackTitleSpan>{track.album}</S.TrackTitleSpan>
                   </S.TrackTitleLink>
                 </div>
               </S.TrackTitle>
@@ -35,13 +34,13 @@ export function Track({ loading, tracks, setCurrentTrack }) {
                   className="track__author-link"
                   href="http://"
                 >
-                  {track.user.artist}
+                  {track.author}
                 </S.TrackAuthorLink>
               </S.TrackAuthor>
 
               <S.TrackAlbom>
                 <S.TrackAlbomLink href="http://">
-                  {track.user.album}
+                  {track.album}
                 </S.TrackAlbomLink>
               </S.TrackAlbom>
 
@@ -49,7 +48,9 @@ export function Track({ loading, tracks, setCurrentTrack }) {
                 <S.TrackTimeSvg alt="time">
                   <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                 </S.TrackTimeSvg>
-                <span className="track__time-text">{track.user.time}</span>
+                <span className="track__time-text">
+                  {track.duration_in_seconds}
+                </span>
               </S.TrackTimeText>
             </>
           )}
