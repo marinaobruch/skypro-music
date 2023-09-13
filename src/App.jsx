@@ -12,6 +12,7 @@ function App() {
 
   const [tracks, setTracks] = useState(tracksArray);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
+  const [currentTrack, setCurrentTrack] = useState(null);
 
   // useEffect(() => {
   //   getAllTracks()
@@ -20,9 +21,6 @@ function App() {
   //       setGetAllTracksError(error.message);
   //     });
   // }, []);
-
-  const [currentTrack, setCurrentTrack] = useState(null);
-  console.log(currentTrack);
 
   return (
     <>
