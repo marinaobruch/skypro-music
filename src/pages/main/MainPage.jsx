@@ -42,7 +42,7 @@ export const MainPage = ({ user, setUser, tracks, setCurrentTrack }) => {
               albums={ALBUMS}
             />
           </S.Main>
-          <TrackBar loading={loading} />
+          {/* <TrackBar loading={loading} /> */}
           <footer className="footer"></footer>
         </S.Container>
       </S.Wrapper>

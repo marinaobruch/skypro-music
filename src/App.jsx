@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { tracksArray } from "./components/Imports/TracksImport";
+import { TrackBar } from "./components/TrackBar/TrackBar";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -21,6 +22,7 @@ function App() {
   // }, []);
 
   const [currentTrack, setCurrentTrack] = useState(null);
+  console.log(currentTrack);
 
   return (
     <>
@@ -36,6 +38,12 @@ function App() {
           />
         </div>
       </div>
+      {currentTrack ? (
+        <TrackBar
+          currentTrack={currentTrack}
+          setCurrentTrack={setCurrentTrack}
+        />
+      ) : null}
     </>
   );
 }

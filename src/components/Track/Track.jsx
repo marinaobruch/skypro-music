@@ -6,7 +6,11 @@ export function Track({ loading, tracks, setCurrentTrack }) {
   return (
     <S.PlaylistItem>
       {tracks.map((track) => (
-        <S.PlaylistTrack key={track.user.id}>
+        <S.PlaylistTrack
+          key={track.user.id}
+          onClick={() => setCurrentTrack(track)}
+          // onClick={() => console.log("1")}
+        >
           {loading ? (
             <SkeletonPlaylist />
           ) : (
