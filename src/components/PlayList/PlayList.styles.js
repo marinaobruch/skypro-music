@@ -9,6 +9,9 @@ export const ContentPlaylist = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
 
+  width: 100%;
+  height: 673px;
+
   overflow-y: auto;
   overflow-x: auto;
 `;

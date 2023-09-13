@@ -5,14 +5,15 @@ import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const handleLogin = () => {
-    setUser(localStorage.setItem("user", "token"), user === "taradam");
-  };
-
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
+
+  const handleLogin = () => {
+    setUser(localStorage.setItem("user", "token"), user === "taradam");
+  };
 
   useEffect(() => {
     getAllTracks()
@@ -20,6 +21,7 @@ function App() {
       .catch((error) => {
         setGetAllTracksError(error.message);
       });
+    setLoading(false);
   }, []);
 
   // getAllTracks().then((allTracks) => console.log(allTracks));
@@ -30,6 +32,7 @@ function App() {
       <div className="App">
         <div>
           <AppRoutes
+            loading={loading}
             allTracks={allTracks}
             setCurrentTrack={setCurrentTrack}
             user={user}

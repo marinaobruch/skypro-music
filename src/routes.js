@@ -8,6 +8,7 @@ import { RegPage } from "./pages/reg/RegPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 export const AppRoutes = ({
+  loading,
   user,
   setUser,
   onAuthButtonClick,
@@ -29,6 +30,7 @@ export const AppRoutes = ({
         element={
           <ProtectedRoute>
             <MainPage
+              loading={loading}
               user={user}
               setUser={setUser}
               allTracks={allTracks}

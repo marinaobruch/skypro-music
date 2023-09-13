@@ -5,18 +5,15 @@ import { Filter } from "../../components/Filter/Filter";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { Search } from "../../components/Search/Search";
 import { SideBar } from "../../components/SideBar/SideBar";
-import { TrackBar } from "../../components/TrackBar/TrackBar";
 import { ALBUMS } from "../../constants.js";
 
-export const MainPage = ({ user, setUser, allTracks, setCurrentTrack }) => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
+export const MainPage = ({
+  loading,
+  user,
+  setUser,
+  allTracks,
+  setCurrentTrack,
+}) => {
   return (
     <>
       <S.GlobalStyle />
@@ -48,3 +45,11 @@ export const MainPage = ({ user, setUser, allTracks, setCurrentTrack }) => {
     </>
   );
 };
+
+// const [loading, setLoading] = useState(true);
+
+// useEffect(() => {
+//   setTimeout(() => {
+//     setLoading(false);
+//   }, 2000);
+// }, []);

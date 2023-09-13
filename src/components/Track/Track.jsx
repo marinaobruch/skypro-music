@@ -5,15 +5,28 @@ import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
 export function Track({ loading, allTracks, setCurrentTrack }) {
   return (
     <S.PlaylistItem>
-      {allTracks.map((track) => (
-        <S.PlaylistTrack
-          key={track.id}
-          onClick={() => setCurrentTrack(track)}
-        >
-          {loading ? (
-            <SkeletonPlaylist />
-          ) : (
-            <>
+      {loading ? (
+        <>
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+        </>
+      ) : (
+        <>
+          {allTracks.map((track) => (
+            <S.PlaylistTrack
+              key={track.id}
+              onClick={() => setCurrentTrack(track)}
+            >
               <S.TrackTitle>
                 <S.TrackTitleImg>
                   <S.TrackTitleSvg alt="music">
@@ -24,7 +37,7 @@ export function Track({ loading, allTracks, setCurrentTrack }) {
                 <div className="track__title-text">
                   <S.TrackTitleLink href="#">
                     {track.name}
-                    <S.TrackTitleSpan>{track.album}</S.TrackTitleSpan>
+                    <S.TrackTitleSpan></S.TrackTitleSpan>
                   </S.TrackTitleLink>
                 </div>
               </S.TrackTitle>
@@ -32,16 +45,14 @@ export function Track({ loading, allTracks, setCurrentTrack }) {
               <S.TrackAuthor>
                 <S.TrackAuthorLink
                   className="track__author-link"
-                  href="http://"
+                  href="#"
                 >
                   {track.author}
                 </S.TrackAuthorLink>
               </S.TrackAuthor>
 
               <S.TrackAlbom>
-                <S.TrackAlbomLink href="http://">
-                  {track.album}
-                </S.TrackAlbomLink>
+                <S.TrackAlbomLink href="#">{track.album}</S.TrackAlbomLink>
               </S.TrackAlbom>
 
               <S.TrackTimeText>
@@ -52,10 +63,10 @@ export function Track({ loading, allTracks, setCurrentTrack }) {
                   {track.duration_in_seconds}
                 </span>
               </S.TrackTimeText>
-            </>
-          )}
-        </S.PlaylistTrack>
-      ))}
+            </S.PlaylistTrack>
+          ))}
+        </>
+      )}
     </S.PlaylistItem>
   );
 }
