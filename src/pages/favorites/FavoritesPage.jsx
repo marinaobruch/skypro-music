@@ -1,7 +1,9 @@
+import * as S from "./FavoritesPage.styles";
+
 export const FavoritesPage = () => {
   return (
     <div>
-      <h1>FavoritesPage</h1>
+      <S.FavHeader>FavoritesPage</S.FavHeader>
     </div>
   );
 };

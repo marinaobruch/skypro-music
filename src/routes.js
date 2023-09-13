@@ -7,7 +7,15 @@ import { LoginPage } from "./pages/login/LoginPage";
 import { RegPage } from "./pages/reg/RegPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
-export const AppRoutes = ({ setUser, onAuthButtonClick }) => {
+export const AppRoutes = ({
+  loading,
+  user,
+  setUser,
+  onAuthButtonClick,
+  allTracks,
+  setCurrentTrack,
+  getAllTracksError,
+}) => {
   return (
     <Routes>
       <Route
@@ -22,7 +30,14 @@ export const AppRoutes = ({ setUser, onAuthButtonClick }) => {
         path="/"
         element={
           <ProtectedRoute>
-            <MainPage setUser={setUser} />
+            <MainPage
+              loading={loading}
+              user={user}
+              setUser={setUser}
+              allTracks={allTracks}
+              setCurrentTrack={setCurrentTrack}
+              getAllTracksError={getAllTracksError}
+            />
           </ProtectedRoute>
         }
       />

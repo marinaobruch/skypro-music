@@ -1,7 +1,9 @@
+import * as S from "./ErrorPage.styles";
+
 export const ErrorPage = () => {
   return (
     <div>
-      <h1>ErrorPage</h1>
+      <S.ErrorHeader>ErrorPage</S.ErrorHeader>
     </div>
   );
 };

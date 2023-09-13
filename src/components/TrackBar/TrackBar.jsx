@@ -4,7 +4,7 @@ import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 
-export function TrackBar({ loading }) {
+export function TrackBar({ currentTrack }) {
   return (
     <S.Bar>
       <S.BarContent>
@@ -13,7 +13,7 @@ export function TrackBar({ loading }) {
         <S.BarPlayerBlock>
           <S.BarPlayer>
             <TrackBarPanel />
-            <TrackBarPlayer loading={loading} />
+            <TrackBarPlayer currentTrack={currentTrack} />
           </S.BarPlayer>
           <TrackBarVolume />
         </S.BarPlayerBlock>

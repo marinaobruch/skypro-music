@@ -5,40 +5,53 @@ import { Filter } from "../../components/Filter/Filter";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { Search } from "../../components/Search/Search";
 import { SideBar } from "../../components/SideBar/SideBar";
-import { TrackBar } from "../../components/TrackBar/TrackBar";
 import { ALBUMS } from "../../constants.js";
 
-export const MainPage = ({ setUser }) => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
+export const MainPage = ({
+  loading,
+  user,
+  setUser,
+  allTracks,
+  setCurrentTrack,
+  getAllTracksError,
+}) => {
   return (
     <>
       <S.GlobalStyle />
       <S.Wrapper>
         <S.Container>
           <S.Main>
-            <NavBar setUser={setUser} />
+            <NavBar
+              user={user}
+              setUser={setUser}
+            />
             <S.MainCenterblock>
               <Search />
               <S.MainCenterblockH2>Треки</S.MainCenterblockH2>
               <Filter />
-              <Content loading={loading} />
+              <Content
+                loading={loading}
+                allTracks={allTracks}
+                setCurrentTrack={setCurrentTrack}
+                getAllTracksError={getAllTracksError}
+              />
             </S.MainCenterblock>
             <SideBar
               loading={loading}
               albums={ALBUMS}
             />
           </S.Main>
-          <TrackBar loading={loading} />
           <footer className="footer"></footer>
         </S.Container>
       </S.Wrapper>
     </>
   );
 };
+
+// const [loading, setLoading] = useState(true);
+
+// useEffect(() => {
+//   setTimeout(() => {
+//     setLoading(false);
+//   }, 2000);
+// }, []);

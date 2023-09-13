@@ -1,17 +1,43 @@
 import React from "react";
 import * as S from "./Track.styles.js";
 import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
-import { tracksArray } from "../Imports/TracksImport";
 
-export function Track({ loading }) {
+export function Track({
+  loading,
+  allTracks,
+  setCurrentTrack,
+  getAllTracksError,
+}) {
+  console.log(getAllTracksError);
   return (
     <S.PlaylistItem>
-      {tracksArray.map((option) => (
-        <S.PlaylistTrack key={option.user.id}>
-          {loading ? (
-            <SkeletonPlaylist />
-          ) : (
-            <>
+      {getAllTracksError !== null ? (
+        <p>
+          Не удалось загрузить плейлист, попробуйте позже: {getAllTracksError}
+        </p>
+      ) : null}
+      {loading ? (
+        <>
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+          <SkeletonPlaylist />
+        </>
+      ) : (
+        <>
+          {allTracks.map((track) => (
+            <S.PlaylistTrack
+              key={track.id}
+              onClick={() => setCurrentTrack(track)}
+            >
               <S.TrackTitle>
                 <S.TrackTitleImg>
                   <S.TrackTitleSvg alt="music">
@@ -20,9 +46,9 @@ export function Track({ loading }) {
                 </S.TrackTitleImg>
 
                 <div className="track__title-text">
-                  <S.TrackTitleLink href="http://">
-                    {option.user.track}{" "}
-                    <S.TrackTitleSpan>{option.user.modify}</S.TrackTitleSpan>
+                  <S.TrackTitleLink href="#">
+                    {track.name}
+                    <S.TrackTitleSpan></S.TrackTitleSpan>
                   </S.TrackTitleLink>
                 </div>
               </S.TrackTitle>
@@ -30,28 +56,28 @@ export function Track({ loading }) {
               <S.TrackAuthor>
                 <S.TrackAuthorLink
                   className="track__author-link"
-                  href="http://"
+                  href="#"
                 >
-                  {option.user.artist}
+                  {track.author}
                 </S.TrackAuthorLink>
               </S.TrackAuthor>
 
               <S.TrackAlbom>
-                <S.TrackAlbomLink href="http://">
-                  {option.user.album}
-                </S.TrackAlbomLink>
+                <S.TrackAlbomLink href="#">{track.album}</S.TrackAlbomLink>
               </S.TrackAlbom>
 
               <S.TrackTimeText>
                 <S.TrackTimeSvg alt="time">
                   <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                 </S.TrackTimeSvg>
-                <span className="track__time-text">{option.user.time}</span>
+                <span className="track__time-text">
+                  {track.duration_in_seconds}
+                </span>
               </S.TrackTimeText>
-            </>
-          )}
-        </S.PlaylistTrack>
-      ))}
+            </S.PlaylistTrack>
+          ))}
+        </>
+      )}
     </S.PlaylistItem>
   );
 }
