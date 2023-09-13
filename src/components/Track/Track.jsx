@@ -2,9 +2,20 @@ import React from "react";
 import * as S from "./Track.styles.js";
 import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
 
-export function Track({ loading, allTracks, setCurrentTrack }) {
+export function Track({
+  loading,
+  allTracks,
+  setCurrentTrack,
+  getAllTracksError,
+}) {
+  console.log(getAllTracksError);
   return (
     <S.PlaylistItem>
+      {getAllTracksError !== null ? (
+        <p>
+          Не удалось загрузить плейлист, попробуйте позже: {getAllTracksError}
+        </p>
+      ) : null}
       {loading ? (
         <>
           <SkeletonPlaylist />

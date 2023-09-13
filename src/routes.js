@@ -14,6 +14,7 @@ export const AppRoutes = ({
   onAuthButtonClick,
   allTracks,
   setCurrentTrack,
+  getAllTracksError,
 }) => {
   return (
     <Routes>
@@ -35,6 +36,7 @@ export const AppRoutes = ({
               setUser={setUser}
               allTracks={allTracks}
               setCurrentTrack={setCurrentTrack}
+              getAllTracksError={getAllTracksError}
             />
           </ProtectedRoute>
         }

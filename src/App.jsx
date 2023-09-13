@@ -16,6 +16,7 @@ function App() {
   };
 
   useEffect(() => {
+    setGetAllTracksError(null);
     getAllTracks()
       .then((allTracks) => setAllTracks(allTracks))
       .catch((error) => {
@@ -23,7 +24,7 @@ function App() {
       });
     setLoading(false);
   }, []);
-
+  // console.log(getAllTracksError);
   // getAllTracks().then((allTracks) => console.log(allTracks));
 
   return (
@@ -38,6 +39,7 @@ function App() {
             user={user}
             setUser={setUser}
             onAuthButtonClick={handleLogin}
+            getAllTracksError={getAllTracksError}
           />
         </div>
       </div>

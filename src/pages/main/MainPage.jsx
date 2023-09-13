@@ -13,6 +13,7 @@ export const MainPage = ({
   setUser,
   allTracks,
   setCurrentTrack,
+  getAllTracksError,
 }) => {
   return (
     <>
@@ -32,6 +33,7 @@ export const MainPage = ({
                 loading={loading}
                 allTracks={allTracks}
                 setCurrentTrack={setCurrentTrack}
+                getAllTracksError={getAllTracksError}
               />
             </S.MainCenterblock>
             <SideBar
