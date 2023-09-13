@@ -8,7 +8,6 @@ export function Track({
   setCurrentTrack,
   getAllTracksError,
 }) {
-  console.log(getAllTracksError);
   return (
     <S.PlaylistItem>
       {getAllTracksError !== null ? (
