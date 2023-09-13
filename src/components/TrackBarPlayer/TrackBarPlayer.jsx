@@ -4,6 +4,11 @@ import * as S from "./TrackBarPlayer.styles.js";
 export function TrackBarPlayer({ currentTrack }) {
   return (
     <S.PlayerTrackPlay>
+      <audio
+        id="audio"
+        src={currentTrack.track_file}
+        controls
+      ></audio>
       <S.TrackPlayContain>
         <S.TrackPlayImg>
           <S.TrackPlaySvg alt="music">
