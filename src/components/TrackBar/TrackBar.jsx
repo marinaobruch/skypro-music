@@ -7,6 +7,7 @@ import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 
 export function TrackBar({ currentTrack }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef(null);
 
   const handleStart = () => {
@@ -21,64 +22,11 @@ export function TrackBar({ currentTrack }) {
 
   const togglePlay = isPlaying ? handleStop : handleStart;
 
-  const [currentTime, setCurrentTime] = useState(0);
   const duration = currentTrack.duration_in_seconds;
-
-  const BarPlayerProgress = styled.input`
-    --progress-height: 8px;
-    --progress-color: #b672ff;
-    --progress-color: ${(props) => props.$color ?? "#b672ff"};
-
-    --progress-bg-color: #2e2e2e;
-
-    margin: 0;
-    width: 100%;
-    height: var(--progress-height);
-    -webkit-appearance: none;
-    cursor: pointer;
-    background: transparent;
-    position: relative;
-    overflow: hidden;
-
-    &::-webkit-slider-runnable-track {
-      position: relative;
-      height: var(--progress-height);
-      background: var(--progress-bg-color);
-    }
-    &::-webkit-slider-thumb {
-      --thumb-height: 1px;
-      --thumb-width: 1px;
-      position: relative;
-      -webkit-appearance: none;
-      width: var(--thumb-width, var(--thumb-height));
-      box-shadow: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0
-        100vmax var(--progress-color);
-    }
-
-    &::-webkit-slider-runnable-track {
-      background: var(--progress-bg-color);
-    }
-
-    /* FF */
-    &::-moz-range-track {
-      width: 100%;
-      height: var(--progress-height);
-      background: var(--progress-bg-color);
-      border: none;
-      border-radius: 0px;
-    }
-    &::-moz-range-thumb {
-      border: none;
-      height: 25px;
-      width: 25px;
-      border-radius: 50%;
-      background: transparent;
-    }
-    &::-moz-range-progress {
-      background-color: var(--progress-color);
-      height: var(--progress-height);
-    }
-  `;
+  const handleProgress = () => {
+    const currentProgress = audioRef.current.currentTime;
+    setCurrentTime(currentProgress);
+  };
 
   return (
     <S.Bar>
@@ -87,10 +35,11 @@ export function TrackBar({ currentTrack }) {
           controls
           ref={audioRef}
           src={currentTrack.track_file}
+          onTimeUpdate={handleProgress}
           type="audio/mpeg"
         ></audio>
 
-        <BarPlayerProgress
+        <S.BarPlayerProgress
           type="range"
           min={0}
           max={duration}
@@ -98,7 +47,7 @@ export function TrackBar({ currentTrack }) {
           step={0.01}
           onChange={(event) => setCurrentTime(event.target.value)}
           $color="#ff0000"
-        ></BarPlayerProgress>
+        ></S.BarPlayerProgress>
 
         <S.BarPlayerBlock>
           <S.BarPlayer>
