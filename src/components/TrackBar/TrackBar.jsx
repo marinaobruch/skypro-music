@@ -63,6 +63,7 @@ export function TrackBar({ currentTrack }) {
               <TrackBarPanel
                 currentTrack={currentTrack}
                 togglePlay={togglePlay}
+                isPlaying={isPlaying}
               />
               <TrackBarPlayer currentTrack={currentTrack} />
             </S.BarPlayer>

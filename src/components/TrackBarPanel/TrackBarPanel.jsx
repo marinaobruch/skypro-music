@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
 
-export function TrackBarPanel({ togglePlay }) {
+export function TrackBarPanel({ togglePlay, isPlaying }) {
   return (
     <S.Controls>
       <S.BtnPrev>
@@ -14,7 +14,11 @@ export function TrackBarPanel({ togglePlay }) {
           alt="play"
           onClick={togglePlay}
         >
-          <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+          {isPlaying ? (
+            <use xlinkHref="img/icon/sprite.svg#icon-pause"></use>
+          ) : (
+            <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+          )}
         </S.BtnPlaySvg>
       </S.BtnPlay>
       <S.BtnNext>
