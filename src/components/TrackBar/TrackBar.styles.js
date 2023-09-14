@@ -8,7 +8,20 @@ export const Bar = styled.div`
   left: 0;
   width: 100%;
   background: rgba(28, 28, 28, 0.5);
+  max-width: 1920px;
+  margin: 0 auto;
 `;
+
+export const TimeBar = styled.div`
+  font-weight: 400;
+  font-size: 16px;
+  color: #696969;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
 export const BarContent = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;

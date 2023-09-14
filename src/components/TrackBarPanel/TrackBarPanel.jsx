@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
 
-export function TrackBarPanel({ currentTrack, togglePlay }) {
+export function TrackBarPanel({ togglePlay }) {
   return (
     <S.Controls>
       <S.BtnPrev>
