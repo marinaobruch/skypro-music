@@ -8,8 +8,17 @@ import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 export function TrackBar({ currentTrack }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [currentDuration, setCurrentDuration] = useState(0);
+  const [volume, setVolume] = useState(60);
+
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
+
+  useEffect(() => {
+    if (audioRef) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [volume, audioRef]);
 
   const handleStart = () => {
     audioRef.current.play();
@@ -23,14 +32,31 @@ export function TrackBar({ currentTrack }) {
   const togglePlay = isPlaying ? handleStop : handleStart;
 
   const duration = currentTrack.duration_in_seconds;
-  const minForPlayer = Math.floor(duration / 60);
-  const secForPlayer = Math.floor(minForPlayer % 60);
+
   const handleProgress = () => {
     const currentProgress = audioRef.current.currentTime;
     setCurrentTime(currentProgress);
   };
+
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
+  };
+
+  const onLoadedMetadata = () => {
+    const seconds = audioRef.current.duration;
+    setCurrentDuration(seconds);
+    progressBarRef.current.max = seconds;
+  };
+
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return "00:00";
   };
 
   return (
@@ -40,11 +66,12 @@ export function TrackBar({ currentTrack }) {
         ref={audioRef}
         src={currentTrack.track_file}
         onTimeUpdate={handleProgress}
+        onLoadedMetadata={onLoadedMetadata}
         type="audio/mpeg"
       ></audio>
       <S.Bar>
         <S.TimeBar>
-          Current time /{minForPlayer}:{secForPlayer}
+          {formatTime(currentTime)} /{formatTime(currentDuration)}
         </S.TimeBar>
         <S.BarContent>
           <S.BarPlayerProgress
@@ -67,7 +94,10 @@ export function TrackBar({ currentTrack }) {
               />
               <TrackBarPlayer currentTrack={currentTrack} />
             </S.BarPlayer>
-            <TrackBarVolume />
+            <TrackBarVolume
+              volume={volume}
+              setVolume={setVolume}
+            />
           </S.BarPlayerBlock>
         </S.BarContent>
       </S.Bar>

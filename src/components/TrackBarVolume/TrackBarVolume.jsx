@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./TrackBarVolume.styles.js";
 
-export function TrackBarVolume() {
+export function TrackBarVolume({ volume, setVolume }) {
   return (
     <S.BarVolumeBlock>
       <S.VolumeContent>
@@ -14,6 +14,10 @@ export function TrackBarVolume() {
           <S.VolumeProgressLine
             type="range"
             name="range"
+            min={0}
+            max={100}
+            value={volume}
+            onChange={(e) => setVolume(e.target.value)}
           />
         </S.VolumeProgress>
       </S.VolumeContent>
