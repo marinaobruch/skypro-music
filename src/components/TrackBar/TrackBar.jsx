@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { styled } from "styled-components";
 import * as S from "./TrackBar.styles.js";
 import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
@@ -10,6 +9,7 @@ export function TrackBar({ currentTrack }) {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
+  const [repeat, setRepeat] = useState(false);
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
@@ -21,8 +21,10 @@ export function TrackBar({ currentTrack }) {
   }, [volume, audioRef]);
 
   const handleStart = () => {
-    audioRef.current.play();
-    setIsPlaying(true);
+    if (audioRef.current) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
   };
   const handleStop = () => {
     audioRef.current.pause();
@@ -40,6 +42,13 @@ export function TrackBar({ currentTrack }) {
 
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
+  };
+
+  const handleRepeat = () => {
+    if (audioRef.current) {
+      audioRef.current.loop = !repeat;
+      setRepeat(!repeat);
+    }
   };
 
   const onLoadedMetadata = () => {
@@ -91,6 +100,8 @@ export function TrackBar({ currentTrack }) {
                 currentTrack={currentTrack}
                 togglePlay={togglePlay}
                 isPlaying={isPlaying}
+                handleRepeat={handleRepeat}
+                repeat={repeat}
               />
               <TrackBarPlayer currentTrack={currentTrack} />
             </S.BarPlayer>

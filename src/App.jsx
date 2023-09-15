@@ -24,8 +24,6 @@ function App() {
       });
     setLoading(false);
   }, []);
-  // console.log(getAllTracksError);
-  // getAllTracks().then((allTracks) => console.log(allTracks));
 
   return (
     <>
