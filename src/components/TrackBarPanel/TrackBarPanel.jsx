@@ -10,7 +10,10 @@ export function TrackBarPanel({
   return (
     <S.Controls>
       <S.BtnPrev>
-        <S.BtnPrevSvg alt="prev">
+        <S.BtnPrevSvg
+          alt="prev"
+          onClick={() => alert("Еще не реализовано")}
+        >
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.BtnPrevSvg>
       </S.BtnPrev>
@@ -43,7 +46,10 @@ export function TrackBarPanel({
         </S.BtnPlaySvg>
       </S.BtnPlay>
       <S.BtnNext>
-        <S.BtnNextSvg alt="next">
+        <S.BtnNextSvg
+          alt="next"
+          onClick={() => alert("Еще не реализовано")}
+        >
           <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
         </S.BtnNextSvg>
       </S.BtnNext>
@@ -59,7 +65,10 @@ export function TrackBarPanel({
         )}
       </S.BtnRepeat>
       <S.BtnShuffle>
-        <S.BtnShuffleSvg alt="shuffle">
+        <S.BtnShuffleSvg
+          alt="shuffle"
+          onClick={() => alert("Еще не реализовано")}
+        >
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
         </S.BtnShuffleSvg>
       </S.BtnShuffle>
