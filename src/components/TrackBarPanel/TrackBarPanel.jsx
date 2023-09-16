@@ -1,7 +1,12 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
 
-export function TrackBarPanel({ togglePlay, isPlaying, repeat, handleRepeat }) {
+export function TrackBarPanel({
+  togglePlayPause,
+  isPlaying,
+  repeat,
+  handleRepeat,
+}) {
   return (
     <S.Controls>
       <S.BtnPrev>
@@ -9,11 +14,9 @@ export function TrackBarPanel({ togglePlay, isPlaying, repeat, handleRepeat }) {
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.BtnPrevSvg>
       </S.BtnPrev>
-      <S.BtnPlay>
-        <S.BtnPlaySvg
-          alt="play"
-          onClick={togglePlay}
-        >
+
+      <S.BtnPlay onClick={togglePlayPause}>
+        <S.BtnPlaySvg alt="play">
           {isPlaying ? (
             <svg
               width="15"
@@ -44,17 +47,16 @@ export function TrackBarPanel({ togglePlay, isPlaying, repeat, handleRepeat }) {
           <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
         </S.BtnNextSvg>
       </S.BtnNext>
-      <S.BtnRepeat>
-        <S.BtnRepeatSvg
-          alt="repeat"
-          onClick={handleRepeat}
-        >
-          {repeat ? (
-            <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
-          ) : (
+      <S.BtnRepeat onClick={handleRepeat}>
+        {repeat ? (
+          <S.BtnRepeatActiveSvg alt="repeat">
             <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
-          )}
-        </S.BtnRepeatSvg>
+          </S.BtnRepeatActiveSvg>
+        ) : (
+          <S.BtnRepeatSvg alt="repeat">
+            <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+          </S.BtnRepeatSvg>
+        )}
       </S.BtnRepeat>
       <S.BtnShuffle>
         <S.BtnShuffleSvg alt="shuffle">

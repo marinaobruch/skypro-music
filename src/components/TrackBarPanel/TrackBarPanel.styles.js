@@ -45,7 +45,7 @@ export const BtnRepeat = styled(CommonBtn)`
   margin-right: 24px;
   &:hover svg {
     fill: #696969;
-    stroke: #ffffff;
+    stroke: #acacac;
     cursor: pointer;
   }
   &:active svg {
@@ -64,7 +64,7 @@ export const BtnShuffle = styled(CommonBtn)`
 
   &:hover svg {
     fill: #696969;
-    stroke: #ffffff;
+    stroke: #acacac;
     cursor: pointer;
   }
   &:active svg {
@@ -94,6 +94,13 @@ export const BtnRepeatSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `;
+export const BtnRepeatActiveSvg = styled.svg`
+  width: 18px;
+  height: 12px;
+  fill: transparent;
+  stroke: #ffffff;
+`;
+
 export const BtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;

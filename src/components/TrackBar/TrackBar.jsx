@@ -20,18 +20,17 @@ export function TrackBar({ currentTrack }) {
     }
   }, [volume, audioRef]);
 
-  const handleStart = () => {
-    if (audioRef.current) {
+  useEffect(() => {
+    if (isPlaying) {
       audioRef.current.play();
-      setIsPlaying(true);
+    } else {
+      audioRef.current.pause();
     }
-  };
-  const handleStop = () => {
-    audioRef.current.pause();
-    setIsPlaying(false);
-  };
+  }, [isPlaying, audioRef]);
 
-  const togglePlay = isPlaying ? handleStop : handleStart;
+  const togglePlayPause = () => {
+    setIsPlaying((prev) => !prev);
+  };
 
   const duration = currentTrack.duration_in_seconds;
 
@@ -91,14 +90,14 @@ export function TrackBar({ currentTrack }) {
             step={0.01}
             ref={progressBarRef}
             onChange={handleProgressChange}
-            $color="#ff0000"
+            $color="#B672FF"
           ></S.BarPlayerProgress>
 
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <TrackBarPanel
                 currentTrack={currentTrack}
-                togglePlay={togglePlay}
+                togglePlayPause={togglePlayPause}
                 isPlaying={isPlaying}
                 handleRepeat={handleRepeat}
                 repeat={repeat}
