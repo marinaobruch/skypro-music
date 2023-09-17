@@ -28,6 +28,12 @@ export function TrackBar({ currentTrack }) {
     }
   }, [isPlaying, audioRef]);
 
+  useEffect(() => {
+    if (currentTrack.track_file) {
+      setIsPlaying(true);
+    }
+  }, [currentTrack.track_file]);
+
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
