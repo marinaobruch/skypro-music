@@ -5,7 +5,7 @@ import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
@@ -16,16 +16,17 @@ function App() {
   };
 
   useEffect(() => {
+    setLoading(true);
     setGetAllTracksError(null);
     getAllTracks()
       .then((allTracks) => setAllTracks(allTracks))
       .catch((error) => {
         setGetAllTracksError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    setLoading(false);
   }, []);
-  // console.log(getAllTracksError);
-  // getAllTracks().then((allTracks) => console.log(allTracks));
 
   return (
     <>

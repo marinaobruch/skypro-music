@@ -1,31 +1,74 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
 
-export function TrackBarPanel() {
+export function TrackBarPanel({
+  togglePlayPause,
+  isPlaying,
+  repeat,
+  handleRepeat,
+}) {
   return (
     <S.Controls>
       <S.BtnPrev>
-        <S.BtnPrevSvg alt="prev">
+        <S.BtnPrevSvg
+          alt="prev"
+          onClick={() => alert("Еще не реализовано")}
+        >
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.BtnPrevSvg>
       </S.BtnPrev>
-      <S.BtnPlay>
+
+      <S.BtnPlay onClick={togglePlayPause}>
         <S.BtnPlaySvg alt="play">
-          <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+          {isPlaying ? (
+            <svg
+              width="15"
+              height="19"
+              viewBox="0 0 15 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                width="5"
+                height="19"
+                fill="#D9D9D9"
+              />
+              <rect
+                x="10"
+                width="5"
+                height="19"
+                fill="#D9D9D9"
+              />
+            </svg>
+          ) : (
+            <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+          )}
         </S.BtnPlaySvg>
       </S.BtnPlay>
       <S.BtnNext>
-        <S.BtnNextSvg alt="next">
+        <S.BtnNextSvg
+          alt="next"
+          onClick={() => alert("Еще не реализовано")}
+        >
           <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
         </S.BtnNextSvg>
       </S.BtnNext>
-      <S.BtnRepeat>
-        <S.BtnRepeatSvg alt="repeat">
-          <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
-        </S.BtnRepeatSvg>
+      <S.BtnRepeat onClick={handleRepeat}>
+        {repeat ? (
+          <S.BtnRepeatActiveSvg alt="repeat">
+            <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+          </S.BtnRepeatActiveSvg>
+        ) : (
+          <S.BtnRepeatSvg alt="repeat">
+            <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+          </S.BtnRepeatSvg>
+        )}
       </S.BtnRepeat>
       <S.BtnShuffle>
-        <S.BtnShuffleSvg alt="shuffle">
+        <S.BtnShuffleSvg
+          alt="shuffle"
+          onClick={() => alert("Еще не реализовано")}
+        >
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
         </S.BtnShuffleSvg>
       </S.BtnShuffle>
