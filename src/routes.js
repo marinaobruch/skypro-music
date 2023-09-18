@@ -15,16 +15,35 @@ export const AppRoutes = ({
   allTracks,
   setCurrentTrack,
   getAllTracksError,
+  email,
+  setEmail,
+  password,
+  setPassword,
 }) => {
   return (
     <Routes>
       <Route
         path="/login"
-        element={<LoginPage onAuthButtonClick={onAuthButtonClick} />}
+        element={
+          <LoginPage
+            onAuthButtonClick={onAuthButtonClick}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+          />
+        }
       />
       <Route
         path="/register"
-        element={<RegPage />}
+        element={
+          <RegPage
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+          />
+        }
       />
       <Route
         path="/"

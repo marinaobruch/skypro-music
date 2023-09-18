@@ -118,8 +118,39 @@ export const LoginModalInput = styled.input`
   border-right: none;
   border-bottom: 1px solid #d0cece;
   padding: 8px 1px;
+  color: #000000;
+  padding-top: 14px;
+  padding-left: 8px;
+  outline: none;
 
-  ::placeholder {
+  &::placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #d0cece;
+  }
+
+  &::-ms-input-placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #d0cece;
+  }
+
+  &:-ms-input-placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #d0cece;
+  }
+
+  &::-webkit-input-placeholder {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -128,4 +159,3 @@ export const LoginModalInput = styled.input`
     color: #d0cece;
   }
 `;
-// export const Login = styled.div``;
