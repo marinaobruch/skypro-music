@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginPage.styles";
 import { fetchLogin } from "../../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const LoginPage = ({
   isLoginMode = false,
@@ -16,6 +16,11 @@ export const LoginPage = ({
 }) => {
   const [textError, setTextError] = useState(null);
   const navigate = useNavigate();
+
+  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
+  useEffect(() => {
+    setTextError(null);
+  }, [isLoginMode, email, password, repeatPassword]);
 
   const handleRegister = async () => {
     // in progress
