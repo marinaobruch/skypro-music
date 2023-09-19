@@ -1,7 +1,7 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginPage.styles";
 import { fetchLogin } from "../../api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const LoginPage = ({
   isLoginMode = false,
@@ -15,28 +15,14 @@ export const LoginPage = ({
   setUser,
 }) => {
   const [textError, setTextError] = useState(null);
-
-  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
-
-  useEffect(() => {
-    !textError;
-  }, [isLoginMode, email, password, repeatPassword]);
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
+    // in progress
     alert(`Выполняется регистрация: ${email} ${password}`);
   };
 
-  const handleAuth = () => {
-    if (!email) {
-      setTextError("Введите логин");
-      return;
-    }
-
-    if (!password) {
-      setTextError("Введите пароль");
-      return;
-    }
-
+  const AuthReg = async () => {
     fetchLogin(email, password)
       .then((response) => {
         setUser(response.username); // передать в Context: response.username
@@ -44,7 +30,29 @@ export const LoginPage = ({
       .catch((error) => {
         setTextError(error.message);
       });
-    setTextError("");
+
+    if (user) {
+      navigate("/");
+      setTextError("");
+    }
+  };
+
+  const handleAuth = async (e) => {
+    e.preventDefault();
+    if (!email) {
+      setTextError("Введите логин");
+      return;
+    }
+    if (!password) {
+      setTextError("Введите пароль");
+      return;
+    }
+    if (!repeatPassword && isLoginMode === false) {
+      setTextError("Повторите пароль");
+      return;
+    }
+
+    AuthReg();
   };
 
   return (
@@ -82,9 +90,7 @@ export const LoginPage = ({
             </S.Inputs>
             <S.LoginError>{textError}</S.LoginError>
             <S.Buttons>
-              <S.PrimaryButton onClick={() => handleAuth}>
-                Войти
-              </S.PrimaryButton>
+              <S.PrimaryButton onClick={handleAuth}>Войти</S.PrimaryButton>
               <Link to="/register">
                 <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
               </Link>
