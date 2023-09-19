@@ -1,28 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import * as S from "./LoginPage.styles";
 import { fetchLogin } from "../../api";
+import { useState } from "react";
 
-export const LoginPage = ({
-  onAuthButtonClick,
-  email,
-  setEmail,
-  password,
-  setPassword,
-}) => {
-  const handleAuth = () => {
-    if (!email) {
-      alert("Введите логин");
+export const LoginPage = ({ login, setLogin, user, setUser }) => {
+  const [textError, setTestError] = useState("");
+
+  const handleAuth = (e) => {
+    e.preventDefault();
+    if (!login.email) {
+      setTestError("Введите логин");
       return;
     }
 
-    if (!password) {
-      alert("Введите пароль");
+    if (!login.password) {
+      setTestError("Введите пароль");
       return;
     }
 
-    fetchLogin(email, password).then((response) => {
-      console.log("login!");
-    });
+    fetchLogin(login.email, login.password)
+      .then((response) => {
+        setUser(response.username); // передать в Context: response.username
+      })
+      .catch((error) => {
+        setTestError(error.message);
+      });
+    setTestError("");
   };
 
   return (
@@ -40,20 +43,24 @@ export const LoginPage = ({
               type="text"
               name="login"
               placeholder="Почта"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setLogin({ ...login, email: e.target.value })}
+              value={login.email}
             />
             <S.LoginModalInput
               type="password"
               name="password"
               placeholder="Пароль"
-              onChange={(e) => setPassword(e.target.value)}
+              value={login.password}
+              onChange={(e) => setLogin({ ...login, password: e.target.value })}
             />
-            <Link to="/">
+            <S.LoginError>{textError}</S.LoginError>
+
+            <NavLink to="/">
               <S.LoginBtnEnter onClick={handleAuth}>Войти</S.LoginBtnEnter>
-            </Link>
-            <Link to="/register">
+            </NavLink>
+            <NavLink to="/register">
               <S.LoginBtnSignup>Зарегистрироваться</S.LoginBtnSignup>
-            </Link>
+            </NavLink>
           </S.LoginModalFormLogin>
         </S.LoginModalBlock>
       </S.LoginContainer>

@@ -10,12 +10,11 @@ function App() {
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState({ email: "", password: "" });
 
-  const handleLogin = () => {
-    setUser(localStorage.setItem("user", "token"), user === "taradam");
-  };
+  // const handleLogin = () => {
+  //   setUser(localStorage.setItem("user", "token"));
+  // };
 
   useEffect(() => {
     setLoading(true);
@@ -41,12 +40,9 @@ function App() {
             setCurrentTrack={setCurrentTrack}
             user={user}
             setUser={setUser}
-            onAuthButtonClick={handleLogin}
             getAllTracksError={getAllTracksError}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+            login={login}
+            setLogin={setLogin}
           />
         </div>
       </div>

@@ -4,7 +4,7 @@ import { NavBarMenu } from "../NavBarMenu/NavBarMenu";
 
 export function NavBar({ user, setUser }) {
   const [open, setOpen] = useState(false);
-  function toggleOlen() {
+  function toggleOpen() {
     setOpen(!open);
   }
 
@@ -17,7 +17,7 @@ export function NavBar({ user, setUser }) {
         />
       </S.Logo>
 
-      <S.Burger onClick={toggleOlen}>
+      <S.Burger onClick={toggleOpen}>
         <S.BurgerLine></S.BurgerLine>
         <S.BurgerLine></S.BurgerLine>
         <S.BurgerLine></S.BurgerLine>

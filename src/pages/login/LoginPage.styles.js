@@ -159,3 +159,6 @@ export const LoginModalInput = styled.input`
     color: #d0cece;
   }
 `;
+export const LoginError = styled.div`
+  color: red;
+`;

@@ -11,14 +11,11 @@ export const AppRoutes = ({
   loading,
   user,
   setUser,
-  onAuthButtonClick,
   allTracks,
   setCurrentTrack,
   getAllTracksError,
-  email,
-  setEmail,
-  password,
-  setPassword,
+  login,
+  setLogin,
 }) => {
   return (
     <Routes>
@@ -26,11 +23,10 @@ export const AppRoutes = ({
         path="/login"
         element={
           <LoginPage
-            onAuthButtonClick={onAuthButtonClick}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+            login={login}
+            setLogin={setLogin}
+            user={user}
+            setUser={setUser}
           />
         }
       />
@@ -38,17 +34,17 @@ export const AppRoutes = ({
         path="/register"
         element={
           <RegPage
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+            login={login}
+            setLogin={setLogin}
+            user={user}
+            setUser={setUser}
           />
         }
       />
       <Route
         path="/"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute user={user}>
             <MainPage
               loading={loading}
               user={user}
@@ -63,7 +59,7 @@ export const AppRoutes = ({
       <Route
         path="/favorites"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute user={user}>
             <FavoritesPage />
           </ProtectedRoute>
         }
@@ -71,7 +67,7 @@ export const AppRoutes = ({
       <Route
         path="/category/:id"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute user={user}>
             <CategoriesPage />
           </ProtectedRoute>
         }
