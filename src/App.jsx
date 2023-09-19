@@ -10,7 +10,9 @@ function App() {
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
-  const [login, setLogin] = useState({ email: "", password: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
 
   // const handleLogin = () => {
   //   setUser(localStorage.setItem("user", "token"));
@@ -41,8 +43,12 @@ function App() {
             user={user}
             setUser={setUser}
             getAllTracksError={getAllTracksError}
-            login={login}
-            setLogin={setLogin}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            repeatPassword={repeatPassword}
+            setRepeatPassword={setRepeatPassword}
           />
         </div>
       </div>

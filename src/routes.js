@@ -4,7 +4,6 @@ import { CategoriesPage } from "./pages/categories/CategoriesPage";
 import { FavoritesPage } from "./pages/favorites/FavoritesPage";
 import { ErrorPage } from "./pages/error/ErrorPage";
 import { LoginPage } from "./pages/login/LoginPage";
-import { RegPage } from "./pages/reg/RegPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 export const AppRoutes = ({
@@ -14,8 +13,12 @@ export const AppRoutes = ({
   allTracks,
   setCurrentTrack,
   getAllTracksError,
-  login,
-  setLogin,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  repeatPassword,
+  setRepeatPassword,
 }) => {
   return (
     <Routes>
@@ -23,24 +26,32 @@ export const AppRoutes = ({
         path="/login"
         element={
           <LoginPage
-            login={login}
-            setLogin={setLogin}
+            isLoginMode={true}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
             user={user}
             setUser={setUser}
-          />
+          ></LoginPage>
         }
-      />
+      ></Route>
       <Route
         path="/register"
         element={
-          <RegPage
-            login={login}
-            setLogin={setLogin}
+          <LoginPage
+            isLoginMode={false}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
             user={user}
             setUser={setUser}
-          />
+            repeatPassword={repeatPassword}
+            setRepeatPassword={setRepeatPassword}
+          ></LoginPage>
         }
-      />
+      ></Route>
       <Route
         path="/"
         element={

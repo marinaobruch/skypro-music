@@ -1,69 +1,135 @@
 import { Link, NavLink } from "react-router-dom";
 import * as S from "./LoginPage.styles";
 import { fetchLogin } from "../../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const LoginPage = ({ login, setLogin, user, setUser }) => {
-  const [textError, setTestError] = useState("");
+export const LoginPage = ({
+  isLoginMode = false,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  repeatPassword,
+  setRepeatPassword,
+  user,
+  setUser,
+}) => {
+  const [textError, setTextError] = useState(null);
 
-  const handleAuth = (e) => {
-    e.preventDefault();
-    if (!login.email) {
-      setTestError("Введите логин");
+  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
+
+  useEffect(() => {
+    !textError;
+  }, [isLoginMode, email, password, repeatPassword]);
+
+  const handleRegister = async () => {
+    alert(`Выполняется регистрация: ${email} ${password}`);
+  };
+
+  const handleAuth = () => {
+    if (!email) {
+      setTextError("Введите логин");
       return;
     }
 
-    if (!login.password) {
-      setTestError("Введите пароль");
+    if (!password) {
+      setTextError("Введите пароль");
       return;
     }
 
-    fetchLogin(login.email, login.password)
+    fetchLogin(email, password)
       .then((response) => {
         setUser(response.username); // передать в Context: response.username
       })
       .catch((error) => {
-        setTestError(error.message);
+        setTextError(error.message);
       });
-    setTestError("");
+    setTextError("");
   };
 
   return (
-    <S.LoginWrap>
-      <S.LoginContainer>
-        <S.LoginModalBlock>
-          <S.LoginModalFormLogin action="#">
-            <S.LoginModalLogo>
-              <S.LoginModalLogoImg
-                src="../img/logo_modal.png"
-                alt="logo"
+    <S.PageContainer>
+      <S.ModalForm>
+        <Link to={"/login"}>
+          <S.LoginModalLogo>
+            <S.LoginModalLogoImg
+              src="../img/logo_modal.png"
+              alt="logo"
+            />
+          </S.LoginModalLogo>
+        </Link>
+        {isLoginMode ? (
+          <>
+            <S.Inputs>
+              <S.ModalInput
+                type="text"
+                name="login"
+                placeholder="Почта"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
               />
-            </S.LoginModalLogo>
-            <S.LoginModalInput
-              type="text"
-              name="login"
-              placeholder="Почта"
-              onChange={(e) => setLogin({ ...login, email: e.target.value })}
-              value={login.email}
-            />
-            <S.LoginModalInput
-              type="password"
-              name="password"
-              placeholder="Пароль"
-              value={login.password}
-              onChange={(e) => setLogin({ ...login, password: e.target.value })}
-            />
+              <S.ModalInput
+                type="password"
+                name="password"
+                placeholder="Пароль"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+            </S.Inputs>
             <S.LoginError>{textError}</S.LoginError>
-
-            <NavLink to="/">
-              <S.LoginBtnEnter onClick={handleAuth}>Войти</S.LoginBtnEnter>
-            </NavLink>
-            <NavLink to="/register">
-              <S.LoginBtnSignup>Зарегистрироваться</S.LoginBtnSignup>
-            </NavLink>
-          </S.LoginModalFormLogin>
-        </S.LoginModalBlock>
-      </S.LoginContainer>
-    </S.LoginWrap>
+            <S.Buttons>
+              <S.PrimaryButton onClick={() => handleAuth}>
+                Войти
+              </S.PrimaryButton>
+              <Link to="/register">
+                <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
+              </Link>
+            </S.Buttons>
+          </>
+        ) : (
+          <>
+            <S.Inputs>
+              <S.ModalInput
+                type="text"
+                name="login"
+                placeholder="Почта"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+              <S.ModalInput
+                type="password"
+                name="password"
+                placeholder="Пароль"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+              <S.ModalInput
+                type="password"
+                name="repeat-password"
+                placeholder="Повторите пароль"
+                value={repeatPassword}
+                onChange={(event) => {
+                  setRepeatPassword(event.target.value);
+                }}
+              />
+            </S.Inputs>
+            <S.LoginError>{textError}</S.LoginError>
+            <S.Buttons>
+              <S.PrimaryButton onClick={handleRegister}>
+                Зарегистрироваться
+              </S.PrimaryButton>
+            </S.Buttons>
+          </>
+        )}
+      </S.ModalForm>
+    </S.PageContainer>
   );
 };
