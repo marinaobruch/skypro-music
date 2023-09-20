@@ -13,14 +13,6 @@ export const AppRoutes = ({
   allTracks,
   setCurrentTrack,
   getAllTracksError,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  repeatPassword,
-  setRepeatPassword,
-  username,
-  setUsername,
 }) => {
   return (
     <Routes>
@@ -29,10 +21,6 @@ export const AppRoutes = ({
         element={
           <LoginPage
             isLoginMode={true}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
             user={user}
             setUser={setUser}
           ></LoginPage>
@@ -43,16 +31,8 @@ export const AppRoutes = ({
         element={
           <LoginPage
             isLoginMode={false}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            username={username}
-            setUsername={setUsername}
             user={user}
             setUser={setUser}
-            repeatPassword={repeatPassword}
-            setRepeatPassword={setRepeatPassword}
           ></LoginPage>
         }
       ></Route>

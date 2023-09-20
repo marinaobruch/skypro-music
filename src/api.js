@@ -45,10 +45,10 @@ export async function fetchReg({ username, email, password }) {
     headers: {
       "content-type": "application/json",
     },
-  }).then((response) => {
-    if (response.status === 400) {
-      throw new Error("Ошибка входа");
-    }
-    return response.json();
+  }).then(async (response) => {
+    const statusRequest = response.status;
+    const dataRequest = await response.json();
+    const obj = { status: statusRequest, data: dataRequest };
+    return obj;
   });
 }

@@ -3,19 +3,12 @@ import * as S from "./LoginPage.styles";
 import { fetchLogin, fetchReg } from "../../api";
 import { useEffect, useState } from "react";
 
-export const LoginPage = ({
-  isLoginMode = false,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  username,
-  setUsername,
-  repeatPassword,
-  setRepeatPassword,
-  user,
-  setUser,
-}) => {
+export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
   const [textError, setTextError] = useState(null);
   const navigate = useNavigate();
 
@@ -60,19 +53,17 @@ export const LoginPage = ({
       username: username,
       email: email,
       password: password,
-    })
-      .then((response) => {
-        setUser(response.username);
-      })
-      .catch((error) => {
-        setTextError(error.message);
-      });
-    if (username) {
-      navigate("/");
-      setTextError("");
-    }
+    }).then((obj) => {
+      if (obj.status === 400) {
+        const errorMail = obj.data.email;
+        const errorUser = obj.data.username;
+        const ErrorPassword = obj.data.password;
+
+        setTextError(errorMail + errorUser + ErrorPassword);
+      }
+      setUser(obj.data.username);
+    });
   };
-  console.log(user);
 
   const handleRegister = async () => {
     if (!email) {
