@@ -13,10 +13,6 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const navigate = useNavigate();
   const navigateAuth = useNavigate();
 
-  // const handleLogin = () => {
-  //   setUser(localStorage.setItem("user", "token"));
-  // };
-
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
     setTextError(null);
@@ -25,7 +21,8 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const getAuth = async () => {
     fetchLogin({ email: email, password: password })
       .then((response) => {
-        setUser(response.username); // передать в Context: response.username
+        setUser(response.username);
+        localStorage.setItem("user", user);
       })
       .catch((error) => {
         setTextError(error.message);
@@ -51,8 +48,6 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
     getAuth();
   };
 
-  // marinka1996@mail.ru
-
   const getReg = async () => {
     fetchReg({
       username: username,
@@ -66,7 +61,6 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
 
         setTextError(errorMail + errorUser + ErrorPassword);
       }
-      setUser(obj.data.username);
       navigateAuth("/login");
     });
   };

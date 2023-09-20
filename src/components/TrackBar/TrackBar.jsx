@@ -4,7 +4,7 @@ import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 
-export function TrackBar({ currentTrack }) {
+export function TrackBar({ currentTrack, user }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentDuration, setCurrentDuration] = useState(0);
@@ -14,22 +14,26 @@ export function TrackBar({ currentTrack }) {
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
 
+  const duration = currentTrack.duration_in_seconds;
+
   useEffect(() => {
     if (audioRef) {
       audioRef.current.volume = volume / 100;
     }
   }, [volume, audioRef]);
 
+  // play/pause track
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && user) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
   }, [isPlaying, audioRef]);
 
+  // auto playing track by clicking on track
   useEffect(() => {
-    if (currentTrack.track_file) {
+    if (currentTrack.track_file && user) {
       setIsPlaying(true);
     }
   }, [currentTrack.track_file]);
@@ -37,18 +41,13 @@ export function TrackBar({ currentTrack }) {
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
-
-  const duration = currentTrack.duration_in_seconds;
-
   const handleProgress = () => {
     const currentProgress = audioRef.current.currentTime;
     setCurrentTime(currentProgress);
   };
-
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };
-
   const handleRepeat = () => {
     if (audioRef.current) {
       audioRef.current.loop = !repeat;
@@ -83,40 +82,42 @@ export function TrackBar({ currentTrack }) {
         onLoadedMetadata={onLoadedMetadata}
         type="audio/mpeg"
       ></audio>
-      <S.Bar>
-        <S.TimeBar>
-          {formatTime(currentTime)} /{formatTime(currentDuration)}
-        </S.TimeBar>
-        <S.BarContent>
-          <S.BarPlayerProgress
-            type="range"
-            min={0}
-            max={duration}
-            value={currentTime}
-            step={0.01}
-            ref={progressBarRef}
-            onChange={handleProgressChange}
-            $color="#B672FF"
-          ></S.BarPlayerProgress>
+      {user ? (
+        <S.Bar>
+          <S.TimeBar>
+            {formatTime(currentTime)} /{formatTime(currentDuration)}
+          </S.TimeBar>
+          <S.BarContent>
+            <S.BarPlayerProgress
+              type="range"
+              min={0}
+              max={duration}
+              value={currentTime}
+              step={0.01}
+              ref={progressBarRef}
+              onChange={handleProgressChange}
+              $color="#B672FF"
+            ></S.BarPlayerProgress>
 
-          <S.BarPlayerBlock>
-            <S.BarPlayer>
-              <TrackBarPanel
-                currentTrack={currentTrack}
-                togglePlayPause={togglePlayPause}
-                isPlaying={isPlaying}
-                handleRepeat={handleRepeat}
-                repeat={repeat}
+            <S.BarPlayerBlock>
+              <S.BarPlayer>
+                <TrackBarPanel
+                  currentTrack={currentTrack}
+                  togglePlayPause={togglePlayPause}
+                  isPlaying={isPlaying}
+                  handleRepeat={handleRepeat}
+                  repeat={repeat}
+                />
+                <TrackBarPlayer currentTrack={currentTrack} />
+              </S.BarPlayer>
+              <TrackBarVolume
+                volume={volume}
+                setVolume={setVolume}
               />
-              <TrackBarPlayer currentTrack={currentTrack} />
-            </S.BarPlayer>
-            <TrackBarVolume
-              volume={volume}
-              setVolume={setVolume}
-            />
-          </S.BarPlayerBlock>
-        </S.BarContent>
-      </S.Bar>
+            </S.BarPlayerBlock>
+          </S.BarContent>
+        </S.Bar>
+      ) : null}
     </>
   );
 }

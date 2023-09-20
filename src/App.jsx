@@ -7,7 +7,15 @@ import { UserContext } from "./contexts/user";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("user");
+    return saved || null;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("user", user);
+  }, [user, setUser]);
+
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
@@ -27,6 +35,7 @@ function App() {
 
   const switchUser = () => {
     setUser(null);
+    setUser(localStorage.clear(), user === null);
   };
 
   return (
@@ -50,6 +59,7 @@ function App() {
         <TrackBar
           currentTrack={currentTrack}
           setCurrentTrack={setCurrentTrack}
+          user={user}
         />
       ) : null}
     </>
