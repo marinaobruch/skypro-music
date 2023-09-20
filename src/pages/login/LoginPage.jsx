@@ -11,7 +11,6 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const [textError, setTextError] = useState(null);
 
   const navigate = useNavigate();
-  const navigateAuth = useNavigate();
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
@@ -61,7 +60,9 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
 
         setTextError(errorMail + errorUser + ErrorPassword);
       }
-      navigateAuth("/login");
+      setUser(obj.data.username);
+      localStorage.setItem("user", obj.data.username);
+      navigate("/");
     });
   };
 

@@ -34,8 +34,8 @@ function App() {
   }, []);
 
   const switchUser = () => {
-    setUser(null);
-    setUser(localStorage.clear(), user === null);
+    setUser("");
+    localStorage.clear(), user === "";
   };
 
   return (
