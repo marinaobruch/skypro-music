@@ -12,6 +12,7 @@ function App() {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   // const handleLogin = () => {
@@ -49,6 +50,8 @@ function App() {
             setPassword={setPassword}
             repeatPassword={repeatPassword}
             setRepeatPassword={setRepeatPassword}
+            username={username}
+            setUsername={setUsername}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginPage.styles";
-import { fetchLogin } from "../../api";
+import { fetchLogin, fetchReg } from "../../api";
 import { useEffect, useState } from "react";
 
 export const LoginPage = ({
@@ -9,6 +9,8 @@ export const LoginPage = ({
   setEmail,
   password,
   setPassword,
+  username,
+  setUsername,
   repeatPassword,
   setRepeatPassword,
   user,
@@ -22,13 +24,8 @@ export const LoginPage = ({
     setTextError(null);
   }, [isLoginMode, email, password, repeatPassword]);
 
-  const handleRegister = async () => {
-    // in progress
-    alert(`Выполняется регистрация: ${email} ${password}`);
-  };
-
-  const AuthReg = async () => {
-    fetchLogin(email, password)
+  const getAuth = async () => {
+    fetchLogin({ email: email, password: password })
       .then((response) => {
         setUser(response.username); // передать в Context: response.username
       })
@@ -52,12 +49,53 @@ export const LoginPage = ({
       setTextError("Введите пароль");
       return;
     }
-    if (!repeatPassword && isLoginMode === false) {
+
+    getAuth();
+  };
+
+  // marinka1996@mail.ru
+
+  const getReg = async () => {
+    fetchReg({
+      username: username,
+      email: email,
+      password: password,
+    })
+      .then((response) => {
+        setUser(response.username);
+      })
+      .catch((error) => {
+        setTextError(error.message);
+      });
+    if (username) {
+      navigate("/");
+      setTextError("");
+    }
+  };
+  console.log(user);
+
+  const handleRegister = async () => {
+    if (!email) {
+      setTextError("Введите почту");
+      return;
+    }
+    if (!username) {
+      setTextError("Введите логин");
+      return;
+    }
+    if (!password) {
+      setTextError("Введите пароль");
+      return;
+    }
+    if (!repeatPassword) {
       setTextError("Повторите пароль");
       return;
     }
-
-    AuthReg();
+    if (password !== repeatPassword) {
+      setTextError("Повторите корректный пароль");
+      return;
+    }
+    getReg();
   };
 
   return (
@@ -111,6 +149,15 @@ export const LoginPage = ({
                 value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
+                }}
+              />
+              <S.ModalInput
+                type="text"
+                name="login"
+                placeholder="Логин"
+                value={username}
+                onChange={(event) => {
+                  setUsername(event.target.value);
                 }}
               />
               <S.ModalInput

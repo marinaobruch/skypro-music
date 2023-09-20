@@ -12,7 +12,7 @@ export async function getAllTracks() {
   return data;
 }
 
-export async function fetchLogin(email, password) {
+export async function fetchLogin({ email, password }) {
   return fetch(loginHost, {
     method: "POST",
     body: JSON.stringify({
@@ -34,16 +34,15 @@ export async function fetchLogin(email, password) {
   });
 }
 
-export async function fetchReg(email, password, username) {
+export async function fetchReg({ username, email, password }) {
   return fetch(regHost, {
     method: "POST",
     body: JSON.stringify({
+      username,
       email,
       password,
-      username,
     }),
     headers: {
-      // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
       "content-type": "application/json",
     },
   }).then((response) => {

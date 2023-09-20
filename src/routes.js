@@ -19,6 +19,8 @@ export const AppRoutes = ({
   setPassword,
   repeatPassword,
   setRepeatPassword,
+  username,
+  setUsername,
 }) => {
   return (
     <Routes>
@@ -45,6 +47,8 @@ export const AppRoutes = ({
             setEmail={setEmail}
             password={password}
             setPassword={setPassword}
+            username={username}
+            setUsername={setUsername}
             user={user}
             setUser={setUser}
             repeatPassword={repeatPassword}
