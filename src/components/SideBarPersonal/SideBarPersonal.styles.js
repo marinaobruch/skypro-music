@@ -26,7 +26,7 @@ export const SidebarPersonalName = styled.p`
   margin-right: 16px;
 `;
 
-export const SidebarIcon = styled.div`
+export const SidebarIcon = styled.button`
   width: 43px;
   height: 43px;
   background-color: #313131;

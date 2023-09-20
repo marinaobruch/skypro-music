@@ -25,12 +25,16 @@ function App() {
       });
   }, []);
 
+  const switchUser = () => {
+    setUser(null);
+  };
+
   return (
     <>
       <GlobalStyle />
       <div className="App">
         <div>
-          <UserContext.Provider value={user}>
+          <UserContext.Provider value={{ userName: user, switchUser }}>
             <AppRoutes
               loading={loading}
               allTracks={allTracks}

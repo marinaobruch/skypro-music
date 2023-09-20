@@ -21,10 +21,7 @@ export const MainPage = ({
       <S.Wrapper>
         <S.Container>
           <S.Main>
-            <NavBar
-              user={user}
-              setUser={setUser}
-            />
+            <NavBar />
             <S.MainCenterblock>
               <Search />
               <S.MainCenterblockH2>Треки</S.MainCenterblockH2>

@@ -8,10 +8,11 @@ export function SideBar({ loading, albums }) {
   return (
     <S.MainSidebar className="main__sidebar sidebar">
       <UserContext.Consumer>
-        {(user) => (
+        {({ userName: user, switchUser }) => (
           <SideBarPersonal
             loading={loading}
             user={user}
+            switchUser={switchUser}
           />
         )}
       </UserContext.Consumer>
