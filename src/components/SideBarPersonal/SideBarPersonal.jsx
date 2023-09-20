@@ -1,13 +1,13 @@
 import React from "react";
 import * as S from "./SideBarPersonal.styles.js";
 
-export function SideBarPersonal({ loading }) {
+export function SideBarPersonal({ loading, user }) {
   return (
     <S.SidebarPersonal>
       {loading ? (
         <S.SidebarPersonalName>User</S.SidebarPersonalName>
       ) : (
-        <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+        <S.SidebarPersonalName>{user}</S.SidebarPersonalName>
       )}
       <S.SidebarIcon>
         <svg alt="logout">

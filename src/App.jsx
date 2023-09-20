@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
+import { UserContext } from "./contexts/user";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -10,10 +11,6 @@ function App() {
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
-
-  // const handleLogin = () => {
-  //   setUser(localStorage.setItem("user", "token"));
-  // };
 
   useEffect(() => {
     setLoading(true);
@@ -33,14 +30,16 @@ function App() {
       <GlobalStyle />
       <div className="App">
         <div>
-          <AppRoutes
-            loading={loading}
-            allTracks={allTracks}
-            setCurrentTrack={setCurrentTrack}
-            user={user}
-            setUser={setUser}
-            getAllTracksError={getAllTracksError}
-          />
+          <UserContext.Provider value={user}>
+            <AppRoutes
+              loading={loading}
+              allTracks={allTracks}
+              setCurrentTrack={setCurrentTrack}
+              user={user}
+              setUser={setUser}
+              getAllTracksError={getAllTracksError}
+            />
+          </UserContext.Provider>
         </div>
       </div>
       {currentTrack ? (

@@ -1,16 +1,21 @@
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginPage.styles";
 import { fetchLogin, fetchReg } from "../../api";
-import { useEffect, useState } from "react";
 
 export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-
   const [textError, setTextError] = useState(null);
+
   const navigate = useNavigate();
+  const navigateAuth = useNavigate();
+
+  // const handleLogin = () => {
+  //   setUser(localStorage.setItem("user", "token"));
+  // };
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
@@ -62,6 +67,7 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
         setTextError(errorMail + errorUser + ErrorPassword);
       }
       setUser(obj.data.username);
+      navigateAuth("/login");
     });
   };
 
@@ -83,7 +89,7 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
       return;
     }
     if (password !== repeatPassword) {
-      setTextError("Повторите корректный пароль");
+      setTextError("Пароли не совпадают");
       return;
     }
     getReg();
