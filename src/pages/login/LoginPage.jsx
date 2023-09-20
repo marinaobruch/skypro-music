@@ -62,7 +62,7 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
       }
       setUser(obj.data.username);
       localStorage.setItem("user", obj.data.username);
-      navigate("/");
+      // navigate("/");
     });
   };
 
