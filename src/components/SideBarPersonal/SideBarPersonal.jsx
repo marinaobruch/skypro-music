@@ -5,7 +5,7 @@ export function SideBarPersonal({ loading, user }) {
   return (
     <S.SidebarPersonal>
       {loading ? (
-        <S.SidebarPersonalName>User</S.SidebarPersonalName>
+        <S.SidebarPersonalName>Loading</S.SidebarPersonalName>
       ) : (
         <S.SidebarPersonalName>{user}</S.SidebarPersonalName>
       )}
