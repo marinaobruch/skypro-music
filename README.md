@@ -1,4 +1,5 @@
 TODO auth/reg HW - 10h
+Fact time - 11h
 
 # Getting Started with Create React App
 
