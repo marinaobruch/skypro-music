@@ -8,8 +8,6 @@ import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 export const AppRoutes = ({
   loading,
-  user,
-  setUser,
   allTracks,
   setCurrentTrack,
   getAllTracksError,
@@ -18,23 +16,11 @@ export const AppRoutes = ({
     <Routes>
       <Route
         path="/login"
-        element={
-          <LoginPage
-            isLoginMode={true}
-            user={user}
-            setUser={setUser}
-          ></LoginPage>
-        }
+        element={<LoginPage isLoginMode={true}></LoginPage>}
       ></Route>
       <Route
         path="/register"
-        element={
-          <LoginPage
-            isLoginMode={false}
-            user={user}
-            setUser={setUser}
-          ></LoginPage>
-        }
+        element={<LoginPage isLoginMode={false}></LoginPage>}
       ></Route>
       <Route
         path="/"

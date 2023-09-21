@@ -7,7 +7,6 @@ import { WithAuth } from "./WithAuth";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
 
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
@@ -36,8 +35,6 @@ function App() {
               loading={loading}
               allTracks={allTracks}
               setCurrentTrack={setCurrentTrack}
-              user={user}
-              setUser={setUser}
               getAllTracksError={getAllTracksError}
             />
           </div>

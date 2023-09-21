@@ -4,7 +4,7 @@ import * as S from "./LoginPage.styles";
 import { fetchLogin, fetchReg } from "../../api";
 import { useAuth } from "../../WithAuth";
 
-export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
+export const LoginPage = ({ isLoginMode = false }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const [textError, setTextError] = useState(null);
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { auth, login } = useAuth();
 
   useEffect(() => {
     setTextError(null);
@@ -21,14 +21,13 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const getAuth = async () => {
     fetchLogin({ email: email, password: password })
       .then((response) => {
-        setUser(response.username);
+        login(response.username);
       })
       .catch((error) => {
         setTextError(error.message);
       });
 
-    if (user) {
-      login(user);
+    if (auth) {
       navigate("/");
       setTextError("");
     }
@@ -62,7 +61,7 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
         setTextError(errorMail + errorUser + ErrorPassword);
         return;
       }
-      setUser(obj.data.username);
+      login(obj.data.username);
       navigate("/");
     });
   };

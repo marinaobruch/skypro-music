@@ -11,7 +11,7 @@ export function TrackBar({ currentTrack }) {
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
-  const { auth, login } = useAuth();
+  const { auth, login, logout } = useAuth();
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
@@ -31,13 +31,14 @@ export function TrackBar({ currentTrack }) {
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef, login]);
+  }, [isPlaying, audioRef, login, logout]);
 
   // auto playing track by clicking on track
   useEffect(() => {
     if (currentTrack.track_file && auth) {
       setIsPlaying(true);
     }
+    setIsPlaying(false);
   }, [currentTrack.track_file]);
 
   const togglePlayPause = () => {

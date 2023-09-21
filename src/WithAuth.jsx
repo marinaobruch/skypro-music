@@ -6,21 +6,21 @@ export const WithAuth = ({ children }) => {
   const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("user")));
   const navigate = useNavigate();
 
-  // Функция, которая запишет данные при входе
+  // function which will record data (login)
   const login = (authData) => {
     setAuth(authData);
     localStorage.setItem("user", JSON.stringify(authData));
     navigate("/");
   };
 
-  // Функция, которая сотрет даннные при выходе
+  // function which will delete data (logout)
   const logout = () => {
     setAuth(null);
     localStorage.removeItem("user");
     navigate("/login");
   };
 
-  // указываем данные в провайдер
+  // put data in provider
   return (
     <AuthContext.Provider
       value={{
@@ -34,7 +34,7 @@ export const WithAuth = ({ children }) => {
   );
 };
 
-// экспортируем контекст
+// export Context
 export const useAuth = () => {
   return useContext(AuthContext);
 };
