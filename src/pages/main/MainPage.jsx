@@ -9,8 +9,6 @@ import { ALBUMS } from "../../constants.js";
 
 export const MainPage = ({
   loading,
-  user,
-  setUser,
   allTracks,
   setCurrentTrack,
   getAllTracksError,
@@ -44,11 +42,3 @@ export const MainPage = ({
     </>
   );
 };
-
-// const [loading, setLoading] = useState(true);
-
-// useEffect(() => {
-//   setTimeout(() => {
-//     setLoading(false);
-//   }, 2000);
-// }, []);

@@ -3,20 +3,11 @@ import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
-import { UserContext } from "./contexts/user";
-import { useNavigate } from "react-router-dom";
+import { WithAuth } from "./WithAuth";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem("user");
-    return saved || null;
-  });
-  const mainNavigate = useNavigate();
-
-  useEffect(() => {
-    localStorage.setItem("user", user);
-  }, [user, setUser]);
+  const [user, setUser] = useState(null);
 
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
@@ -35,18 +26,12 @@ function App() {
       });
   }, []);
 
-  const switchUser = () => {
-    setUser(null);
-    localStorage.clear(), user === null;
-    mainNavigate("/login");
-  };
-
   return (
     <>
       <GlobalStyle />
-      <div className="App">
-        <div>
-          <UserContext.Provider value={{ userName: user, switchUser }}>
+      <WithAuth>
+        <div className="App">
+          <div>
             <AppRoutes
               loading={loading}
               allTracks={allTracks}
@@ -55,16 +40,15 @@ function App() {
               setUser={setUser}
               getAllTracksError={getAllTracksError}
             />
-          </UserContext.Provider>
+          </div>
         </div>
-      </div>
-      {currentTrack ? (
-        <TrackBar
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
-          user={user}
-        />
-      ) : null}
+        {currentTrack ? (
+          <TrackBar
+            currentTrack={currentTrack}
+            setCurrentTrack={setCurrentTrack}
+          />
+        ) : null}
+      </WithAuth>
     </>
   );
 }

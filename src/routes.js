@@ -39,11 +39,9 @@ export const AppRoutes = ({
       <Route
         path="/"
         element={
-          <ProtectedRoute user={user}>
+          <ProtectedRoute>
             <MainPage
               loading={loading}
-              user={user}
-              setUser={setUser}
               allTracks={allTracks}
               setCurrentTrack={setCurrentTrack}
               getAllTracksError={getAllTracksError}
@@ -54,7 +52,7 @@ export const AppRoutes = ({
       <Route
         path="/favorites"
         element={
-          <ProtectedRoute user={user}>
+          <ProtectedRoute>
             <FavoritesPage />
           </ProtectedRoute>
         }
@@ -62,7 +60,7 @@ export const AppRoutes = ({
       <Route
         path="/category/:id"
         element={
-          <ProtectedRoute user={user}>
+          <ProtectedRoute>
             <CategoriesPage />
           </ProtectedRoute>
         }

@@ -3,13 +3,15 @@ import * as S from "./TrackBar.styles.js";
 import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
+import { useAuth } from "../../WithAuth.jsx";
 
-export function TrackBar({ currentTrack, user }) {
+export function TrackBar({ currentTrack }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
+  const { auth, login } = useAuth();
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
@@ -24,16 +26,16 @@ export function TrackBar({ currentTrack, user }) {
 
   // play/pause track
   useEffect(() => {
-    if (isPlaying && user) {
+    if (isPlaying && auth) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef]);
+  }, [isPlaying, audioRef, login]);
 
   // auto playing track by clicking on track
   useEffect(() => {
-    if (currentTrack.track_file && user) {
+    if (currentTrack.track_file && auth) {
       setIsPlaying(true);
     }
   }, [currentTrack.track_file]);
@@ -82,7 +84,7 @@ export function TrackBar({ currentTrack, user }) {
         onLoadedMetadata={onLoadedMetadata}
         type="audio/mpeg"
       ></audio>
-      {user ? (
+      {auth ? (
         <S.Bar>
           <S.TimeBar>
             {formatTime(currentTime)} /{formatTime(currentDuration)}

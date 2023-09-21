@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginPage.styles";
 import { fetchLogin, fetchReg } from "../../api";
+import { useAuth } from "../../WithAuth";
 
 export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const [email, setEmail] = useState("");
@@ -11,8 +12,8 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
   const [textError, setTextError] = useState(null);
 
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
     setTextError(null);
   }, [isLoginMode, email, password, repeatPassword]);
@@ -21,13 +22,13 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
     fetchLogin({ email: email, password: password })
       .then((response) => {
         setUser(response.username);
-        localStorage.setItem("user", user);
       })
       .catch((error) => {
         setTextError(error.message);
       });
 
     if (user) {
+      login(user);
       navigate("/");
       setTextError("");
     }
@@ -62,7 +63,6 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
         return;
       }
       setUser(obj.data.username);
-      localStorage.setItem("user", obj.data.username);
       navigate("/");
     });
   };

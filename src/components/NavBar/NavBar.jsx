@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./NavBar.styles.js";
 import { NavBarMenu } from "../NavBarMenu/NavBarMenu";
-import { UserContext } from "../../contexts/user.jsx";
 
 export function NavBar() {
   const [open, setOpen] = useState(false);
@@ -24,16 +23,7 @@ export function NavBar() {
         <S.BurgerLine></S.BurgerLine>
       </S.Burger>
 
-      {open ? (
-        <UserContext.Consumer>
-          {({ userName: user, switchUser }) => (
-            <NavBarMenu
-              user={user}
-              switchUser={switchUser}
-            />
-          )}
-        </UserContext.Consumer>
-      ) : null}
+      {open ? <NavBarMenu /> : null}
     </S.MainNav>
   );
 }
