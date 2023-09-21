@@ -4,6 +4,7 @@ import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
 import { UserContext } from "./contexts/user";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,7 @@ function App() {
     const saved = localStorage.getItem("user");
     return saved || null;
   });
+  const mainNavigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("user", user);
@@ -34,8 +36,9 @@ function App() {
   }, []);
 
   const switchUser = () => {
-    setUser("");
-    localStorage.clear(), user === "";
+    setUser(null);
+    localStorage.clear(), user === null;
+    mainNavigate("/login");
   };
 
   return (

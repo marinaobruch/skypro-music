@@ -59,10 +59,11 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
         const ErrorPassword = obj.data.password;
 
         setTextError(errorMail + errorUser + ErrorPassword);
+        return;
       }
       setUser(obj.data.username);
       localStorage.setItem("user", obj.data.username);
-      // navigate("/");
+      navigate("/");
     });
   };
 
@@ -89,7 +90,6 @@ export const LoginPage = ({ isLoginMode = false, user, setUser }) => {
     }
     getReg();
   };
-
   return (
     <S.PageContainer>
       <S.ModalForm>
