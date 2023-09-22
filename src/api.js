@@ -35,7 +35,7 @@ export async function fetchLogin({ email, password }) {
 }
 
 export async function fetchReg({ username, email, password }) {
-  return fetch(regHost, {
+  const response = await fetch(regHost, {
     method: "POST",
     body: JSON.stringify({
       username,
@@ -45,10 +45,28 @@ export async function fetchReg({ username, email, password }) {
     headers: {
       "content-type": "application/json",
     },
-  }).then(async (response) => {
-    const statusRequest = response.status;
-    const dataRequest = await response.json();
-    const obj = { status: statusRequest, data: dataRequest };
-    return obj;
   });
+  const jsonData = await response.json();
+
+  if (!response.ok) {
+    let errorMessages = [];
+    if (jsonData.email && jsonData.email.length > 0) {
+      errorMessages.push(jsonData.email[0]);
+    }
+    if (jsonData.password && jsonData.password.length > 0) {
+      errorMessages.push(jsonData.password[0]);
+    }
+    if (jsonData.username && jsonData.username.length > 0) {
+      errorMessages.push(jsonData.username[0]);
+    }
+
+    const errorMessage = errorMessages.join(" \n");
+
+    if (!errorMessage) {
+      errorMessage = "Ошибка сервера";
+    }
+
+    throw new Error(errorMessage);
+  }
+  return jsonData;
 }

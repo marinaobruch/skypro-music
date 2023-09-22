@@ -47,23 +47,20 @@ export const LoginPage = ({ isLoginMode = false }) => {
     getAuth();
   };
 
-  const getReg = async () => {
+  const getReg = () => {
     fetchReg({
       username: username,
       email: email,
       password: password,
-    }).then((obj) => {
-      if (obj.status === 400) {
-        const errorMail = obj.data.email;
-        const errorUser = obj.data.username;
-        const ErrorPassword = obj.data.password;
-
-        setTextError(errorMail + errorUser + ErrorPassword);
-        return;
-      }
-      login(obj.data.username);
-      navigate("/");
-    });
+    })
+      .then((jsonData) => {
+        console.log(jsonData);
+        login(jsonData.username);
+        navigate("/");
+      })
+      .catch((error) => {
+        setTextError(error.message);
+      });
   };
 
   const handleRegister = async () => {

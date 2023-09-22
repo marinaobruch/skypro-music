@@ -148,4 +148,5 @@ export const LoginError = styled.div`
   line-height: 24px;
   margin-top: 20px;
   text-align: left;
+  white-space: pre-wrap;
 `;
