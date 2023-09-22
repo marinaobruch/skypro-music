@@ -6,7 +6,7 @@ import { SideBarBlock } from "../SideBarBlock/SideBarBlock";
 export function SideBar({ loading, albums }) {
   return (
     <S.MainSidebar className="main__sidebar sidebar">
-      <SideBarPersonal loading={loading} />
+      {<SideBarPersonal loading={loading} />}
       <SideBarBlock
         loading={loading}
         albums={albums}

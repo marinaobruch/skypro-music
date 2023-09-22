@@ -9,8 +9,6 @@ import { ALBUMS } from "../../constants.js";
 
 export const MainPage = ({
   loading,
-  user,
-  setUser,
   allTracks,
   setCurrentTrack,
   getAllTracksError,
@@ -21,10 +19,7 @@ export const MainPage = ({
       <S.Wrapper>
         <S.Container>
           <S.Main>
-            <NavBar
-              user={user}
-              setUser={setUser}
-            />
+            <NavBar />
             <S.MainCenterblock>
               <Search />
               <S.MainCenterblockH2>Треки</S.MainCenterblockH2>
@@ -47,11 +42,3 @@ export const MainPage = ({
     </>
   );
 };
-
-// const [loading, setLoading] = useState(true);
-
-// useEffect(() => {
-//   setTimeout(() => {
-//     setLoading(false);
-//   }, 2000);
-// }, []);

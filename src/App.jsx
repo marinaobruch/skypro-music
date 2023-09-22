@@ -1,19 +1,16 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
+import { WithAuth } from "./WithAuth";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
+
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
-
-  const handleLogin = () => {
-    setUser(localStorage.setItem("user", "token"), user === "taradam");
-  };
 
   useEffect(() => {
     setLoading(true);
@@ -31,25 +28,24 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <div className="App">
-        <div>
-          <AppRoutes
-            loading={loading}
-            allTracks={allTracks}
-            setCurrentTrack={setCurrentTrack}
-            user={user}
-            setUser={setUser}
-            onAuthButtonClick={handleLogin}
-            getAllTracksError={getAllTracksError}
-          />
+      <WithAuth>
+        <div className="App">
+          <div>
+            <AppRoutes
+              loading={loading}
+              allTracks={allTracks}
+              setCurrentTrack={setCurrentTrack}
+              getAllTracksError={getAllTracksError}
+            />
+          </div>
         </div>
-      </div>
-      {currentTrack ? (
-        <TrackBar
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
-        />
-      ) : null}
+        {currentTrack ? (
+          <TrackBar
+            currentTrack={currentTrack}
+            setCurrentTrack={setCurrentTrack}
+          />
+        ) : null}
+      </WithAuth>
     </>
   );
 }

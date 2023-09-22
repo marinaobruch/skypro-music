@@ -3,6 +3,7 @@ import * as S from "./TrackBar.styles.js";
 import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
+import { useAuth } from "../../WithAuth.jsx";
 
 export function TrackBar({ currentTrack }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -10,9 +11,12 @@ export function TrackBar({ currentTrack }) {
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
+  const { auth, login, logout } = useAuth();
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
+
+  const duration = currentTrack.duration_in_seconds;
 
   useEffect(() => {
     if (audioRef) {
@@ -20,35 +24,33 @@ export function TrackBar({ currentTrack }) {
     }
   }, [volume, audioRef]);
 
+  // play/pause track
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && auth) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef]);
+  }, [isPlaying, audioRef, login, logout]);
 
+  // auto playing track by clicking on track
   useEffect(() => {
-    if (currentTrack.track_file) {
+    if (currentTrack.track_file && auth) {
       setIsPlaying(true);
     }
+    setIsPlaying(false);
   }, [currentTrack.track_file]);
 
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
-
-  const duration = currentTrack.duration_in_seconds;
-
   const handleProgress = () => {
     const currentProgress = audioRef.current.currentTime;
     setCurrentTime(currentProgress);
   };
-
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };
-
   const handleRepeat = () => {
     if (audioRef.current) {
       audioRef.current.loop = !repeat;
@@ -83,40 +85,42 @@ export function TrackBar({ currentTrack }) {
         onLoadedMetadata={onLoadedMetadata}
         type="audio/mpeg"
       ></audio>
-      <S.Bar>
-        <S.TimeBar>
-          {formatTime(currentTime)} /{formatTime(currentDuration)}
-        </S.TimeBar>
-        <S.BarContent>
-          <S.BarPlayerProgress
-            type="range"
-            min={0}
-            max={duration}
-            value={currentTime}
-            step={0.01}
-            ref={progressBarRef}
-            onChange={handleProgressChange}
-            $color="#B672FF"
-          ></S.BarPlayerProgress>
+      {auth ? (
+        <S.Bar>
+          <S.TimeBar>
+            {formatTime(currentTime)} /{formatTime(currentDuration)}
+          </S.TimeBar>
+          <S.BarContent>
+            <S.BarPlayerProgress
+              type="range"
+              min={0}
+              max={duration}
+              value={currentTime}
+              step={0.01}
+              ref={progressBarRef}
+              onChange={handleProgressChange}
+              $color="#B672FF"
+            ></S.BarPlayerProgress>
 
-          <S.BarPlayerBlock>
-            <S.BarPlayer>
-              <TrackBarPanel
-                currentTrack={currentTrack}
-                togglePlayPause={togglePlayPause}
-                isPlaying={isPlaying}
-                handleRepeat={handleRepeat}
-                repeat={repeat}
+            <S.BarPlayerBlock>
+              <S.BarPlayer>
+                <TrackBarPanel
+                  currentTrack={currentTrack}
+                  togglePlayPause={togglePlayPause}
+                  isPlaying={isPlaying}
+                  handleRepeat={handleRepeat}
+                  repeat={repeat}
+                />
+                <TrackBarPlayer currentTrack={currentTrack} />
+              </S.BarPlayer>
+              <TrackBarVolume
+                volume={volume}
+                setVolume={setVolume}
               />
-              <TrackBarPlayer currentTrack={currentTrack} />
-            </S.BarPlayer>
-            <TrackBarVolume
-              volume={volume}
-              setVolume={setVolume}
-            />
-          </S.BarPlayerBlock>
-        </S.BarContent>
-      </S.Bar>
+            </S.BarPlayerBlock>
+          </S.BarContent>
+        </S.Bar>
+      ) : null}
     </>
   );
 }

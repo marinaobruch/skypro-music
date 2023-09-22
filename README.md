@@ -1,3 +1,6 @@
+TODO auth/reg HW - 10h
+Fact time - 11h
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
