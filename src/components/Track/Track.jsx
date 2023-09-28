@@ -1,10 +1,11 @@
 import React from "react";
 import * as S from "./Track.styles.js";
 import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCurrentTrack } from "../../store/playerSlice.js";
 
 export function Track({ loading, allTracks, getAllTracksError }) {
+  const currentTrack = useSelector((state) => state.audioplayer.track);
   const dispatch = useDispatch();
 
   return (
@@ -38,11 +39,14 @@ export function Track({ loading, allTracks, getAllTracksError }) {
             >
               <S.TrackTitle>
                 <S.TrackTitleImg>
-                  <S.TrackTitleSvg alt="music">
-                    <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                  </S.TrackTitleSvg>
+                  {currentTrack.id === track.id ? (
+                    <S.playingdot></S.playingdot>
+                  ) : (
+                    <S.TrackTitleSvg alt="music">
+                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                    </S.TrackTitleSvg>
+                  )}
                 </S.TrackTitleImg>
-
                 <div className="track__title-text">
                   <S.TrackTitleLink href="#">
                     {track.name}
