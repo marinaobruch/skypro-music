@@ -7,12 +7,7 @@ import { Search } from "../../components/Search/Search";
 import { SideBar } from "../../components/SideBar/SideBar";
 import { ALBUMS } from "../../constants.js";
 
-export const MainPage = ({
-  loading,
-  allTracks,
-  setCurrentTrack,
-  getAllTracksError,
-}) => {
+export const MainPage = ({ loading, allTracks, getAllTracksError }) => {
   return (
     <>
       <S.GlobalStyle />
@@ -27,7 +22,6 @@ export const MainPage = ({
               <Content
                 loading={loading}
                 allTracks={allTracks}
-                setCurrentTrack={setCurrentTrack}
                 getAllTracksError={getAllTracksError}
               />
             </S.MainCenterblock>

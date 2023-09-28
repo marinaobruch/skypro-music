@@ -4,13 +4,15 @@ import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
 import { WithAuth } from "./WithAuth";
+import { useSelector } from "react-redux";
 
 function App() {
   const [loading, setLoading] = useState(false);
 
   const [allTracks, setAllTracks] = useState([]);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
-  const [currentTrack, setCurrentTrack] = useState(null);
+
+  const currentTrack = useSelector((state) => state.audioplayer.track);
 
   useEffect(() => {
     setLoading(true);
@@ -34,17 +36,11 @@ function App() {
             <AppRoutes
               loading={loading}
               allTracks={allTracks}
-              setCurrentTrack={setCurrentTrack}
               getAllTracksError={getAllTracksError}
             />
           </div>
         </div>
-        {currentTrack ? (
-          <TrackBar
-            currentTrack={currentTrack}
-            setCurrentTrack={setCurrentTrack}
-          />
-        ) : null}
+        {currentTrack ? <TrackBar /> : null}
       </WithAuth>
     </>
   );

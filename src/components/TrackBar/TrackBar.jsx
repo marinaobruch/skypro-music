@@ -4,17 +4,20 @@ import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 import { useAuth } from "../../WithAuth.jsx";
+import { useSelector } from "react-redux";
 
-export function TrackBar({ currentTrack }) {
+export function TrackBar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
-  const { auth, login, logout } = useAuth();
+  const { auth } = useAuth();
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
+
+  const currentTrack = useSelector((state) => state.audioplayer.track);
 
   const duration = currentTrack.duration_in_seconds;
 
@@ -24,22 +27,24 @@ export function TrackBar({ currentTrack }) {
     }
   }, [volume, audioRef]);
 
+  // auto playing track by clicking on track
+  useEffect(() => {
+    if (currentTrack.track_file) {
+      setIsPlaying(true);
+      return;
+    } else {
+      setIsPlaying(false);
+    }
+  }, [currentTrack.track_file]);
+
   // play/pause track
   useEffect(() => {
-    if (isPlaying && auth) {
+    if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef, login, logout]);
-
-  // auto playing track by clicking on track
-  useEffect(() => {
-    if (currentTrack.track_file && auth) {
-      setIsPlaying(true);
-    }
-    setIsPlaying(false);
-  }, [currentTrack.track_file]);
+  }, [isPlaying, audioRef]);
 
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
@@ -105,13 +110,12 @@ export function TrackBar({ currentTrack }) {
             <S.BarPlayerBlock>
               <S.BarPlayer>
                 <TrackBarPanel
-                  currentTrack={currentTrack}
                   togglePlayPause={togglePlayPause}
                   isPlaying={isPlaying}
                   handleRepeat={handleRepeat}
                   repeat={repeat}
                 />
-                <TrackBarPlayer currentTrack={currentTrack} />
+                <TrackBarPlayer />
               </S.BarPlayer>
               <TrackBarVolume
                 volume={volume}

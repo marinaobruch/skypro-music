@@ -1,13 +1,12 @@
 import React from "react";
 import * as S from "./Track.styles.js";
 import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
+import { useDispatch } from "react-redux";
+import { addCurrentTrack } from "../../store/playerSlice.js";
 
-export function Track({
-  loading,
-  allTracks,
-  setCurrentTrack,
-  getAllTracksError,
-}) {
+export function Track({ loading, allTracks, getAllTracksError }) {
+  const dispatch = useDispatch();
+
   return (
     <S.PlaylistItem>
       {getAllTracksError !== null ? (
@@ -35,7 +34,7 @@ export function Track({
           {allTracks.map((track) => (
             <S.PlaylistTrack
               key={track.id}
-              onClick={() => setCurrentTrack(track)}
+              onClick={() => dispatch(addCurrentTrack(track))}
             >
               <S.TrackTitle>
                 <S.TrackTitleImg>

@@ -2,12 +2,7 @@ import React from "react";
 import * as S from "./Content.styles.js";
 import { PlayList } from "../PlayList/PlayList";
 
-export function Content({
-  loading,
-  allTracks,
-  setCurrentTrack,
-  getAllTracksError,
-}) {
+export function Content({ loading, allTracks, getAllTracksError }) {
   return (
     <S.CenterblockCntent>
       <S.ContentTitle>
@@ -23,7 +18,6 @@ export function Content({
       <PlayList
         loading={loading}
         allTracks={allTracks}
-        setCurrentTrack={setCurrentTrack}
         getAllTracksError={getAllTracksError}
       />
     </S.CenterblockCntent>
