@@ -4,8 +4,9 @@ import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrentTrack } from "../../store/playerSlice.js";
 
-export function Track({ loading, allTracks, getAllTracksError }) {
+export function Track({ loading, getAllTracksError }) {
   const currentTrack = useSelector((state) => state.audioplayer.track);
+  const allMyTracks = useSelector((state) => state.audioplayer.playlist);
   const dispatch = useDispatch();
 
   return (
@@ -32,7 +33,7 @@ export function Track({ loading, allTracks, getAllTracksError }) {
         </>
       ) : (
         <>
-          {allTracks.map((track) => (
+          {allMyTracks.map((track) => (
             <S.PlaylistTrack
               key={track.id}
               onClick={() => dispatch(addCurrentTrack(track))}

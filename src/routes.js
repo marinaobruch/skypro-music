@@ -6,7 +6,7 @@ import { ErrorPage } from "./pages/error/ErrorPage";
 import { LoginPage } from "./pages/login/LoginPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
-export const AppRoutes = ({ loading, allTracks, getAllTracksError }) => {
+export const AppRoutes = ({ loading, getAllTracksError }) => {
   return (
     <Routes>
       <Route
@@ -23,7 +23,6 @@ export const AppRoutes = ({ loading, allTracks, getAllTracksError }) => {
           <ProtectedRoute>
             <MainPage
               loading={loading}
-              allTracks={allTracks}
               getAllTracksError={getAllTracksError}
             />
           </ProtectedRoute>

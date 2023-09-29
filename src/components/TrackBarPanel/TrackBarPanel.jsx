@@ -7,13 +7,13 @@ export function TrackBarPanel({
   repeat,
   handleRepeat,
 }) {
+  const handlePrevious = () => {};
+
+  const handleNext = () => {};
   return (
     <S.Controls>
       <S.BtnPrev>
-        <S.BtnPrevSvg
-          alt="prev"
-          onClick={() => alert("Еще не реализовано")}
-        >
+        <S.BtnPrevSvg onClick={handlePrevious}>
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.BtnPrevSvg>
       </S.BtnPrev>
@@ -46,10 +46,7 @@ export function TrackBarPanel({
         </S.BtnPlaySvg>
       </S.BtnPlay>
       <S.BtnNext>
-        <S.BtnNextSvg
-          alt="next"
-          onClick={() => alert("Еще не реализовано")}
-        >
+        <S.BtnNextSvg onClick={handleNext}>
           <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
         </S.BtnNextSvg>
       </S.BtnNext>
@@ -65,10 +62,7 @@ export function TrackBarPanel({
         )}
       </S.BtnRepeat>
       <S.BtnShuffle>
-        <S.BtnShuffleSvg
-          alt="shuffle"
-          onClick={() => alert("Еще не реализовано")}
-        >
+        <S.BtnShuffleSvg onClick={() => alert("Еще не реализовано")}>
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
         </S.BtnShuffleSvg>
       </S.BtnShuffle>

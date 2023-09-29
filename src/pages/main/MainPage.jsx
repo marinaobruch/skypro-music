@@ -7,7 +7,7 @@ import { Search } from "../../components/Search/Search";
 import { SideBar } from "../../components/SideBar/SideBar";
 import { ALBUMS } from "../../constants.js";
 
-export const MainPage = ({ loading, allTracks, getAllTracksError }) => {
+export const MainPage = ({ loading, getAllTracksError }) => {
   return (
     <>
       <S.GlobalStyle />
@@ -21,7 +21,6 @@ export const MainPage = ({ loading, allTracks, getAllTracksError }) => {
               <Filter />
               <Content
                 loading={loading}
-                allTracks={allTracks}
                 getAllTracksError={getAllTracksError}
               />
             </S.MainCenterblock>

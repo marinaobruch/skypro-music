@@ -91,39 +91,41 @@ export function TrackBar() {
         type="audio/mpeg"
       ></audio>
       {auth ? (
-        <S.Bar>
-          <S.TimeBar>
-            {formatTime(currentTime)} /{formatTime(currentDuration)}
-          </S.TimeBar>
-          <S.BarContent>
-            <S.BarPlayerProgress
-              type="range"
-              min={0}
-              max={duration}
-              value={currentTime}
-              step={0.01}
-              ref={progressBarRef}
-              onChange={handleProgressChange}
-              $color="#B672FF"
-            ></S.BarPlayerProgress>
+        <S.BarContainer>
+          <S.Bar>
+            <S.TimeBar>
+              {formatTime(currentTime)} /{formatTime(currentDuration)}
+            </S.TimeBar>
+            <S.BarContent>
+              <S.BarPlayerProgress
+                type="range"
+                min={0}
+                max={duration}
+                value={currentTime}
+                step={0.01}
+                ref={progressBarRef}
+                onChange={handleProgressChange}
+                $color="#B672FF"
+              ></S.BarPlayerProgress>
 
-            <S.BarPlayerBlock>
-              <S.BarPlayer>
-                <TrackBarPanel
-                  togglePlayPause={togglePlayPause}
-                  isPlaying={isPlaying}
-                  handleRepeat={handleRepeat}
-                  repeat={repeat}
+              <S.BarPlayerBlock>
+                <S.BarPlayer>
+                  <TrackBarPanel
+                    togglePlayPause={togglePlayPause}
+                    isPlaying={isPlaying}
+                    handleRepeat={handleRepeat}
+                    repeat={repeat}
+                  />
+                  <TrackBarPlayer />
+                </S.BarPlayer>
+                <TrackBarVolume
+                  volume={volume}
+                  setVolume={setVolume}
                 />
-                <TrackBarPlayer />
-              </S.BarPlayer>
-              <TrackBarVolume
-                volume={volume}
-                setVolume={setVolume}
-              />
-            </S.BarPlayerBlock>
-          </S.BarContent>
-        </S.Bar>
+              </S.BarPlayerBlock>
+            </S.BarContent>
+          </S.Bar>
+        </S.BarContainer>
       ) : null}
     </>
   );
