@@ -15,8 +15,12 @@ const playerSlice = createSlice({
     },
     addCurrentTrack(state, action) {
       state.track = action.payload;
+      //   console.log(state.track);
+      //   console.log(state.playlist);
     },
     nextTrack(state, action) {
+      //   console.log(state.track);
+      //   console.log(state.playlist);
       //   const curPlaylist = state.playlist;
       //   const curTrack = state.track;
       //   const newTrackInd = curPlaylist.findIndex((i) => i == curTrack);
