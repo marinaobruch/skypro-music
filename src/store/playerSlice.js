@@ -25,6 +25,12 @@ const playerSlice = createSlice({
       //   const curTrack = state.track;
       //   const newTrackInd = curPlaylist.findIndex((i) => i == curTrack);
       //   console.log(newTrackInd);
+
+      function isCurrent(i) {
+        return i === state.track.id;
+      }
+      const curPlaylist = state.playlist;
+      console.log(curPlaylist.findIndex(isCurrent));
     },
   },
 });
