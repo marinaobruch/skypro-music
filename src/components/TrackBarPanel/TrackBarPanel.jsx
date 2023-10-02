@@ -12,6 +12,7 @@ export function TrackBarPanel({ repeat, handleRepeat }) {
   const dispatch = useDispatch();
 
   const currToggle = useSelector((state) => state.audioplayer.playing);
+  const isShuffled = useSelector((state) => state.audioplayer.shuffled);
 
   return (
     <S.Controls>
@@ -64,10 +65,16 @@ export function TrackBarPanel({ repeat, handleRepeat }) {
           </S.BtnRepeatSvg>
         )}
       </S.BtnRepeat>
-      <S.BtnShuffle>
-        <S.BtnShuffleSvg onClick={() => dispatch(shuffledHandlePlaylist())}>
-          <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-        </S.BtnShuffleSvg>
+      <S.BtnShuffle onClick={() => dispatch(shuffledHandlePlaylist())}>
+        {isShuffled ? (
+          <S.BtnShuffleActiveSvg>
+            <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+          </S.BtnShuffleActiveSvg>
+        ) : (
+          <S.BtnShuffleSvg>
+            <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+          </S.BtnShuffleSvg>
+        )}
       </S.BtnShuffle>
     </S.Controls>
   );
