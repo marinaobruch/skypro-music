@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   nextTrack,
   previousTrack,
+  shuffledHandlePlaylist,
   togglePlayer,
 } from "../../store/playerSlice.js";
 
@@ -64,7 +65,7 @@ export function TrackBarPanel({ repeat, handleRepeat }) {
         )}
       </S.BtnRepeat>
       <S.BtnShuffle>
-        <S.BtnShuffleSvg onClick={() => alert("Еще не реализовано")}>
+        <S.BtnShuffleSvg onClick={() => dispatch(shuffledHandlePlaylist())}>
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
         </S.BtnShuffleSvg>
       </S.BtnShuffle>

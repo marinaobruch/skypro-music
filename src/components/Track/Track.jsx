@@ -89,9 +89,3 @@ export function Track({ loading, getAllTracksError }) {
     </S.PlaylistItem>
   );
 }
-
-// const curMyTrack = allMyTracks.findIndex((i) => {
-//   return i === currentTrack;
-// });
-// console.log(curMyTrack);
-// console.log(allMyTracks[curMyTrack]);
