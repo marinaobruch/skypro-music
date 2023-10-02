@@ -9,10 +9,6 @@ export function Track({ loading, getAllTracksError }) {
   const allMyTracks = useSelector((state) => state.audioplayer.playlist);
   const dispatch = useDispatch();
 
-  const curMyTrack = allMyTracks.findIndex((i) => i == currentTrack);
-  console.log(curMyTrack);
-  console.log(allMyTracks[curMyTrack]);
-
   return (
     <S.PlaylistItem>
       {getAllTracksError !== null ? (
@@ -88,3 +84,9 @@ export function Track({ loading, getAllTracksError }) {
     </S.PlaylistItem>
   );
 }
+
+// const curMyTrack = allMyTracks.findIndex((i) => {
+//   return i === currentTrack;
+// });
+// console.log(curMyTrack);
+// console.log(allMyTracks[curMyTrack]);

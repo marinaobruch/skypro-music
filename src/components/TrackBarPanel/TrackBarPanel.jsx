@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
 import { useDispatch } from "react-redux";
-import { nextTrack } from "../../store/playerSlice.js";
+import { nextTrack, previousTrack } from "../../store/playerSlice.js";
 
 export function TrackBarPanel({
   togglePlayPause,
@@ -11,13 +11,10 @@ export function TrackBarPanel({
 }) {
   const dispatch = useDispatch();
 
-  const handleNext = () => {};
-  const handlePrevious = () => {};
-
   return (
     <S.Controls>
       <S.BtnPrev>
-        <S.BtnPrevSvg onClick={handlePrevious}>
+        <S.BtnPrevSvg onClick={() => dispatch(previousTrack())}>
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.BtnPrevSvg>
       </S.BtnPrev>

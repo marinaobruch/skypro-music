@@ -15,32 +15,43 @@ const playerSlice = createSlice({
     },
     addCurrentTrack(state, action) {
       state.track = action.payload;
-      //   console.log(state.track);
-      //   console.log(state.playlist);
+    },
+    togglePlayPause(state, action) {
+      state.playing = !state.playing;
     },
     nextTrack(state, action) {
-      //   console.log(state.track);
-      //   console.log(state.playlist);
-      //   const curPlaylist = state.playlist;
-      //   const curTrack = state.track;
-      //   const newTrackInd = curPlaylist.findIndex((i) => i == curTrack);
-      //   console.log(newTrackInd);
-
-      function isCurrent(i) {
-        return i === state.track.id;
-      }
       const curPlaylist = state.playlist;
-      console.log(curPlaylist.findIndex(isCurrent));
+      const curTrack = state.track;
+      const currentTrackIdInList = curPlaylist.findIndex(
+        (track) => track.id == curTrack.id
+      );
+      if (currentTrackIdInList >= curPlaylist.length - 1) {
+        state.track = state.playlist[0];
+      } else {
+        state.track = state.playlist[currentTrackIdInList + 1];
+      }
+    },
+    previousTrack(state, action) {
+      const curPlaylist = state.playlist;
+      const curTrack = state.track;
+      const currentTrackIdInList = curPlaylist.findIndex(
+        (track) => track.id == curTrack.id
+      );
+      if (currentTrackIdInList === 0) {
+        state.track = state.playlist[0];
+      } else {
+        state.track = state.playlist[currentTrackIdInList - 1];
+      }
     },
   },
 });
 
-export const { addAllTracks, addCurrentTrack, nextTrack } = playerSlice.actions;
+export const {
+  addAllTracks,
+  addCurrentTrack,
+  nextTrack,
+  previousTrack,
+  togglePlayPause,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;
-
-// (state.currentTrackIndex = state.playlist.findIndex(
-//     (i) => i == state.track
-//   ))
-
-// const curMyTrack = allMyTracks.findIndex((i) => i == currentTrack);
