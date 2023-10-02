@@ -4,10 +4,10 @@ import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 import { useAuth } from "../../WithAuth.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { togglePlayer } from "../../store/playerSlice.js";
 
 export function TrackBar() {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
@@ -15,10 +15,12 @@ export function TrackBar() {
 
   const { auth } = useAuth();
 
+  const dispatch = useDispatch();
+  const currentTrack = useSelector((state) => state.audioplayer.track);
+  const currToggle = useSelector((state) => state.audioplayer.playing);
+
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
-
-  const currentTrack = useSelector((state) => state.audioplayer.track);
 
   const duration = currentTrack.duration_in_seconds;
 
@@ -28,28 +30,24 @@ export function TrackBar() {
     }
   }, [volume, audioRef]);
 
-  // auto playing track by clicking on track
+  // // auto playing track by clicking on track and switch track
   useEffect(() => {
-    if (currentTrack.track_file) {
-      setIsPlaying(true);
+    if (currentTrack.id) {
+      dispatch(togglePlayer(true));
       return;
     } else {
-      setIsPlaying(false);
+      dispatch(togglePlayer(false));
     }
   }, [currentTrack.id]);
 
-  // play/pause track
+  // // play/pause track
   useEffect(() => {
-    if (isPlaying) {
+    if (currToggle) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef, currentTrack.id]);
-
-  const togglePlayPause = () => {
-    setIsPlaying((prev) => !prev);
-  };
+  }, [currToggle, audioRef, currentTrack.id]);
 
   const handleProgress = () => {
     const currentProgress = audioRef.current.currentTime;
@@ -113,8 +111,7 @@ export function TrackBar() {
               <S.BarPlayerBlock>
                 <S.BarPlayer>
                   <TrackBarPanel
-                    togglePlayPause={togglePlayPause}
-                    isPlaying={isPlaying}
+                    isPlaying={currToggle}
                     handleRepeat={handleRepeat}
                     repeat={repeat}
                   />

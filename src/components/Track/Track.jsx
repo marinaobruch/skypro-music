@@ -7,6 +7,7 @@ import { addCurrentTrack } from "../../store/playerSlice.js";
 export function Track({ loading, getAllTracksError }) {
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const allMyTracks = useSelector((state) => state.audioplayer.playlist);
+  const currToggle = useSelector((state) => state.audioplayer.playing);
   const dispatch = useDispatch();
 
   return (
@@ -41,7 +42,11 @@ export function Track({ loading, getAllTracksError }) {
               <S.TrackTitle>
                 <S.TrackTitleImg>
                   {currentTrack.id === track.id ? (
-                    <S.playingdot></S.playingdot>
+                    currToggle ? (
+                      <S.playingdot></S.playingdot>
+                    ) : (
+                      <S.simpledot></S.simpledot>
+                    )
                   ) : (
                     <S.TrackTitleSvg alt="music">
                       <use xlinkHref="img/icon/sprite.svg#icon-note"></use>

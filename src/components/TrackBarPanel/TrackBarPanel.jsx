@@ -1,15 +1,16 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
-import { useDispatch } from "react-redux";
-import { nextTrack, previousTrack } from "../../store/playerSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  nextTrack,
+  previousTrack,
+  togglePlayer,
+} from "../../store/playerSlice.js";
 
-export function TrackBarPanel({
-  togglePlayPause,
-  isPlaying,
-  repeat,
-  handleRepeat,
-}) {
+export function TrackBarPanel({ repeat, handleRepeat }) {
   const dispatch = useDispatch();
+
+  const currToggle = useSelector((state) => state.audioplayer.playing);
 
   return (
     <S.Controls>
@@ -19,9 +20,9 @@ export function TrackBarPanel({
         </S.BtnPrevSvg>
       </S.BtnPrev>
 
-      <S.BtnPlay onClick={togglePlayPause}>
+      <S.BtnPlay onClick={() => dispatch(togglePlayer())}>
         <S.BtnPlaySvg alt="play">
-          {isPlaying ? (
+          {currToggle ? (
             <svg
               width="15"
               height="19"

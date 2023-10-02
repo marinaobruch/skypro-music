@@ -16,7 +16,10 @@ const playerSlice = createSlice({
     addCurrentTrack(state, action) {
       state.track = action.payload;
     },
-    togglePlayPause(state, action) {
+    togglePlayer(state, action) {
+      if (state.playing === action.payload) {
+        return;
+      }
       state.playing = !state.playing;
     },
     nextTrack(state, action) {
@@ -51,7 +54,7 @@ export const {
   addCurrentTrack,
   nextTrack,
   previousTrack,
-  togglePlayPause,
+  togglePlayer,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;
