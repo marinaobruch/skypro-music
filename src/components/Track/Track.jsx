@@ -10,6 +10,17 @@ export function Track({ loading, getAllTracksError }) {
   const currToggle = useSelector((state) => state.audioplayer.playing);
   const dispatch = useDispatch();
 
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return "00:00";
+  };
+
   return (
     <S.PlaylistItem>
       {getAllTracksError !== null ? (
@@ -79,7 +90,7 @@ export function Track({ loading, getAllTracksError }) {
                   <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                 </S.TrackTimeSvg>
                 <span className="track__time-text">
-                  {track.duration_in_seconds}
+                  {formatTime(track.duration_in_seconds)}
                 </span>
               </S.TrackTimeText>
             </S.PlaylistTrack>
