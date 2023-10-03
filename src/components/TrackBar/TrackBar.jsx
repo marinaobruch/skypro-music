@@ -5,7 +5,7 @@ import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 import { useAuth } from "../../WithAuth.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { togglePlayer } from "../../store/playerSlice.js";
+import { togglePlayer, nextTrack } from "../../store/playerSlice.js";
 
 export function TrackBar() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -17,7 +17,7 @@ export function TrackBar() {
 
   const dispatch = useDispatch();
   const currentTrack = useSelector((state) => state.audioplayer.track);
-  const currToggle = useSelector((state) => state.audioplayer.playing);
+  const isPlaying = useSelector((state) => state.audioplayer.playing);
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
@@ -42,12 +42,12 @@ export function TrackBar() {
 
   // // play/pause track
   useEffect(() => {
-    if (currToggle) {
+    if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [currToggle, audioRef, currentTrack.id]);
+  }, [isPlaying, audioRef, currentTrack.id]);
 
   const handleProgress = () => {
     const currentProgress = audioRef.current.currentTime;
@@ -88,6 +88,7 @@ export function TrackBar() {
         src={currentTrack.track_file}
         onTimeUpdate={handleProgress}
         onLoadedMetadata={onLoadedMetadata}
+        onEnded={() => dispatch(nextTrack())}
         type="audio/mpeg"
       ></audio>
       {auth ? (
@@ -111,7 +112,6 @@ export function TrackBar() {
               <S.BarPlayerBlock>
                 <S.BarPlayer>
                   <TrackBarPanel
-                    isPlaying={currToggle}
                     handleRepeat={handleRepeat}
                     repeat={repeat}
                   />

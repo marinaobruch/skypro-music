@@ -11,7 +11,7 @@ import {
 export function TrackBarPanel({ repeat, handleRepeat }) {
   const dispatch = useDispatch();
 
-  const currToggle = useSelector((state) => state.audioplayer.playing);
+  const isPlaying = useSelector((state) => state.audioplayer.playing);
   const isShuffled = useSelector((state) => state.audioplayer.shuffled);
 
   return (
@@ -24,7 +24,7 @@ export function TrackBarPanel({ repeat, handleRepeat }) {
 
       <S.BtnPlay onClick={() => dispatch(togglePlayer())}>
         <S.BtnPlaySvg alt="play">
-          {currToggle ? (
+          {isPlaying ? (
             <svg
               width="15"
               height="19"
