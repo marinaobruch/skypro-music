@@ -4,14 +4,20 @@ import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
 import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
 import { useAuth } from "../../WithAuth.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { togglePlayer, nextTrack } from "../../store/playerSlice.js";
 
-export function TrackBar({ currentTrack }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+export function TrackBar() {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
-  const { auth, login, logout } = useAuth();
+
+  const { auth } = useAuth();
+
+  const dispatch = useDispatch();
+  const currentTrack = useSelector((state) => state.audioplayer.track);
+  const isPlaying = useSelector((state) => state.audioplayer.playing);
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
@@ -24,26 +30,25 @@ export function TrackBar({ currentTrack }) {
     }
   }, [volume, audioRef]);
 
-  // play/pause track
+  // // auto playing track by clicking on track and switch track
   useEffect(() => {
-    if (isPlaying && auth) {
+    if (currentTrack.id) {
+      dispatch(togglePlayer(true));
+      return;
+    } else {
+      dispatch(togglePlayer(false));
+    }
+  }, [currentTrack.id]);
+
+  // // play/pause track
+  useEffect(() => {
+    if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef, login, logout]);
+  }, [isPlaying, audioRef, currentTrack.id]);
 
-  // auto playing track by clicking on track
-  useEffect(() => {
-    if (currentTrack.track_file && auth) {
-      setIsPlaying(true);
-    }
-    setIsPlaying(false);
-  }, [currentTrack.track_file]);
-
-  const togglePlayPause = () => {
-    setIsPlaying((prev) => !prev);
-  };
   const handleProgress = () => {
     const currentProgress = audioRef.current.currentTime;
     setCurrentTime(currentProgress);
@@ -83,43 +88,43 @@ export function TrackBar({ currentTrack }) {
         src={currentTrack.track_file}
         onTimeUpdate={handleProgress}
         onLoadedMetadata={onLoadedMetadata}
+        onEnded={() => dispatch(nextTrack())}
         type="audio/mpeg"
       ></audio>
       {auth ? (
-        <S.Bar>
-          <S.TimeBar>
-            {formatTime(currentTime)} /{formatTime(currentDuration)}
-          </S.TimeBar>
-          <S.BarContent>
-            <S.BarPlayerProgress
-              type="range"
-              min={0}
-              max={duration}
-              value={currentTime}
-              step={0.01}
-              ref={progressBarRef}
-              onChange={handleProgressChange}
-              $color="#B672FF"
-            ></S.BarPlayerProgress>
+        <S.BarContainer>
+          <S.Bar>
+            <S.TimeBar>
+              {formatTime(currentTime)} /{formatTime(currentDuration)}
+            </S.TimeBar>
+            <S.BarContent>
+              <S.BarPlayerProgress
+                type="range"
+                min={0}
+                max={duration}
+                value={currentTime}
+                step={0.01}
+                ref={progressBarRef}
+                onChange={handleProgressChange}
+                $color="#B672FF"
+              ></S.BarPlayerProgress>
 
-            <S.BarPlayerBlock>
-              <S.BarPlayer>
-                <TrackBarPanel
-                  currentTrack={currentTrack}
-                  togglePlayPause={togglePlayPause}
-                  isPlaying={isPlaying}
-                  handleRepeat={handleRepeat}
-                  repeat={repeat}
+              <S.BarPlayerBlock>
+                <S.BarPlayer>
+                  <TrackBarPanel
+                    handleRepeat={handleRepeat}
+                    repeat={repeat}
+                  />
+                  <TrackBarPlayer />
+                </S.BarPlayer>
+                <TrackBarVolume
+                  volume={volume}
+                  setVolume={setVolume}
                 />
-                <TrackBarPlayer currentTrack={currentTrack} />
-              </S.BarPlayer>
-              <TrackBarVolume
-                volume={volume}
-                setVolume={setVolume}
-              />
-            </S.BarPlayerBlock>
-          </S.BarContent>
-        </S.Bar>
+              </S.BarPlayerBlock>
+            </S.BarContent>
+          </S.Bar>
+        </S.BarContainer>
       ) : null}
     </>
   );

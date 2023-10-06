@@ -107,3 +107,10 @@ export const BtnShuffleSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `;
+
+export const BtnShuffleActiveSvg = styled.svg`
+  width: 18px;
+  height: 12px;
+  fill: transparent;
+  stroke: #ffffff;
+`;

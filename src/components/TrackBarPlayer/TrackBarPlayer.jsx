@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import * as S from "./TrackBarPlayer.styles.js";
 
-export function TrackBarPlayer({ currentTrack }) {
+export function TrackBarPlayer() {
+  const currentTrack = useSelector((state) => state.audioplayer.track);
+
   return (
     <S.PlayerTrackPlay>
       <S.TrackPlayContain>

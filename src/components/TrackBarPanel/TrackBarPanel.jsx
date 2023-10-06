@@ -1,24 +1,28 @@
 import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  nextTrack,
+  previousTrack,
+  shuffledHandlePlaylist,
+  togglePlayer,
+} from "../../store/playerSlice.js";
 
-export function TrackBarPanel({
-  togglePlayPause,
-  isPlaying,
-  repeat,
-  handleRepeat,
-}) {
+export function TrackBarPanel({ repeat, handleRepeat }) {
+  const dispatch = useDispatch();
+
+  const isPlaying = useSelector((state) => state.audioplayer.playing);
+  const isShuffled = useSelector((state) => state.audioplayer.shuffled);
+
   return (
     <S.Controls>
       <S.BtnPrev>
-        <S.BtnPrevSvg
-          alt="prev"
-          onClick={() => alert("Еще не реализовано")}
-        >
+        <S.BtnPrevSvg onClick={() => dispatch(previousTrack())}>
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.BtnPrevSvg>
       </S.BtnPrev>
 
-      <S.BtnPlay onClick={togglePlayPause}>
+      <S.BtnPlay onClick={() => dispatch(togglePlayer())}>
         <S.BtnPlaySvg alt="play">
           {isPlaying ? (
             <svg
@@ -46,10 +50,7 @@ export function TrackBarPanel({
         </S.BtnPlaySvg>
       </S.BtnPlay>
       <S.BtnNext>
-        <S.BtnNextSvg
-          alt="next"
-          onClick={() => alert("Еще не реализовано")}
-        >
+        <S.BtnNextSvg onClick={() => dispatch(nextTrack())}>
           <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
         </S.BtnNextSvg>
       </S.BtnNext>
@@ -64,13 +65,16 @@ export function TrackBarPanel({
           </S.BtnRepeatSvg>
         )}
       </S.BtnRepeat>
-      <S.BtnShuffle>
-        <S.BtnShuffleSvg
-          alt="shuffle"
-          onClick={() => alert("Еще не реализовано")}
-        >
-          <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-        </S.BtnShuffleSvg>
+      <S.BtnShuffle onClick={() => dispatch(shuffledHandlePlaylist())}>
+        {isShuffled ? (
+          <S.BtnShuffleActiveSvg>
+            <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+          </S.BtnShuffleActiveSvg>
+        ) : (
+          <S.BtnShuffleSvg>
+            <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+          </S.BtnShuffleSvg>
+        )}
       </S.BtnShuffle>
     </S.Controls>
   );
