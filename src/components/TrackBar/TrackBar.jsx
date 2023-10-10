@@ -82,7 +82,7 @@ export function TrackBar() {
 
   return (
     <>
-      <audio
+      <S.InitPlayer
         controls
         ref={audioRef}
         src={currentTrack.track_file}
@@ -90,7 +90,7 @@ export function TrackBar() {
         onLoadedMetadata={onLoadedMetadata}
         onEnded={() => dispatch(nextTrack())}
         type="audio/mpeg"
-      ></audio>
+      ></S.InitPlayer>
       {auth ? (
         <S.BarContainer>
           <S.Bar>

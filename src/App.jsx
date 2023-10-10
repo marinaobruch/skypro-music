@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
-import { TrackBar } from "./components/TrackBar/TrackBar";
 import { getAllTracks } from "./api";
 import { WithAuth } from "./WithAuth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addAllTracks } from "./store/playerSlice";
 
 function App() {
@@ -12,8 +11,6 @@ function App() {
   const [getAllTracksError, setGetAllTracksError] = useState(null);
 
   const dispatch = useDispatch();
-
-  const currentTrack = useSelector((state) => state.audioplayer.track);
 
   useEffect(() => {
     setLoading(true);
@@ -40,7 +37,6 @@ function App() {
             />
           </div>
         </div>
-        {currentTrack ? <TrackBar /> : null}
       </WithAuth>
     </>
   );

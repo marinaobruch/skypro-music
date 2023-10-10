@@ -2,6 +2,10 @@ import { styled } from "styled-components";
 
 // export const  = styled.div``;
 
+export const InitPlayer = styled.audio`
+  display: none;
+`;
+
 export const BarContainer = styled.div`
   width: 1920px;
 `;
