@@ -1,8 +1,8 @@
 import React from "react";
-import * as S from "./Content.styles.js";
-import { PlayList } from "../PlayList/PlayList";
+import * as S from "./MainContent.styles.js";
+import { PlayList } from "../PlayList/PlayList.jsx";
 
-export function Content({ loading, getAllTracksError }) {
+export function MainContent({ loading, getAllTracksError }) {
   return (
     <S.CenterblockCntent>
       <S.ContentTitle>

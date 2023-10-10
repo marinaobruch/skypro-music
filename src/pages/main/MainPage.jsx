@@ -1,5 +1,5 @@
 import * as S from "./MainPage.styles.js";
-import { Content } from "../../components/Content/Content";
+import { MainContent } from "../../components/MainContent/MainContent.jsx";
 import { Filter } from "../../components/Filter/Filter";
 
 export const MainPage = ({ loading, getAllTracksError }) => {
@@ -7,7 +7,7 @@ export const MainPage = ({ loading, getAllTracksError }) => {
     <>
       <S.MainCenterblockH2>Треки</S.MainCenterblockH2>
       <Filter />
-      <Content
+      <MainContent
         loading={loading}
         getAllTracksError={getAllTracksError}
       />
