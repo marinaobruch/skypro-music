@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import * as S from "./NavBarMenu.styles.js";
 import { NavBarItem } from "../NavBarItem/NavBarItem";
-import { useAuth } from "../../WithAuth.jsx";
+import { useAuth } from "../../../WithAuth.jsx";
 
 export function NavBarMenu() {
   const { logout } = useAuth();

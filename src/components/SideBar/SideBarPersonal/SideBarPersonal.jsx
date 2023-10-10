@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./SideBarPersonal.styles.js";
-import { useAuth } from "../../WithAuth.jsx";
+import { useAuth } from "../../../WithAuth.jsx";
 
 export function SideBarPersonal({ loading }) {
   const { auth, logout } = useAuth();

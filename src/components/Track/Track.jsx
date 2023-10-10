@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./Track.styles.js";
-import { SkeletonPlaylist } from "../SkeletonPlaylist/SkeletonPlaylist";
+import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrentTrack } from "../../store/playerSlice.js";
 

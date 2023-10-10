@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as S from "./SideBarBlock.styles.js";
-import { SkeletonSidebar } from "../SkeletonSidebar/SkeletonSidebar";
+import { SkeletonSidebar } from "../../Skeletons/SkeletonSidebar/SkeletonSidebar.jsx";
 
 export function SideBarBlock({ loading, albums }) {
   return (

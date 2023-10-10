@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./NavBar.styles.js";
-import { NavBarMenu } from "../NavBarMenu/NavBarMenu";
+import { NavBarMenu } from "./NavBarMenu/NavBarMenu.jsx";
 
 export function NavBar() {
   const [open, setOpen] = useState(false);
