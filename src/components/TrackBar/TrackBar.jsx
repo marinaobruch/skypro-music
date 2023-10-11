@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import * as S from "./TrackBar.styles.js";
-import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
-import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
-import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
+import { TrackBarPanel } from "./TrackBarPanel/TrackBarPanel.jsx";
+import { TrackBarPlayer } from "./TrackBarPlayer/TrackBarPlayer";
+import { TrackBarVolume } from "./TrackBarVolume/TrackBarVolume.jsx";
 import { useAuth } from "../../WithAuth.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePlayer, nextTrack } from "../../store/playerSlice.js";
