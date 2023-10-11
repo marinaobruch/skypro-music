@@ -3,6 +3,7 @@ import * as S from "./MainPlaylist.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
 import { addCurrentTrack } from "../../store/playerSlice.js";
+import { Filter } from "../Filter/Filter.jsx";
 
 export function MainPlaylist({ loading, getAllTracksError }) {
   const currentTrack = useSelector((state) => state.audioplayer.track);
@@ -23,6 +24,19 @@ export function MainPlaylist({ loading, getAllTracksError }) {
 
   return (
     <S.ContentPlaylist>
+      <S.MainCenterblockH2>Треки</S.MainCenterblockH2>
+      <Filter />
+      <S.ContentTitle>
+        <S.PlaylistTitleCol1>Трек</S.PlaylistTitleCol1>
+        <S.PlaylistTitleCol2>ИСПОЛНИТЕЛЬ</S.PlaylistTitleCol2>
+        <S.PlaylistTitleCol3>АЛЬБОМ</S.PlaylistTitleCol3>
+        <S.PlaylistTitleCol4>
+          <S.PlaylistTitleSvg alt="time">
+            <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
+          </S.PlaylistTitleSvg>
+        </S.PlaylistTitleCol4>
+      </S.ContentTitle>
+
       <S.PlaylistItem>
         {getAllTracksError !== null ? (
           <p>
