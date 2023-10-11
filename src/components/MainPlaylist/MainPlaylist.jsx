@@ -1,10 +1,10 @@
 import React from "react";
-import * as S from "./Playlist.styles";
+import * as S from "./MainPlaylist.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
 import { addCurrentTrack } from "../../store/playerSlice.js";
 
-export function Playlist({ loading, getAllTracksError }) {
+export function MainPlaylist({ loading, getAllTracksError }) {
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const allMyTracks = useSelector((state) => state.audioplayer.playlist);
   const isPlaying = useSelector((state) => state.audioplayer.playing);

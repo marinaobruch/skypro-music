@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./MainContent.styles.js";
-import { Playlist } from "../Playlist/Playlist";
+import { MainPlaylist } from "../MainPlaylist/MainPlaylist";
 
 export function MainContent({ loading, getAllTracksError }) {
   return (
@@ -15,7 +15,7 @@ export function MainContent({ loading, getAllTracksError }) {
           </S.PlaylistTitleSvg>
         </S.PlaylistTitleCol4>
       </S.ContentTitle>
-      <Playlist
+      <MainPlaylist
         loading={loading}
         getAllTracksError={getAllTracksError}
       />
