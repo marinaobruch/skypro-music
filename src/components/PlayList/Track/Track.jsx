@@ -1,8 +1,8 @@
 import React from "react";
 import * as S from "./Track.styles.js";
-import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { addCurrentTrack } from "../../store/playerSlice.js";
+import { SkeletonPlaylist } from "../../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
+import { addCurrentTrack } from "../../../store/playerSlice.js";
 
 export function Track({ loading, getAllTracksError }) {
   const currentTrack = useSelector((state) => state.audioplayer.track);

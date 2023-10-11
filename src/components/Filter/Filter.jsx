@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./Filter.styles.js";
-import { FilterItem } from "../FilterItem/FilterItem";
+import { FilterItem } from "./FilterItem/FilterItem.jsx";
 import { tracksArray } from "../Imports/TracksImport";
 
 export function Filter() {
