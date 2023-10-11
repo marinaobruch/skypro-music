@@ -9,7 +9,10 @@ export const playlistApi = createApi({
     getAllTracks: builder.query({
       query: () => "all",
     }),
+    getNewTracks: builder.query({
+      query: () => "all",
+    }),
   }),
 });
 
-export const { useGetAllTracksQuery } = playlistApi;
+export const { useGetAllTracksQuery, useGetNewTracksQuery } = playlistApi;

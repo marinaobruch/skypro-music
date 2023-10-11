@@ -5,9 +5,14 @@ import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist
 import { addCurrentTrack } from "../../store/playerSlice.js";
 import { Filter } from "../Filter/Filter.jsx";
 
-export function MainPlaylist({ loading, getAllTracksError }) {
+export function MainPlaylist({
+  getAllTracksError,
+  tracks,
+  error,
+  isLoading,
+  title,
+}) {
   const currentTrack = useSelector((state) => state.audioplayer.track);
-  const allMyTracks = useSelector((state) => state.audioplayer.playlist);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
   const dispatch = useDispatch();
 
@@ -24,7 +29,7 @@ export function MainPlaylist({ loading, getAllTracksError }) {
 
   return (
     <S.ContentPlaylist>
-      <S.MainCenterblockH2>Треки</S.MainCenterblockH2>
+      <S.MainCenterblockH2>{title}</S.MainCenterblockH2>
       <Filter />
       <S.ContentTitle>
         <S.PlaylistTitleCol1>Трек</S.PlaylistTitleCol1>
@@ -43,7 +48,7 @@ export function MainPlaylist({ loading, getAllTracksError }) {
             Не удалось загрузить плейлист, попробуйте позже: {getAllTracksError}
           </p>
         ) : null}
-        {loading ? (
+        {isLoading ? (
           <>
             <SkeletonPlaylist />
             <SkeletonPlaylist />
@@ -60,7 +65,7 @@ export function MainPlaylist({ loading, getAllTracksError }) {
           </>
         ) : (
           <>
-            {allMyTracks.map((track) => (
+            {tracks.map((track) => (
               <S.PlaylistTrack
                 key={track.id}
                 onClick={() => dispatch(addCurrentTrack(track))}
