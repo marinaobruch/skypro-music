@@ -1,7 +1,7 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../WithAuth";
 
-export const ProtectedRoute = ({ children, redirectPath = "/login" }) => {
+export const ProtectedRoute = ({ redirectPath = "/login" }) => {
   const { auth } = useAuth();
   if (!auth) {
     return (
@@ -12,5 +12,5 @@ export const ProtectedRoute = ({ children, redirectPath = "/login" }) => {
     );
   }
 
-  return children;
+  return <Outlet />;
 };

@@ -20,67 +20,29 @@ export const AppRoutes = ({ loading, getAllTracksError }) => {
         element={<LoginPage isLoginMode={false}></LoginPage>}
       ></Route>
 
-      <Route element={<PageLayout />}>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
+      <Route element={<ProtectedRoute />}>
+        <Route element={<PageLayout />}>
+          <Route
+            path="/"
+            element={
               <MainPage
                 loading={loading}
                 getAllTracksError={getAllTracksError}
               />
-            </ProtectedRoute>
-          }
-        ></Route>
+            }
+          />
 
-        <Route
-          path="/favorites"
-          element={
-            <ProtectedRoute>
-              <FavoritesPage />
-            </ProtectedRoute>
-          }
-        ></Route>
+          <Route
+            path="/favorites"
+            element={<FavoritesPage />}
+          />
 
-        <Route
-          path="/category/:id"
-          element={
-            <ProtectedRoute>
-              <CategoriesPage />
-            </ProtectedRoute>
-          }
-        ></Route>
+          <Route
+            path="/category/:id"
+            element={<CategoriesPage />}
+          />
+        </Route>
       </Route>
-
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <MainPage
-              loading={loading}
-              getAllTracksError={getAllTracksError}
-            />
-          </ProtectedRoute>
-        }
-      ></Route>
-
-      <Route
-        path="/favorites"
-        element={
-          <ProtectedRoute>
-            <FavoritesPage />
-          </ProtectedRoute>
-        }
-      ></Route>
-
-      <Route
-        path="/category/:id"
-        element={
-          <ProtectedRoute>
-            <CategoriesPage />
-          </ProtectedRoute>
-        }
-      ></Route>
 
       <Route
         path="*"
