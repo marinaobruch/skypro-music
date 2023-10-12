@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginPage.styles";
 import { fetchLogin, fetchReg } from "../../api";
 import { useAuth } from "../../WithAuth";
+import {
+  usePostLoginMutation,
+  usePostRegMutation,
+  usePostTokenMutation,
+} from "../../services/playlists";
 
 export const LoginPage = ({ isLoginMode = false }) => {
   const [email, setEmail] = useState("");
@@ -14,6 +19,25 @@ export const LoginPage = ({ isLoginMode = false }) => {
   const navigate = useNavigate();
   const { auth, login } = useAuth();
 
+  const [postToken, {}] = usePostTokenMutation();
+  const [postLogin, {}] = usePostLoginMutation();
+  const [postReg, {}] = usePostRegMutation();
+
+  const handleLogin = async () => {
+    await postToken({ email, password })
+      .unwrap()
+      .then((token) => {
+        localStorage.setItem("token", token.refresh);
+
+        postLogin({ email, password })
+          .unwrap()
+          .then((response) => {
+            login(response.username);
+            navigate("/");
+          });
+      });
+  };
+
   useEffect(() => {
     setTextError(null);
   }, [isLoginMode, email, password, repeatPassword]);
@@ -21,6 +45,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
   const getAuth = async () => {
     fetchLogin({ email: email, password: password })
       .then((response) => {
+        console.log(response);
         login(response.username);
       })
       .catch((error) => {
@@ -121,7 +146,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
             </S.Inputs>
             <S.LoginError>{textError}</S.LoginError>
             <S.Buttons>
-              <S.PrimaryButton onClick={handleAuth}>Войти</S.PrimaryButton>
+              <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
               <Link to="/register">
                 <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
               </Link>

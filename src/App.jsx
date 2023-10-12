@@ -9,7 +9,6 @@ import { addAllTracks } from "./store/playerSlice";
 function App() {
   const [loading, setLoading] = useState(false);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
-  console.log(getAllTracksError);
 
   const dispatch = useDispatch();
 

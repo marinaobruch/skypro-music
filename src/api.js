@@ -20,7 +20,6 @@ export async function fetchLogin({ email, password }) {
       password,
     }),
     headers: {
-      // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
       "content-type": "application/json",
     },
   }).then((response) => {

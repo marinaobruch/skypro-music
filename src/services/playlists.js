@@ -3,16 +3,51 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const playlistApi = createApi({
   reducerPath: "playlistApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://skypro-music-api.skyeng.tech/catalog/track",
+    baseUrl: "https://skypro-music-api.skyeng.tech/",
   }),
   endpoints: (builder) => ({
-    getAllTracks: builder.query({
-      query: () => "all",
+    postReg: builder.mutation({
+      query: (body) => ({
+        url: "user/signup/",
+        method: "POST",
+        body,
+      }),
     }),
-    getNewTracks: builder.query({
-      query: () => "all",
+
+    postLogin: builder.mutation({
+      query: (body) => ({
+        url: "user/login/",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    postToken: builder.mutation({
+      query: (body) => ({
+        url: "user/token/",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    postTokenRefresh: builder.mutation({
+      query: (body) => ({
+        url: "user/token/refresh/",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    getAllTracks: builder.query({
+      query: () => "catalog/track/all/",
     }),
   }),
 });
 
-export const { useGetAllTracksQuery, useGetNewTracksQuery } = playlistApi;
+export const {
+  useGetAllTracksQuery,
+  usePostRegMutation,
+  usePostLoginMutation,
+  usePostTokenMutation,
+  usePostTokenRefreshMutation,
+} = playlistApi;
