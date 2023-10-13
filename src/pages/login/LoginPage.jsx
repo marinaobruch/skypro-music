@@ -23,7 +23,11 @@ export const LoginPage = ({ isLoginMode = false }) => {
   const [postLogin, {}] = usePostLoginMutation();
   const [postReg, {}] = usePostRegMutation();
 
-  const handleLogin = async () => {
+  useEffect(() => {
+    setTextError(null);
+  }, [isLoginMode, email, password, repeatPassword]);
+
+  const handleNewLogin = async () => {
     await postToken({ email, password })
       .unwrap()
       .then((token) => {
@@ -38,10 +42,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
       });
   };
 
-  useEffect(() => {
-    setTextError(null);
-  }, [isLoginMode, email, password, repeatPassword]);
-
+  // в настоящий момент не вызывается, после полного рефакторинга кода - удалить
   const getAuth = async () => {
     fetchLogin({ email: email, password: password })
       .then((response) => {
@@ -69,9 +70,49 @@ export const LoginPage = ({ isLoginMode = false }) => {
       return;
     }
 
-    getAuth();
+    handleNewLogin();
+    // getAuth();
   };
 
+  const handleNewReg = async () => {
+    await postReg({
+      username: username,
+      email: email,
+      password: password,
+    })
+      .unwrap()
+      .then((response) => {
+        login(response.username);
+        navigate("/");
+      });
+
+    postToken({ email, password })
+      .unwrap()
+      .then((token) => {
+        localStorage.setItem("token", token.refresh);
+      });
+  };
+
+  // const handleNewReg = async () => {
+  //   await postToken({ email, password })
+  //     .unwrap()
+  //     .then((token) => {
+  //       localStorage.setItem("token", token.refresh);
+
+  //       postReg({
+  //         username: username,
+  //         email: email,
+  //         password: password,
+  //       })
+  //         .unwrap()
+  //         .then((response) => {
+  //           login(response.username);
+  //           navigate("/");
+  //         });
+  //     });
+  // };
+
+  // в настоящий момент не вызывается, после полного рефакторинга кода - удалить
   const getReg = () => {
     fetchReg({
       username: username,
@@ -79,7 +120,6 @@ export const LoginPage = ({ isLoginMode = false }) => {
       password: password,
     })
       .then((jsonData) => {
-        console.log(jsonData);
         login(jsonData.username);
         navigate("/");
       })
@@ -109,7 +149,9 @@ export const LoginPage = ({ isLoginMode = false }) => {
       setTextError("Пароли не совпадают");
       return;
     }
-    getReg();
+
+    handleNewReg();
+    // getReg();
   };
   return (
     <S.PageContainer>
@@ -146,7 +188,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
             </S.Inputs>
             <S.LoginError>{textError}</S.LoginError>
             <S.Buttons>
-              <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
+              <S.PrimaryButton onClick={handleAuth}>Войти</S.PrimaryButton>
               <Link to="/register">
                 <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
               </Link>
