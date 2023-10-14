@@ -32,6 +32,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
       .unwrap()
       .then((token) => {
         localStorage.setItem("token", JSON.stringify(token.access));
+        localStorage.setItem("refreshToken", JSON.stringify(token.refresh));
 
         postLogin({ email, password })
           .unwrap()
@@ -46,6 +47,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
                 username: response.username,
                 id: response.id,
                 token: token.access,
+                refreshToken: token.refresh,
               })
             );
             if (response.email) {
@@ -74,6 +76,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
       .unwrap()
       .then((token) => {
         localStorage.setItem("token", JSON.stringify(token.access));
+        localStorage.setItem("refreshToken", JSON.stringify(token.refresh));
 
         postReg({
           username: username,
@@ -88,6 +91,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
                 username: response.username,
                 id: response.id,
                 token: token.access,
+                refreshToken: token.refresh,
               })
             );
             if (response.email) {

@@ -6,6 +6,7 @@ const userSlice = createSlice({
     email: null,
     username: null,
     token: null,
+    refreshToken: null,
     id: null,
   },
 
@@ -15,6 +16,7 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.username = action.payload.username;
       state.token = action.payload.token;
+      state.refreshToken = action.payload.refreshToken;
     },
 
     userLogout: (state) => {
