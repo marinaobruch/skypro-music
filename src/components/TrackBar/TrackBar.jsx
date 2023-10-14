@@ -3,7 +3,6 @@ import * as S from "./TrackBar.styles.js";
 import { TrackBarPanel } from "./TrackBarPanel/TrackBarPanel.jsx";
 import { TrackBarPlayer } from "./TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "./TrackBarVolume/TrackBarVolume.jsx";
-import { useAuth } from "../../WithAuth.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePlayer, nextTrack } from "../../store/playerSlice.js";
 
@@ -13,7 +12,7 @@ export function TrackBar() {
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
 
-  const { auth } = useAuth();
+  const currentUser = localStorage.getItem("user");
 
   const dispatch = useDispatch();
   const currentTrack = useSelector((state) => state.audioplayer.track);
@@ -91,7 +90,7 @@ export function TrackBar() {
         onEnded={() => dispatch(nextTrack())}
         type="audio/mpeg"
       ></S.InitPlayer>
-      {auth ? (
+      {currentUser ? (
         <S.BarContainer>
           <S.Bar>
             <S.TimeBar>

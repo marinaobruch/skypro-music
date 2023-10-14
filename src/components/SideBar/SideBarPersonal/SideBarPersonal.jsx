@@ -1,17 +1,31 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "./SideBarPersonal.styles.js";
-import { useAuth } from "../../../WithAuth.jsx";
+import { userLogout } from "../../../store/userSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 export function SideBarPersonal({ loading }) {
-  const { auth, logout } = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const currentUser = useSelector((state) => state.user.username);
+
+  const logoutNew = () => {
+    dispatch(userLogout());
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <S.SidebarPersonal>
       {loading ? (
         <S.SidebarPersonalName>Loading</S.SidebarPersonalName>
       ) : (
-        <S.SidebarPersonalName>{auth}</S.SidebarPersonalName>
+        <S.SidebarPersonalName>{currentUser}</S.SidebarPersonalName>
       )}
-      <S.SidebarIcon onClick={logout}>
+      <S.SidebarIcon onClick={logoutNew}>
         <svg alt="logout">
           <use xlinkHref="img/icon/sprite.svg#logout"></use>
         </svg>

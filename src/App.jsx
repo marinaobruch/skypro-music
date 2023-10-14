@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { getAllTracks } from "./api";
-import { WithAuth } from "./WithAuth";
 import { useDispatch } from "react-redux";
 import { addAllTracks } from "./store/playerSlice";
 
@@ -28,16 +27,14 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <WithAuth>
-        <div className="App">
-          <div>
-            <AppRoutes
-              loading={loading}
-              getAllTracksError={getAllTracksError}
-            />
-          </div>
+      <div className="App">
+        <div>
+          <AppRoutes
+            loading={loading}
+            getAllTracksError={getAllTracksError}
+          />
         </div>
-      </WithAuth>
+      </div>
     </>
   );
 }

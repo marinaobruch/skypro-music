@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const AuthContext = createContext(null);
 // localStorage.removeItem("user");
+// localStorage.removeItem("token");
 
 export const WithAuth = ({ children }) => {
   const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("user")));

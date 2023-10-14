@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as S from "./LoginPage.styles";
 import { fetchLogin, fetchReg } from "../../api";
-import { useAuth } from "../../WithAuth";
 import {
   usePostLoginMutation,
   usePostRegMutation,
   usePostTokenMutation,
 } from "../../services/playlists";
+import { userLogin } from "../../store/userSlice";
 
 export const LoginPage = ({ isLoginMode = false }) => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
   const [textError, setTextError] = useState(null);
 
   const navigate = useNavigate();
-  const { auth, login } = useAuth();
+  const dispatch = useDispatch();
 
   const [postToken, {}] = usePostTokenMutation();
   const [postLogin, {}] = usePostLoginMutation();
@@ -31,32 +32,26 @@ export const LoginPage = ({ isLoginMode = false }) => {
     await postToken({ email, password })
       .unwrap()
       .then((token) => {
-        localStorage.setItem("token", token.refresh);
+        localStorage.setItem("token", token.access);
 
         postLogin({ email, password })
           .unwrap()
           .then((response) => {
-            login(response.username);
-            navigate("/");
+            localStorage.setItem("user", JSON.stringify(response.username));
+
+            dispatch(
+              userLogin({
+                email: response.email,
+                username: response.username,
+                id: response.id,
+                token: token.access,
+              })
+            );
+            if (response.email) {
+              navigate("/");
+            }
           });
       });
-  };
-
-  // в настоящий момент не вызывается, после полного рефакторинга кода - удалить
-  const getAuth = async () => {
-    fetchLogin({ email: email, password: password })
-      .then((response) => {
-        console.log(response);
-        login(response.username);
-      })
-      .catch((error) => {
-        setTextError(error.message);
-      });
-
-    if (auth) {
-      navigate("/");
-      setTextError("");
-    }
   };
 
   const handleAuth = async (e) => {
@@ -71,7 +66,6 @@ export const LoginPage = ({ isLoginMode = false }) => {
     }
 
     handleNewLogin();
-    // getAuth();
   };
 
   const handleNewReg = async () => {
@@ -82,49 +76,23 @@ export const LoginPage = ({ isLoginMode = false }) => {
     })
       .unwrap()
       .then((response) => {
-        login(response.username);
-        navigate("/");
+        dispatch(
+          userLogin({
+            email: response.email,
+            username: response.username,
+            id: response.id,
+            token: token.access,
+          })
+        );
+        if (response.email) {
+          navigate("/");
+        }
       });
 
     postToken({ email, password })
       .unwrap()
       .then((token) => {
         localStorage.setItem("token", token.refresh);
-      });
-  };
-
-  // const handleNewReg = async () => {
-  //   await postToken({ email, password })
-  //     .unwrap()
-  //     .then((token) => {
-  //       localStorage.setItem("token", token.refresh);
-
-  //       postReg({
-  //         username: username,
-  //         email: email,
-  //         password: password,
-  //       })
-  //         .unwrap()
-  //         .then((response) => {
-  //           login(response.username);
-  //           navigate("/");
-  //         });
-  //     });
-  // };
-
-  // в настоящий момент не вызывается, после полного рефакторинга кода - удалить
-  const getReg = () => {
-    fetchReg({
-      username: username,
-      email: email,
-      password: password,
-    })
-      .then((jsonData) => {
-        login(jsonData.username);
-        navigate("/");
-      })
-      .catch((error) => {
-        setTextError(error.message);
       });
   };
 
@@ -151,7 +119,6 @@ export const LoginPage = ({ isLoginMode = false }) => {
     }
 
     handleNewReg();
-    // getReg();
   };
   return (
     <S.PageContainer>
