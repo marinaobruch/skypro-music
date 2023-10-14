@@ -69,7 +69,6 @@ export const playlistApi = createApi({
     }),
 
     getFavTracks: builder.query({
-      // query: () => "catalog/track/all/",
       query: () => "catalog/track/favorite/all/",
     }),
   }),
