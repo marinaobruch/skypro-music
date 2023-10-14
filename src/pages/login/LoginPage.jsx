@@ -31,14 +31,14 @@ export const LoginPage = ({ isLoginMode = false }) => {
     await postToken({ email, password })
       .unwrap()
       .then((token) => {
-        localStorage.setItem("token", token.access);
+        localStorage.setItem("token", JSON.stringify(token.access));
 
         postLogin({ email, password })
           .unwrap()
           .then((response) => {
-            localStorage.setItem("user", response.username);
-            localStorage.setItem("email", response.email);
-            localStorage.setItem("id", response.id);
+            localStorage.setItem("user", JSON.stringify(response.username));
+            localStorage.setItem("email", JSON.stringify(response.email));
+            localStorage.setItem("id", JSON.stringify(response.id));
 
             dispatch(
               userLogin({
@@ -73,7 +73,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
     await postToken({ email, password })
       .unwrap()
       .then((token) => {
-        localStorage.setItem("token", token.access);
+        localStorage.setItem("token", JSON.stringify(token.access));
 
         postReg({
           username: username,

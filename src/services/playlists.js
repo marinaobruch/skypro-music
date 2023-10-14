@@ -5,16 +5,17 @@ export const playlistApi = createApi({
   reducerPath: "playlistApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://skypro-music-api.skyeng.tech/",
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().user.token;
+
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().user.token;
 
-    if (token) {
-      headers.set("authorization", `Bearer ${token}`);
-    }
-
-    return headers;
-  },
   endpoints: (builder) => ({
     // Requests for auth/reg
     postReg: builder.mutation({
@@ -68,8 +69,8 @@ export const playlistApi = createApi({
     }),
 
     getFavTracks: builder.query({
-      query: () => "catalog/track/all/",
-      // query: () => "catalog/track/favorite/all/",
+      // query: () => "catalog/track/all/",
+      query: () => "catalog/track/favorite/all/",
     }),
   }),
 });

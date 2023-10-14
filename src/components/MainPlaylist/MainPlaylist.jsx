@@ -5,13 +5,7 @@ import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist
 import { addCurrentTrack } from "../../store/playerSlice.js";
 import { Filter } from "../Filter/Filter.jsx";
 
-export function MainPlaylist({
-  getAllTracksError,
-  tracks,
-  error,
-  isLoading,
-  title,
-}) {
+export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
   const dispatch = useDispatch();

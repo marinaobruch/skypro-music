@@ -6,6 +6,7 @@ export const FavoritesPage = () => {
   const { data, error, isLoading } = useGetFavTracksQuery();
   const currentToken = useSelector((state) => state.user.token);
   console.log(currentToken);
+  console.log(data);
 
   return (
     <MainPlaylist
