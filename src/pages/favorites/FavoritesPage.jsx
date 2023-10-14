@@ -1,12 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { MainPlaylist } from "../../components/MainPlaylist/MainPlaylist.jsx";
 import { useGetFavTracksQuery } from "../../services/playlists.js";
+import { addMyTracks } from "../../store/playerSlice.js";
 
 export const FavoritesPage = () => {
   const { data, error, isLoading } = useGetFavTracksQuery();
-  const currentToken = useSelector((state) => state.user.token);
-  console.log(currentToken);
-  console.log(data);
+  const dispatch = useDispatch();
+
+  dispatch(addMyTracks(data));
 
   return (
     <MainPlaylist

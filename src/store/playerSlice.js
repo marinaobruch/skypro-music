@@ -5,6 +5,7 @@ const playerSlice = createSlice({
   initialState: {
     playing: false,
     playlist: [{}],
+    playlistFavorite: [{}],
     track: {},
     shuffled: false,
     shuffledPlaylist: [{}],
@@ -13,6 +14,9 @@ const playerSlice = createSlice({
   reducers: {
     addAllTracks(state, action) {
       state.playlist = action.payload;
+    },
+    addMyTracks(state, action) {
+      state.playlistFavorite = action.payload;
     },
     addCurrentTrack(state, action) {
       state.track = action.payload;
@@ -61,6 +65,7 @@ const playerSlice = createSlice({
 
 export const {
   addAllTracks,
+  addMyTracks,
   addCurrentTrack,
   nextTrack,
   previousTrack,

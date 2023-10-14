@@ -40,7 +40,7 @@ export const playlistApi = createApi({
       }),
     }),
 
-    // Requests for woks with token
+    // Requests for works with token
     postToken: builder.mutation({
       query: (body) => ({
         url: "user/token/",
@@ -69,6 +69,7 @@ export const playlistApi = createApi({
     }),
 
     getFavTracks: builder.query({
+      // query: () => "catalog/track/all/",
       query: () => "catalog/track/favorite/all/",
     }),
   }),
