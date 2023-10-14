@@ -4,24 +4,29 @@ import {
   useGetFavTracksQuery,
   usePostTokenRefreshMutation,
 } from "../../services/playlists.js";
-import { addMyTracks } from "../../store/playerSlice.js";
 import { useEffect } from "react";
+import { setAccessToken } from "../../store/tokenSlice.js";
 
 export const FavoritesPage = () => {
   const { data, error, isLoading } = useGetFavTracksQuery();
-  const [postTokenRefresh, {}] = usePostTokenRefreshMutation();
-  const refreshToken = window.localStorage.getItem("refreshToken");
-
   const dispatch = useDispatch();
-  dispatch(addMyTracks(data));
 
-  useEffect(() => {
-    postTokenRefresh({ refreshToken })
-      .unwrap()
-      .then((newToken) => {
-        console.log(newToken);
-      });
-  }, [dispatch, refreshToken]);
+  const refreshToken = useSelector((state) => state.token.refreshToken);
+  console.log(refreshToken);
+
+  let accessToken = useSelector((state) => state.token.accessToken);
+  const [getRefreshToken, {}] = usePostTokenRefreshMutation();
+  console.log(accessToken);
+
+  // useEffect(() => {
+  //   getRefreshToken({ refreshToken })
+  //     .unwrap()
+  //     .then((newAccessToken) => {
+  //       accessToken = newAccessToken;
+  //       dispatch(setAccessToken({ token: accessToken }));
+  //     });
+  //   console.log(accessToken);
+  // }, [dispatch, refreshToken]);
 
   return (
     <MainPlaylist

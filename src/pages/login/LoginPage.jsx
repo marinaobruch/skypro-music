@@ -8,6 +8,7 @@ import {
   usePostTokenMutation,
 } from "../../services/playlists";
 import { userLogin } from "../../store/userSlice";
+import { setAccessToken } from "../../store/tokenSlice";
 
 export const LoginPage = ({ isLoginMode = false }) => {
   const [email, setEmail] = useState("");
@@ -27,25 +28,30 @@ export const LoginPage = ({ isLoginMode = false }) => {
     setTextError(null);
   }, [isLoginMode, email, password, repeatPassword]);
 
-  const handleNewLogin = async () => {
+  const handleLogin = async () => {
     await postToken({ email, password })
       .unwrap()
       .then((token) => {
-        localStorage.setItem("token", JSON.stringify(token.access));
-        localStorage.setItem("refreshToken", JSON.stringify(token.refresh));
+        // localStorage.setItem("token", JSON.stringify(token.access));
+        localStorage.setItem("token", token.access);
+        localStorage.setItem("refreshToken", token.refresh);
 
         postLogin({ email, password })
           .unwrap()
           .then((response) => {
-            localStorage.setItem("user", JSON.stringify(response.username));
-            localStorage.setItem("email", JSON.stringify(response.email));
-            localStorage.setItem("id", JSON.stringify(response.id));
+            localStorage.setItem("user", response.username);
+            localStorage.setItem("email", response.email);
+            localStorage.setItem("id", response.id);
 
             dispatch(
               userLogin({
                 email: response.email,
                 username: response.username,
                 id: response.id,
+              })
+            );
+            dispatch(
+              setAccessToken({
                 token: token.access,
                 refreshToken: token.refresh,
               })
@@ -68,7 +74,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
       return;
     }
 
-    handleNewLogin();
+    handleLogin();
   };
 
   const handleNewReg = async () => {
@@ -90,8 +96,6 @@ export const LoginPage = ({ isLoginMode = false }) => {
                 email: response.email,
                 username: response.username,
                 id: response.id,
-                token: token.access,
-                refreshToken: token.refresh,
               })
             );
             if (response.email) {

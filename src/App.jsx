@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
-import { getAllTracks } from "./api";
 import { useDispatch } from "react-redux";
-import { addAllTracks } from "./store/playerSlice";
 import { userLogin } from "./store/userSlice";
+import { setAccessToken } from "./store/tokenSlice";
+import { usePostTokenRefreshMutation } from "./services/playlists";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [getAllTracksError, setGetAllTracksError] = useState(null);
 
-  const dispatch = useDispatch();
-
   const cashUser = localStorage.getItem("user");
   const cashEmail = localStorage.getItem("email");
   const cashId = localStorage.getItem("id");
   const cashToken = localStorage.getItem("token");
+  const cashRefreshToken = localStorage.getItem("refreshToken");
+
+  const [postTokenRefresh, {}] = usePostTokenRefreshMutation();
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+
+  //   postTokenRefresh({ refreshToken })
+  //     .unwrap()
+  //     .then((response) => {
+  //       console.log(response);
+  //       dispatch(setRefreshToken({ token: response.data }));
+  //     });
+  // }, []);
 
   useEffect(() => {
     if (cashUser) {
@@ -24,7 +38,12 @@ function App() {
           email: cashEmail,
           username: cashUser,
           id: cashId,
+        })
+      );
+      dispatch(
+        setAccessToken({
           token: cashToken,
+          refreshToken: cashRefreshToken,
         })
       );
     }
