@@ -18,10 +18,10 @@ const userSlice = createSlice({
     },
 
     userLogout: (state) => {
-      state.token = null;
       state.id = null;
       state.email = null;
       state.username = null;
+      state.token = null;
     },
   },
 });

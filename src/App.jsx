@@ -4,6 +4,7 @@ import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { getAllTracks } from "./api";
 import { useDispatch } from "react-redux";
 import { addAllTracks } from "./store/playerSlice";
+import { userLogin } from "./store/userSlice";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -11,17 +12,22 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const cashUser = localStorage.getItem("user");
+  const cashEmail = localStorage.getItem("email");
+  const cashId = localStorage.getItem("id");
+  const cashToken = localStorage.getItem("token");
+
   useEffect(() => {
-    setLoading(true);
-    setGetAllTracksError(null);
-    getAllTracks()
-      .then((allTracks) => dispatch(addAllTracks(allTracks)))
-      .catch((error) => {
-        setGetAllTracksError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (cashUser) {
+      dispatch(
+        userLogin({
+          email: cashEmail,
+          username: cashUser,
+          id: cashId,
+          token: cashToken,
+        })
+      );
+    }
   }, []);
 
   return (

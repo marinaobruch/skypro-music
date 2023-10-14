@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as S from "./LoginPage.styles";
-import { fetchLogin, fetchReg } from "../../api";
 import {
   usePostLoginMutation,
   usePostRegMutation,
@@ -37,7 +36,9 @@ export const LoginPage = ({ isLoginMode = false }) => {
         postLogin({ email, password })
           .unwrap()
           .then((response) => {
-            localStorage.setItem("user", JSON.stringify(response.username));
+            localStorage.setItem("user", response.username);
+            localStorage.setItem("email", response.email);
+            localStorage.setItem("id", response.id);
 
             dispatch(
               userLogin({
@@ -69,30 +70,30 @@ export const LoginPage = ({ isLoginMode = false }) => {
   };
 
   const handleNewReg = async () => {
-    await postReg({
-      username: username,
-      email: email,
-      password: password,
-    })
-      .unwrap()
-      .then((response) => {
-        dispatch(
-          userLogin({
-            email: response.email,
-            username: response.username,
-            id: response.id,
-            token: token.access,
-          })
-        );
-        if (response.email) {
-          navigate("/");
-        }
-      });
-
-    postToken({ email, password })
+    await postToken({ email, password })
       .unwrap()
       .then((token) => {
-        localStorage.setItem("token", token.refresh);
+        localStorage.setItem("token", token.access);
+
+        postReg({
+          username: username,
+          email: email,
+          password: password,
+        })
+          .unwrap()
+          .then((response) => {
+            dispatch(
+              userLogin({
+                email: response.email,
+                username: response.username,
+                id: response.id,
+                token: token.access,
+              })
+            );
+            if (response.email) {
+              navigate("/login");
+            }
+          });
       });
   };
 

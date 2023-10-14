@@ -1,15 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+// test@test.test
 export const playlistApi = createApi({
   reducerPath: "playlistApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://skypro-music-api.skyeng.tech/",
   }),
   prepareHeaders: (headers, { getState }) => {
-    const { token } = getState().user;
+    const token = getState().user.token;
+
     if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set("authorization", `Bearer ${token}`);
     }
+
     return headers;
   },
   endpoints: (builder) => ({
@@ -36,7 +39,7 @@ export const playlistApi = createApi({
       }),
     }),
 
-    // Requests for woks wuth token
+    // Requests for woks with token
     postToken: builder.mutation({
       query: (body) => ({
         url: "user/token/",
@@ -63,11 +66,17 @@ export const playlistApi = createApi({
     getAllTracks: builder.query({
       query: () => "catalog/track/all/",
     }),
+
+    getFavTracks: builder.query({
+      query: () => "catalog/track/all/",
+      // query: () => "catalog/track/favorite/all/",
+    }),
   }),
 });
 
 export const {
   useGetAllTracksQuery,
+  useGetFavTracksQuery,
   usePostRegMutation,
   usePostLoginMutation,
   usePostTokenMutation,
