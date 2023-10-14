@@ -7,7 +7,7 @@ import { LoginPage } from "./pages/login/LoginPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import { PageLayout } from "./pages/PageLayout/PageLayout";
 
-export const AppRoutes = ({ loading, getAllTracksError }) => {
+export const AppRoutes = ({ getAllTracksError }) => {
   return (
     <Routes>
       <Route
@@ -24,12 +24,7 @@ export const AppRoutes = ({ loading, getAllTracksError }) => {
         <Route element={<PageLayout />}>
           <Route
             path="/"
-            element={
-              <MainPage
-                loading={loading}
-                getAllTracksError={getAllTracksError}
-              />
-            }
+            element={<MainPage getAllTracksError={getAllTracksError} />}
           />
 
           <Route

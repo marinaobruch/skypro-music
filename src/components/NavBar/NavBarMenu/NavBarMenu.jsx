@@ -14,6 +14,7 @@ export function NavBarMenu() {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
     localStorage.removeItem("email");
+    localStorage.removeItem("refreshToken");
     navigate("/login");
   };
 

@@ -32,7 +32,6 @@ export const LoginPage = ({ isLoginMode = false }) => {
     await postToken({ email, password })
       .unwrap()
       .then((token) => {
-        // localStorage.setItem("token", JSON.stringify(token.access));
         localStorage.setItem("token", token.access);
         localStorage.setItem("refreshToken", token.refresh);
 

@@ -21,9 +21,7 @@ export const playlistApi = createApi({
     getAllTracks: builder.query({
       query: () => "catalog/track/all/",
     }),
-
     getFavTracks: builder.query({
-      // query: () => "catalog/track/all/",
       query: () => "catalog/track/favorite/all/",
     }),
 
@@ -38,7 +36,6 @@ export const playlistApi = createApi({
         },
       }),
     }),
-
     postLogin: builder.mutation({
       query: (body) => ({
         url: "user/login/",
@@ -61,7 +58,6 @@ export const playlistApi = createApi({
         },
       }),
     }),
-
     postTokenRefresh: builder.mutation({
       query: (body) => ({
         url: "user/token/refresh/",
@@ -78,6 +74,7 @@ export const playlistApi = createApi({
 export const {
   useGetAllTracksQuery,
   useGetFavTracksQuery,
+  useLazyGetFavTracksQuery,
   usePostRegMutation,
   usePostLoginMutation,
   usePostTokenMutation,
