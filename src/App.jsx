@@ -5,6 +5,10 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "./store/userSlice";
 import { setAccessToken } from "./store/tokenSlice";
 
+// туду:
+// доделать обработку ошибка, когда "падает" сервер - getAllTracksError
+// доделать обработку запросов на логин/рег
+
 function App() {
   const [getAllTracksError, setGetAllTracksError] = useState(null);
 

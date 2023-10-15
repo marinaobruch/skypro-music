@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./MainPlaylist.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
 import { addCurrentTrack } from "../../store/playerSlice.js";
 import { Filter } from "../Filter/Filter.jsx";
+import {
+  useSetLikeMutation,
+  useSetUnlikeMutation,
+} from "../../services/playlists.js";
 
 export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
+  const dispatch = useDispatch();
+
+  const [setLike] = useSetLikeMutation();
+  const [setUnlike] = useSetUnlikeMutation();
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
-  const dispatch = useDispatch();
+  const userId = Number(useSelector((state) => state.user.id));
+
+  const [isFavourite, setFavourite] = useState(false);
+
+  // console.log(tracks);
+  // const track = tracks[0];
+  // console.log(track);
+  // const firstTrackStarred = track.stared_user;
+  // console.log(firstTrackStarred);
+  // const user = firstTrackStarred[0];
+  // console.log(user);
+  // const firstUserStarredId = user.id;
+  // console.log(firstUserStarredId);
+
+  // console.log(userId);
+
+  // console.log(
+  //   tracks.map((track) => track.stared_user.find((user) => user.id === userId))
+  // );
 
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
@@ -19,6 +45,20 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
       return `${formatMinutes}:${formatSeconds}`;
     }
     return "00:00";
+  };
+
+  const toggleStarred = (track) => {
+    if (
+      tracks.map((track) =>
+        track.stared_user.find((user) => user.id === userId)
+      )
+    ) {
+      console.log("like");
+      setLike(track);
+    } else {
+      console.log("dislike");
+      setUnlike(track);
+    }
   };
 
   return (
@@ -99,7 +139,12 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
                   <S.TrackAlbomLink href="#">{track.album}</S.TrackAlbomLink>
                 </S.TrackAlbom>
 
-                <S.TrackTimeText>
+                <S.TrackTimeText
+                  onClick={(e) => {
+                    toggleStarred(track);
+                    e.stopPropagation();
+                  }}
+                >
                   <S.TrackTimeSvg alt="time">
                     <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                   </S.TrackTimeSvg>

@@ -25,6 +25,20 @@ export const playlistApi = createApi({
       query: () => "catalog/track/favorite/all/",
     }),
 
+    // Requests for like/dislike
+    setLike: builder.mutation({
+      query: (track) => ({
+        url: `/catalog/track/${track.id}/favorite/`,
+        method: "POST",
+      }),
+    }),
+    setUnlike: builder.mutation({
+      query: (track) => ({
+        url: `/catalog/track/${track.id}/favorite/`,
+        method: "DELETE",
+      }),
+    }),
+
     // Requests for auth/reg
     postReg: builder.mutation({
       query: (body) => ({
@@ -75,8 +89,13 @@ export const {
   useGetAllTracksQuery,
   useGetFavTracksQuery,
   useLazyGetFavTracksQuery,
+
+  useSetLikeMutation,
+  useSetUnlikeMutation,
+
   usePostRegMutation,
   usePostLoginMutation,
+
   usePostTokenMutation,
   usePostTokenRefreshMutation,
 } = playlistApi;
