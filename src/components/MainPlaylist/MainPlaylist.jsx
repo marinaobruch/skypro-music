@@ -20,22 +20,6 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
 
   const [isFavourite, setFavourite] = useState(false);
 
-  // console.log(tracks);
-  // const track = tracks[0];
-  // console.log(track);
-  // const firstTrackStarred = track.stared_user;
-  // console.log(firstTrackStarred);
-  // const user = firstTrackStarred[0];
-  // console.log(user);
-  // const firstUserStarredId = user.id;
-  // console.log(firstUserStarredId);
-
-  // console.log(userId);
-
-  // console.log(
-  //   tracks.map((track) => track.stared_user.find((user) => user.id === userId))
-  // );
-
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
       const minutes = Math.floor(time / 60);
@@ -48,11 +32,7 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
   };
 
   const toggleStarred = (track) => {
-    if (
-      tracks.map((track) =>
-        track.stared_user.find((user) => user.id === userId)
-      )
-    ) {
+    if (!track.stared_user.some((user) => user.id === userId)) {
       console.log("like");
       setLike(track);
     } else {

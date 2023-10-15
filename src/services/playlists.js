@@ -5,6 +5,7 @@ export const playlistApi = createApi({
   reducerPath: "playlistApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://skypro-music-api.skyeng.tech/",
+    tagTypes: ["Tracks"],
     prepareHeaders: (headers, { getState }) => {
       const token = getState().token.accessToken;
 
@@ -23,6 +24,7 @@ export const playlistApi = createApi({
     }),
     getFavTracks: builder.query({
       query: () => "catalog/track/favorite/all/",
+      providesTags: ["Tracks"],
     }),
 
     // Requests for like/dislike
@@ -30,12 +32,14 @@ export const playlistApi = createApi({
       query: (track) => ({
         url: `/catalog/track/${track.id}/favorite/`,
         method: "POST",
+        invalidatesTags: ["Tracks"],
       }),
     }),
     setUnlike: builder.mutation({
       query: (track) => ({
         url: `/catalog/track/${track.id}/favorite/`,
         method: "DELETE",
+        invalidatesTags: ["Tracks"],
       }),
     }),
 
