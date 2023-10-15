@@ -8,18 +8,22 @@ import {
   useSetLikeMutation,
   useSetUnlikeMutation,
 } from "../../services/playlists.js";
+import { useNavigate } from "react-router-dom";
 
 export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [setLike] = useSetLikeMutation();
-  const [setUnlike] = useSetUnlikeMutation();
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
   const userId = Number(useSelector((state) => state.user.id));
 
-  const [isFavourite, setFavourite] = useState(false);
+  const [setLike, {}] = useSetLikeMutation();
+  const [setUnlike, {}] = useSetUnlikeMutation();
 
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  // вынести в отдельный файл, переиспользовать
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
       const minutes = Math.floor(time / 60);
@@ -34,10 +38,20 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
   const toggleStarred = (track) => {
     if (!track.stared_user.some((user) => user.id === userId)) {
       console.log("like");
-      setLike(track);
+      setLike(track)
+        .unwrap()
+        .catch((error) => {
+          console.log(error);
+          navigate("/login");
+        });
     } else {
       console.log("dislike");
-      setUnlike(track);
+      setUnlike(track)
+        .unwrap()
+        .catch((error) => {
+          console.log(error);
+          navigate("/login");
+        });
     }
   };
 

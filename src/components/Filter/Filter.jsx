@@ -22,7 +22,7 @@ export function Filter() {
   };
 
   return (
-    <S.CenterblockFilter>
+    <S.CenterBlockFilter>
       <S.FilterTitle>Искать по:</S.FilterTitle>
       <FilterItem
         value="исполнителю"
@@ -50,6 +50,6 @@ export function Filter() {
         open={open}
         id="2"
       />
-    </S.CenterblockFilter>
+    </S.CenterBlockFilter>
   );
 }

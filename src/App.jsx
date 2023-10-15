@@ -7,7 +7,7 @@ import { setAccessToken } from "./store/tokenSlice";
 
 // туду:
 // доделать обработку ошибка, когда "падает" сервер - getAllTracksError
-// доделать обработку запросов на логин/рег
+// доделать обработку запросов через RTL Query
 
 function App() {
   const [getAllTracksError, setGetAllTracksError] = useState(null);
