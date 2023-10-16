@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as S from "./MainPlaylist.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
-import { addCurrentTrack } from "../../store/playerSlice.js";
+import { addCurrentTrack } from "../../redux/store/playerSlice.js";
 import { Filter } from "../Filter/Filter.jsx";
 import {
   useSetLikeMutation,
   useSetUnlikeMutation,
-} from "../../services/playlists.js";
+} from "../../redux/services/playlists.js";
 import { useNavigate } from "react-router-dom";
-import { userLogout } from "../../store/userSlice.js";
+import { userLogout } from "../../redux/store/userSlice.js";
 
 export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
   const dispatch = useDispatch();

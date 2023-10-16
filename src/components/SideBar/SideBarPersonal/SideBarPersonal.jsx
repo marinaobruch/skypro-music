@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./SideBarPersonal.styles.js";
-import { userLogout } from "../../../store/userSlice.js";
+import { userLogout } from "../../../redux/store/userSlice.js";
 import { useDispatch } from "react-redux";
 
 export function SideBarPersonal({ loading }) {

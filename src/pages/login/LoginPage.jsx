@@ -6,9 +6,9 @@ import {
   usePostLoginMutation,
   usePostRegMutation,
   usePostTokenMutation,
-} from "../../services/playlists";
-import { userLogin } from "../../store/userSlice";
-import { setAccessToken } from "../../store/tokenSlice";
+} from "../../redux/services/playlists";
+import { userLogin } from "../../redux/store/userSlice";
+import { setAccessToken } from "../../redux/store/tokenSlice";
 
 export const LoginPage = ({ isLoginMode = false }) => {
   const [email, setEmail] = useState("");

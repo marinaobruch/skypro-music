@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import * as S from "./NavBarMenu.styles.js";
 import { NavBarItem } from "../NavBarItem/NavBarItem";
-import { userLogout } from "../../../store/userSlice.js";
+import { userLogout } from "../../../redux/store/userSlice.js";
 import { useDispatch } from "react-redux";
 
 export function NavBarMenu() {

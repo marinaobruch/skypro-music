@@ -6,7 +6,7 @@ import {
   previousTrack,
   shuffledHandlePlaylist,
   togglePlayer,
-} from "../../../store/playerSlice.js";
+} from "../../../redux/store/playerSlice.js";
 
 export function TrackBarPanel({ repeat, handleRepeat }) {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import userReducer from "./userSlice";
 import tokenReducer from "./tokenSlice";
 import { playlistApi } from "../services/playlists";
 
-export const store = configureStore({
+export default configureStore({
   reducer: {
     audioplayer: audioReducer,
     user: userReducer,

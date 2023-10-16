@@ -4,10 +4,10 @@ import {
   useGetFavTracksQuery,
   useLazyGetFavTracksQuery,
   usePostTokenRefreshMutation,
-} from "../../services/playlists.js";
+} from "../../redux/services/playlists.js";
 import { useEffect } from "react";
-import { setAccessToken } from "../../store/tokenSlice.js";
-import { addMyTracks } from "../../store/playerSlice.js";
+import { setAccessToken } from "../../redux/store/tokenSlice.js";
+import { addMyTracks } from "../../redux/store/playerSlice.js";
 
 export const FavoritesPage = () => {
   const dispatch = useDispatch();

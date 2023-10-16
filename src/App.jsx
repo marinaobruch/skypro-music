@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./pages/main/MainPage.styles";
 import { useDispatch } from "react-redux";
-import { userLogin } from "./store/userSlice";
-import { setAccessToken } from "./store/tokenSlice";
+import { userLogin } from "./redux/store/userSlice";
+import { setAccessToken } from "./redux/store/tokenSlice";
 
 // туду:
 // доделать обработку ошибка, когда "падает" сервер - getAllTracksError

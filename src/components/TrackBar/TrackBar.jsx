@@ -4,7 +4,7 @@ import { TrackBarPanel } from "./TrackBarPanel/TrackBarPanel.jsx";
 import { TrackBarPlayer } from "./TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "./TrackBarVolume/TrackBarVolume.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { togglePlayer, nextTrack } from "../../store/playerSlice.js";
+import { togglePlayer, nextTrack } from "../../redux/store/playerSlice.js";
 
 export function TrackBar() {
   const [currentTime, setCurrentTime] = useState(0);

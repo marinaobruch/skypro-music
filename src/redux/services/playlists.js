@@ -87,6 +87,7 @@ export const playlistApi = createApi({
         headers: {
           "content-type": "application/json",
         },
+        invalidatesTags: [{ type: "Tracks", id: "LIST" }],
       }),
     }),
     postTokenRefresh: builder.mutation({
@@ -97,6 +98,7 @@ export const playlistApi = createApi({
         headers: {
           "content-type": "application/json",
         },
+        invalidatesTags: [{ type: "Tracks", id: "LIST" }],
       }),
     }),
   }),
