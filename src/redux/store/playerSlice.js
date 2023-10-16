@@ -9,6 +9,7 @@ const playerSlice = createSlice({
     track: {},
     shuffled: false,
     shuffledPlaylist: [{}],
+    currentPathnameTrackList: null,
   },
 
   reducers: {

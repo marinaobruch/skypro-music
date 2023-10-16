@@ -38,12 +38,14 @@ export const LoginPage = ({ isLoginMode = false }) => {
         postLogin({ email, password })
           .unwrap()
           .then((response) => {
+            localStorage.setItem("fullUser", response);
             localStorage.setItem("user", response.username);
             localStorage.setItem("email", response.email);
             localStorage.setItem("id", response.id);
 
             dispatch(
               userLogin({
+                fullUser: response,
                 email: response.email,
                 username: response.username,
                 id: response.id,
@@ -92,6 +94,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
           .then((response) => {
             dispatch(
               userLogin({
+                fullUser: response,
                 email: response.email,
                 username: response.username,
                 id: response.id,

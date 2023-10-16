@@ -5,7 +5,6 @@ import { addAllTracks } from "../../redux/store/playerSlice.js";
 
 export const MainPage = ({ getAllTracksError }) => {
   const { data, error, isLoading } = useGetAllTracksQuery();
-
   const dispatch = useDispatch();
   dispatch(addAllTracks(data));
 

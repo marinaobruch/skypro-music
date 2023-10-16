@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as S from "./MainPlaylist.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
@@ -197,7 +197,7 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
 }
 
 // {(track.stared_user ?? []).find((user) => user.id === userId) ||
-//   track.starred ? (
+//   !track.stared_user ? (
 //     <svg
 //       width="16"
 //       height="14"
