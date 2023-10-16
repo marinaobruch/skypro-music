@@ -17,19 +17,22 @@ export const FavoritesPage = () => {
   const refresh = window.localStorage.getItem("refreshToken");
   const [postTokenRefresh, {}] = usePostTokenRefreshMutation();
 
+  const favoriteError = null;
+
   useEffect(() => {
     postTokenRefresh({ refresh })
       .unwrap()
       .then((newToken) => {
-        console.log(newToken);
         dispatch(setAccessToken({ token: newToken.access }));
         fetchFavorite()
           .unwrap()
           .then((data) => {
-            console.log(data);
             dispatch(addMyTracks(data));
           })
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            console.log(error);
+            favoriteError = error;
+          });
       });
   }, [refresh]);
 
@@ -41,6 +44,7 @@ export const FavoritesPage = () => {
     <>
       <MainPlaylist
         tracks={myFavTracks}
+        getAllTracksError={favoriteError}
         isLoading={isLoading}
         title="Мои треки"
       />
