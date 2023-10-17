@@ -41,7 +41,7 @@ export const FavoritesPage = () => {
 
   useEffect(() => {
     if (myFavTracks) dispatch(setCurrentPage("Favorites"));
-  }, [myFavTracks]);
+  }, [data]);
 
   return (
     <>
