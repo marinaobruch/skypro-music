@@ -46,22 +46,22 @@ export const playlistApi = createApi({
       query: (track) => ({
         url: `/catalog/track/${track.id}/favorite/`,
         method: "POST",
-        invalidatesTags: [
-          { type: "Favorites", id: "LIST" },
-          { type: "Tracks", id: "LIST" },
-        ],
       }),
+      invalidatesTags: [
+        { type: "Favorites", id: "LIST" },
+        { type: "Tracks", id: "LIST" },
+      ],
     }),
 
     setUnlike: builder.mutation({
       query: (track) => ({
         url: `/catalog/track/${track.id}/favorite/`,
         method: "DELETE",
-        invalidatesTags: [
-          { type: "Favorites", id: "LIST" },
-          { type: "Tracks", id: "LIST" },
-        ],
       }),
+      invalidatesTags: [
+        { type: "Favorites", id: "LIST" },
+        { type: "Tracks", id: "LIST" },
+      ],
     }),
 
     // Requests for auth/reg
@@ -117,6 +117,7 @@ export const playlistApi = createApi({
 export const {
   useGetAllTracksQuery,
   useGetFavTracksQuery,
+  useLazyGetAllTracksQuery,
   useLazyGetFavTracksQuery,
 
   useSetLikeMutation,

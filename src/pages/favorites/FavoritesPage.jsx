@@ -7,17 +7,20 @@ import {
 } from "../../redux/services/playlists.js";
 import { useEffect } from "react";
 import { setAccessToken } from "../../redux/store/tokenSlice.js";
-import { addMyTracks } from "../../redux/store/playerSlice.js";
+import { addMyTracks, setCurrentPage } from "../../redux/store/playerSlice.js";
 
 export const FavoritesPage = () => {
   const dispatch = useDispatch();
 
-  const { isLoading } = useGetFavTracksQuery();
+  const { data, isLoading } = useGetFavTracksQuery();
   const [fetchFavorite] = useLazyGetFavTracksQuery();
   const refresh = window.localStorage.getItem("refreshToken");
   const [postTokenRefresh, {}] = usePostTokenRefreshMutation();
 
   const favoriteError = null;
+  const myFavTracks = useSelector(
+    (state) => state.audioplayer.playlistFavorite
+  );
 
   useEffect(() => {
     postTokenRefresh({ refresh })
@@ -34,11 +37,11 @@ export const FavoritesPage = () => {
             favoriteError = error;
           });
       });
-  }, [refresh]);
+  }, [refresh, data]);
 
-  const myFavTracks = useSelector(
-    (state) => state.audioplayer.playlistFavorite
-  );
+  useEffect(() => {
+    if (myFavTracks) dispatch(setCurrentPage("Favorites"));
+  }, [myFavTracks]);
 
   return (
     <>

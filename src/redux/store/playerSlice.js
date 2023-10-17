@@ -9,7 +9,8 @@ const playerSlice = createSlice({
     track: {},
     shuffled: false,
     shuffledPlaylist: [{}],
-    currentPathnameTrackList: null,
+    currentPlaylist: [{}],
+    currentPage: "",
   },
 
   reducers: {
@@ -20,7 +21,26 @@ const playerSlice = createSlice({
       state.playlistFavorite = action.payload;
     },
     addCurrentTrack(state, action) {
-      state.track = action.payload;
+      // state.track = action.payload;
+
+      if (state.currentPage === "Main") {
+        const newCurrentArrayMain = state.playlist.map((track) => track);
+        state.currentPlayList = newCurrentArrayMain;
+        console.log("Main");
+        return;
+      }
+      if (state.currentPage === "Favorites") {
+        const newCurrentArrayFav = state.playlistFavorite.map((track) => track);
+        state.currentPlayList = newCurrentArrayFav;
+        console.log("Favorites");
+        return;
+      }
+      console.log("Error");
+      // currentTrackIndex = state.currentPlayList.findIndex(
+      //   (track) => track.id === action.payload
+      // );
+
+      // state.track = state.currentPlayList[currentTrackIndex];
     },
     togglePlayer(state, action) {
       if (state.playing === action.payload) {
@@ -61,6 +81,9 @@ const playerSlice = createSlice({
       const newShuffledArray = state.playlist.map((track) => track);
       state.shuffledPlaylist = newShuffledArray.sort(() => Math.random() - 0.5);
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
@@ -72,6 +95,7 @@ export const {
   previousTrack,
   togglePlayer,
   shuffledHandlePlaylist,
+  setCurrentPage,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;
