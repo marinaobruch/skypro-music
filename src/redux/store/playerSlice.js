@@ -74,10 +74,21 @@ const playerSlice = createSlice({
         state.track = curPlaylist[currentTrackIdInList - 1];
       }
     },
-    shuffledHandlePlaylist(state) {
-      state.shuffled = !state.shuffled;
-      const newShuffledArray = state.playlist.map((track) => track);
-      state.shuffledPlaylist = newShuffledArray.sort(() => Math.random() - 0.5);
+    shuffledHandlePlaylist(state, action) {
+      state.shuffled = action.payload;
+      if (state.shuffled) {
+        state.shuffledPlaylist = state.currentPlaylist.sort(
+          () => Math.random() - 0.5
+        );
+      }
+      if (!state.shuffled) {
+        if (state.currentPage === "Main") {
+          state.currentPlaylist = state.playlist;
+        }
+        if (state.currentPage === "Favorites") {
+          state.currentPlaylist = state.playlistFavorite;
+        }
+      }
     },
   },
 });

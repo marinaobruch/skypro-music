@@ -58,7 +58,18 @@ export const LoginPage = ({ isLoginMode = false }) => {
             if (response.email) {
               navigate("/");
             }
+          })
+          .catch((error) => {
+            console.log(error);
           });
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.status === 401) {
+          setTextError(
+            "Не найдено активной учетной записи с указанными данными"
+          );
+        } else setTextError("Ошибка сервера, попробуйте позже");
       });
   };
 
@@ -77,30 +88,35 @@ export const LoginPage = ({ isLoginMode = false }) => {
   };
 
   const handleNewReg = async () => {
-    await postToken({ email, password })
+    await postReg({
+      username: username,
+      email: email,
+      password: password,
+    })
       .unwrap()
-      .then((token) => {
-        localStorage.setItem("token", JSON.stringify(token.access));
-        localStorage.setItem("refreshToken", JSON.stringify(token.refresh));
-
-        postReg({
-          username: username,
-          email: email,
-          password: password,
-        })
-          .unwrap()
-          .then((response) => {
-            dispatch(
-              userLogin({
-                email: response.email,
-                username: response.username,
-                id: response.id,
-              })
-            );
-            if (response.email) {
-              navigate("/login");
-            }
-          });
+      .then((response) => {
+        dispatch(
+          userLogin({
+            email: response.email,
+            username: response.username,
+            id: response.id,
+          })
+        );
+        if (response.email) {
+          navigate("/login");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.data.email && error.data.email.length > 0) {
+          setTextError(error.data.email);
+        }
+        if (error.data.password && error.data.password.length > 0) {
+          setTextError(error.data.password);
+        }
+        if (error.data.username && error.data.username.length > 0) {
+          setTextError(error.data.username);
+        }
       });
   };
 

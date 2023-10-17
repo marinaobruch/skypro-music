@@ -1,4 +1,3 @@
-import React from "react";
 import * as S from "./TrackBarPanel.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -65,7 +64,9 @@ export function TrackBarPanel({ repeat, handleRepeat }) {
           </S.BtnRepeatSvg>
         )}
       </S.BtnRepeat>
-      <S.BtnShuffle onClick={() => dispatch(shuffledHandlePlaylist())}>
+      <S.BtnShuffle
+        onClick={() => dispatch(shuffledHandlePlaylist(!isShuffled))}
+      >
         {isShuffled ? (
           <S.BtnShuffleActiveSvg>
             <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
