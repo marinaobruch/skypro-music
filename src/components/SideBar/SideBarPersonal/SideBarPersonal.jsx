@@ -2,21 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./SideBarPersonal.styles.js";
 import { userLogout } from "../../../redux/store/userSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export function SideBarPersonal({ loading }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const currentUser = localStorage.getItem("user");
+  const currentUser = useSelector((state) => state.user.username);
 
   const logout = () => {
     dispatch(userLogout());
-
-    localStorage.removeItem("user");
     localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("email");
     localStorage.removeItem("refreshToken");
     navigate("/login");
   };

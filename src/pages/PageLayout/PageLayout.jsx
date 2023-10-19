@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 export const PageLayout = ({ loading }) => {
   const currentTrack = useSelector((state) => state.audioplayer.track);
+  console.log(currentTrack);
 
   return (
     <>
@@ -26,7 +27,7 @@ export const PageLayout = ({ loading }) => {
               albums={ALBUMS}
             />
           </S.Main>
-          {currentTrack && <TrackBar />}
+          {currentTrack ? <TrackBar /> : null}
         </S.Container>
       </S.Wrapper>
     </>

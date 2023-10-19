@@ -13,7 +13,7 @@ export function TrackBar() {
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
 
-  const currentUser = localStorage.getItem("user");
+  const currentUser = localStorage.getItem("auth");
 
   const dispatch = useDispatch();
   const currentTrack = useSelector((state) => state.audioplayer.track);
@@ -21,12 +21,6 @@ export function TrackBar() {
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
-
-  const duration = () => {
-    if (currentTrack) {
-      currentTrack.duration_in_seconds;
-    }
-  };
 
   useEffect(() => {
     if (audioRef) {
@@ -69,6 +63,7 @@ export function TrackBar() {
 
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
+    console.log(seconds);
     setCurrentDuration(seconds);
     progressBarRef.current.max = seconds;
   };
@@ -94,7 +89,7 @@ export function TrackBar() {
               <S.BarPlayerProgress
                 type="range"
                 min={0}
-                max={duration}
+                max={currentDuration}
                 value={currentTime}
                 step={0.01}
                 ref={progressBarRef}

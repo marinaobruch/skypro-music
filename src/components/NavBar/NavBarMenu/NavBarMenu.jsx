@@ -9,11 +9,7 @@ export function NavBarMenu() {
 
   const logout = () => {
     dispatch(userLogout());
-
-    localStorage.removeItem("user");
     localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("email");
     localStorage.removeItem("refreshToken");
     navigate("/login");
   };
