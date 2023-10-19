@@ -6,7 +6,7 @@ const playerSlice = createSlice({
     playing: false,
     playlist: [{}],
     playlistFavorite: [{}],
-    track: {},
+    track: null,
     shuffled: false,
     shuffledPlaylist: [{}],
     currentPage: "",

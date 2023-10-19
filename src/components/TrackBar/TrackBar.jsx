@@ -5,6 +5,7 @@ import { TrackBarPlayer } from "./TrackBarPlayer/TrackBarPlayer";
 import { TrackBarVolume } from "./TrackBarVolume/TrackBarVolume.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePlayer, nextTrack } from "../../redux/store/playerSlice.js";
+import { formatTimeTool } from "../../utils/formatTime";
 
 export function TrackBar() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -21,7 +22,11 @@ export function TrackBar() {
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
 
-  const duration = currentTrack.duration_in_seconds;
+  const duration = () => {
+    if (currentTrack) {
+      currentTrack.duration_in_seconds;
+    }
+  };
 
   useEffect(() => {
     if (audioRef) {
@@ -68,17 +73,6 @@ export function TrackBar() {
     progressBarRef.current.max = seconds;
   };
 
-  const formatTime = (time) => {
-    if (time && !isNaN(time)) {
-      const minutes = Math.floor(time / 60);
-      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-      const seconds = Math.floor(time % 60);
-      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-      return `${formatMinutes}:${formatSeconds}`;
-    }
-    return "00:00";
-  };
-
   return (
     <>
       <S.InitPlayer
@@ -94,7 +88,7 @@ export function TrackBar() {
         <S.BarContainer>
           <S.Bar>
             <S.TimeBar>
-              {formatTime(currentTime)} /{formatTime(currentDuration)}
+              {formatTimeTool(currentTime)} /{formatTimeTool(currentDuration)}
             </S.TimeBar>
             <S.BarContent>
               <S.BarPlayerProgress

@@ -10,6 +10,7 @@ import {
 } from "../../redux/services/playlists.js";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../redux/store/userSlice.js";
+import { formatTimeTool } from "../../utils/formatTime";
 
 export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
   const dispatch = useDispatch();
@@ -22,17 +23,6 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
   const [setLike, {}] = useSetLikeMutation();
   const [setUnlike, {}] = useSetUnlikeMutation();
 
-  // вынести в отдельный файл, переиспользовать
-  const formatTime = (time) => {
-    if (time && !isNaN(time)) {
-      const minutes = Math.floor(time / 60);
-      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-      const seconds = Math.floor(time % 60);
-      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-      return `${formatMinutes}:${formatSeconds}`;
-    }
-    return "00:00";
-  };
   const logout = () => {
     dispatch(userLogout());
 
@@ -120,7 +110,7 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
               >
                 <S.TrackTitle>
                   <S.TrackTitleImg>
-                    {currentTrack.id === track.id ? (
+                    {currentTrack && currentTrack.id === track.id ? (
                       isPlaying ? (
                         <S.playingdot></S.playingdot>
                       ) : (
@@ -184,7 +174,7 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
                     )}
                   </S.TrackTimeSvg>
                   <span className="track__time-text">
-                    {formatTime(track.duration_in_seconds)}
+                    {formatTimeTool(track.duration_in_seconds)}
                   </span>
                 </S.TrackTimeText>
               </S.PlaylistTrack>
@@ -195,25 +185,3 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
     </S.ContentPlaylist>
   );
 }
-
-// {(track.stared_user ?? []).find((user) => user.id === userId) ||
-//   !track.stared_user ? (
-//     <svg
-//       width="16"
-//       height="14"
-//       viewBox="0 0 16 14"
-//       fill="none"
-//       xmlns="http://www.w3.org/2000/svg"
-//     >
-//       <path
-//         d="M8.36529 12.751C14.2458 9.25098 17.3111 3.96019 13.9565 1.51832C11.7563 -0.0832586 9.29718 1.19273 8.36529 2.00669H8.34378H8.34372H8.32221C7.39032 1.19273 4.93121 -0.0832586 2.73102 1.51832C-0.623552 3.96019 2.44172 9.25098 8.32221 12.751H8.34372H8.34378H8.36529Z"
-//         fill="#B672FF"
-//       />
-//       <path
-//         d="M8.34372 2.00669H8.36529C9.29718 1.19273 11.7563 -0.0832586 13.9565 1.51832C17.3111 3.96019 14.2458 9.25098 8.36529 12.751H8.34372M8.34378 2.00669H8.32221C7.39032 1.19273 4.93121 -0.0832586 2.73102 1.51832C-0.623552 3.96019 2.44172 9.25098 8.32221 12.751H8.34378"
-//         stroke="#B672FF"
-//       />
-//     </svg>
-//   ) : (
-//     <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-//   )}

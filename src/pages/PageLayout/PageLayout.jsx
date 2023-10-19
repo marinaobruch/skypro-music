@@ -5,8 +5,11 @@ import { ALBUMS } from "../../constants.js";
 import * as S from "./PageLayout.styles";
 import { TrackBar } from "../../components/TrackBar/TrackBar";
 import { Search } from "../../components/Search/Search";
+import { useSelector } from "react-redux";
 
 export const PageLayout = ({ loading }) => {
+  const currentTrack = useSelector((state) => state.audioplayer.track);
+
   return (
     <>
       <S.GlobalStyle />
@@ -23,12 +26,9 @@ export const PageLayout = ({ loading }) => {
               albums={ALBUMS}
             />
           </S.Main>
-          <TrackBar />
+          {currentTrack && <TrackBar />}
         </S.Container>
       </S.Wrapper>
     </>
   );
 };
-
-{
-}
