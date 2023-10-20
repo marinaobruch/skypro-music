@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as S from "./LoginPage.styles";
-import { fetchLogin, fetchReg } from "../../api";
-import { useAuth } from "../../WithAuth";
+import {
+  usePostLoginMutation,
+  usePostRegMutation,
+  usePostTokenMutation,
+} from "../../redux/services/playlists";
+import { userLogin } from "../../redux/store/userSlice";
+import { setAccessToken } from "../../redux/store/tokenSlice";
 
 export const LoginPage = ({ isLoginMode = false }) => {
   const [email, setEmail] = useState("");
@@ -12,25 +18,55 @@ export const LoginPage = ({ isLoginMode = false }) => {
   const [textError, setTextError] = useState(null);
 
   const navigate = useNavigate();
-  const { auth, login } = useAuth();
+  const dispatch = useDispatch();
+
+  const [postToken, {}] = usePostTokenMutation();
+  const [postLogin, {}] = usePostLoginMutation();
+  const [postReg, {}] = usePostRegMutation();
 
   useEffect(() => {
     setTextError(null);
   }, [isLoginMode, email, password, repeatPassword]);
 
-  const getAuth = async () => {
-    fetchLogin({ email: email, password: password })
-      .then((response) => {
-        login(response.username);
+  const handleLogin = async () => {
+    await postToken({ email, password })
+      .unwrap()
+      .then((token) => {
+        localStorage.setItem("token", token.access);
+        localStorage.setItem("refreshToken", token.refresh);
+
+        postLogin({ email, password })
+          .unwrap()
+          .then((response) => {
+            dispatch(
+              userLogin({
+                email: response.email,
+                username: response.username,
+                id: response.id,
+              })
+            );
+            dispatch(
+              setAccessToken({
+                token: token.access,
+                refreshToken: token.refresh,
+              })
+            );
+            if (response.email) {
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
-        setTextError(error.message);
+        console.log(error);
+        if (error.status === 401) {
+          setTextError(
+            "Не найдено активной учетной записи с указанными данными"
+          );
+        } else setTextError("Ошибка сервера, попробуйте позже");
       });
-
-    if (auth) {
-      navigate("/");
-      setTextError("");
-    }
   };
 
   const handleAuth = async (e) => {
@@ -44,22 +80,39 @@ export const LoginPage = ({ isLoginMode = false }) => {
       return;
     }
 
-    getAuth();
+    handleLogin();
   };
 
-  const getReg = () => {
-    fetchReg({
+  const handleNewReg = async () => {
+    await postReg({
       username: username,
       email: email,
       password: password,
     })
-      .then((jsonData) => {
-        console.log(jsonData);
-        login(jsonData.username);
-        navigate("/");
+      .unwrap()
+      .then((response) => {
+        dispatch(
+          userLogin({
+            email: response.email,
+            username: response.username,
+            id: response.id,
+          })
+        );
+        if (response.email) {
+          navigate("/login");
+        }
       })
       .catch((error) => {
-        setTextError(error.message);
+        console.log(error);
+        if (error.data.email && error.data.email.length > 0) {
+          setTextError(error.data.email);
+        }
+        if (error.data.password && error.data.password.length > 0) {
+          setTextError(error.data.password);
+        }
+        if (error.data.username && error.data.username.length > 0) {
+          setTextError(error.data.username);
+        }
       });
   };
 
@@ -84,7 +137,8 @@ export const LoginPage = ({ isLoginMode = false }) => {
       setTextError("Пароли не совпадают");
       return;
     }
-    getReg();
+
+    handleNewReg();
   };
   return (
     <S.PageContainer>

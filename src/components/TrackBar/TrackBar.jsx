@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import * as S from "./TrackBar.styles.js";
-import { TrackBarPanel } from "../TrackBarPanel/TrackBarPanel";
-import { TrackBarPlayer } from "../TrackBarPlayer/TrackBarPlayer";
-import { TrackBarVolume } from "../TrackBarVolume/TrackBarVolume";
-import { useAuth } from "../../WithAuth.jsx";
+import { TrackBarPanel } from "./TrackBarPanel/TrackBarPanel.jsx";
+import { TrackBarPlayer } from "./TrackBarPlayer/TrackBarPlayer";
+import { TrackBarVolume } from "./TrackBarVolume/TrackBarVolume.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { togglePlayer, nextTrack } from "../../store/playerSlice.js";
+import { togglePlayer, nextTrack } from "../../redux/store/playerSlice.js";
+import { formatTimeTool } from "../../utils/formatTime";
 
 export function TrackBar() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -13,7 +13,7 @@ export function TrackBar() {
   const [volume, setVolume] = useState(60);
   const [repeat, setRepeat] = useState(false);
 
-  const { auth } = useAuth();
+  const currentUser = localStorage.getItem("auth");
 
   const dispatch = useDispatch();
   const currentTrack = useSelector((state) => state.audioplayer.track);
@@ -21,8 +21,6 @@ export function TrackBar() {
 
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
-
-  const duration = currentTrack.duration_in_seconds;
 
   useEffect(() => {
     if (audioRef) {
@@ -69,20 +67,9 @@ export function TrackBar() {
     progressBarRef.current.max = seconds;
   };
 
-  const formatTime = (time) => {
-    if (time && !isNaN(time)) {
-      const minutes = Math.floor(time / 60);
-      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-      const seconds = Math.floor(time % 60);
-      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-      return `${formatMinutes}:${formatSeconds}`;
-    }
-    return "00:00";
-  };
-
   return (
     <>
-      <audio
+      <S.InitPlayer
         controls
         ref={audioRef}
         src={currentTrack.track_file}
@@ -90,18 +77,18 @@ export function TrackBar() {
         onLoadedMetadata={onLoadedMetadata}
         onEnded={() => dispatch(nextTrack())}
         type="audio/mpeg"
-      ></audio>
-      {auth ? (
+      ></S.InitPlayer>
+      {currentUser ? (
         <S.BarContainer>
           <S.Bar>
             <S.TimeBar>
-              {formatTime(currentTime)} /{formatTime(currentDuration)}
+              {formatTimeTool(currentTime)} /{formatTimeTool(currentDuration)}
             </S.TimeBar>
             <S.BarContent>
               <S.BarPlayerProgress
                 type="range"
                 min={0}
-                max={duration}
+                max={currentDuration}
                 value={currentTime}
                 step={0.01}
                 ref={progressBarRef}

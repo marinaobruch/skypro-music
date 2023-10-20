@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./Filter.styles.js";
-import { FilterItem } from "../FilterItem/FilterItem";
+import { FilterItem } from "./FilterItem/FilterItem.jsx";
 import { tracksArray } from "../Imports/TracksImport";
 
 export function Filter() {
@@ -22,7 +22,7 @@ export function Filter() {
   };
 
   return (
-    <S.CenterblockFilter>
+    <S.CenterBlockFilter>
       <S.FilterTitle>Искать по:</S.FilterTitle>
       <FilterItem
         value="исполнителю"
@@ -50,6 +50,6 @@ export function Filter() {
         open={open}
         id="2"
       />
-    </S.CenterblockFilter>
+    </S.CenterBlockFilter>
   );
 }

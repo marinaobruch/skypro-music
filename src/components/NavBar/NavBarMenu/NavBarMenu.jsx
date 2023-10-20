@@ -1,10 +1,19 @@
 import { NavLink } from "react-router-dom";
 import * as S from "./NavBarMenu.styles.js";
 import { NavBarItem } from "../NavBarItem/NavBarItem";
-import { useAuth } from "../../WithAuth.jsx";
+import { userLogout } from "../../../redux/store/userSlice.js";
+import { useDispatch } from "react-redux";
 
 export function NavBarMenu() {
-  const { logout } = useAuth();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(userLogout());
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    navigate("/login");
+  };
+
   return (
     <S.NavMenu>
       <S.MenuList>

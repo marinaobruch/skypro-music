@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as S from "./SideBarBlock.styles.js";
-import { SkeletonSidebar } from "../SkeletonSidebar/SkeletonSidebar";
+import { SkeletonSidebar } from "../../Skeletons/SkeletonSidebar/SkeletonSidebar.jsx";
 
 export function SideBarBlock({ loading, albums }) {
   return (
@@ -13,9 +13,9 @@ export function SideBarBlock({ loading, albums }) {
               <SkeletonSidebar />
             ) : (
               <Link to={`category/${album.id}`}>
-                <S.SidebarLink href={album.playlistImg}>
+                <S.SidebarLink href={album.src}>
                   <S.SidebarImgItem
-                    src={album.playlistImg}
+                    src={album.src}
                     alt={album.playlistAlt}
                   />
                 </S.SidebarLink>
