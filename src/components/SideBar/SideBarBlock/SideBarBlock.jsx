@@ -13,9 +13,9 @@ export function SideBarBlock({ loading, albums }) {
               <SkeletonSidebar />
             ) : (
               <Link to={`category/${album.id}`}>
-                <S.SidebarLink href={album.playlistImg}>
+                <S.SidebarLink href={album.src}>
                   <S.SidebarImgItem
-                    src={album.playlistImg}
+                    src={album.src}
                     alt={album.playlistAlt}
                   />
                 </S.SidebarLink>

@@ -63,7 +63,6 @@ export function TrackBar() {
 
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
-    console.log(seconds);
     setCurrentDuration(seconds);
     progressBarRef.current.max = seconds;
   };

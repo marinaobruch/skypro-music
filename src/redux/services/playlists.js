@@ -41,6 +41,10 @@ export const playlistApi = createApi({
           : [{ type: "Favorites", id: "LIST" }],
     }),
 
+    getSelections: builder.query({
+      query: (id) => `catalog/selection/${id}/`,
+    }),
+
     // Requests for like/dislike
     setLike: builder.mutation({
       query: (track) => ({
@@ -119,6 +123,8 @@ export const {
   useGetFavTracksQuery,
   useLazyGetAllTracksQuery,
   useLazyGetFavTracksQuery,
+
+  useGetSelectionsQuery,
 
   useSetLikeMutation,
   useSetUnlikeMutation,
