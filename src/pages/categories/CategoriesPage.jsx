@@ -14,9 +14,9 @@ export const CategoriesPage = () => {
 
   const { data, error, isLoading } = useGetSelectionsQuery(Number(params.id));
 
-  useEffect(() => {
-    if (data) dispatch(setCurrentPage("Category"));
-  }, [data, dispatch]);
+  // useEffect(() => {
+  //   if (data) dispatch(setCurrentPage("Category"));
+  // }, [data, dispatch]);
 
   return (
     <>
