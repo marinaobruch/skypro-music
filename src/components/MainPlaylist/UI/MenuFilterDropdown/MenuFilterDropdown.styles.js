@@ -58,9 +58,9 @@ export const FilterItem = styled.li`
 
 export const FilterButton = styled.div`
   position: relative;
-  color: ${(props) => (props.isClicked ? "#b672ff" : "#ffffff")};
+  color: ${(props) => (props.clicked ? "#b672ff" : "#ffffff")};
   border: ${(props) =>
-    props.isClicked ? "1px solid #b672ff" : "1px solid #ffffff"};
+    props.clicked ? "1px solid #b672ff" : "1px solid #ffffff"};
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

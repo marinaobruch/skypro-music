@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./Search.styles.js";
 
-export function Search() {
+export const Search = () => {
   return (
     <S.CentreBlockSearch>
       <S.SearchSvg>
@@ -15,4 +15,4 @@ export function Search() {
       />
     </S.CentreBlockSearch>
   );
-}
+};

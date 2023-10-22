@@ -4,7 +4,7 @@ import * as S from "./SideBarPersonal.styles.js";
 import { userLogout } from "../../../redux/store/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
-export function SideBarPersonal({ loading }) {
+export const SideBarPersonal = ({ loading }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,4 +31,4 @@ export function SideBarPersonal({ loading }) {
       </S.SidebarIcon>
     </S.SidebarPersonal>
   );
-}
+};

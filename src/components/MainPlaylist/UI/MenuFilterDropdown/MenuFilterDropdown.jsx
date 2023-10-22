@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import * as S from "./MenuFilterDropdown.styles.js";
+import Select from "../Select/Select.jsx";
 
-export function MenuFilterDropdown({ data, isLoading }) {
+export const MenuFilterDropdown = ({
+  data,
+  isLoading,
+  selectedSort,
+  setSelectedSort,
+}) => {
   const [filter, setFilter] = useState(false);
+
   const [open, setOpen] = useState("");
 
   // const authorTrack = data.map((item) => item.author);
@@ -18,6 +25,10 @@ export function MenuFilterDropdown({ data, isLoading }) {
     setOpen(i);
   };
 
+  const sortTracks = (sort) => {
+    setSelectedSort(sort);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -28,7 +39,7 @@ export function MenuFilterDropdown({ data, isLoading }) {
             <S.FilterTitle>Искать по:</S.FilterTitle>
 
             <S.FilterButton
-              isClicked={filter && "0" === open}
+              clicked={filter && "0" === open}
               onClick={() => handleFilter("0")}
             >
               <S.CategoryButton>исполнителю</S.CategoryButton>
@@ -44,7 +55,7 @@ export function MenuFilterDropdown({ data, isLoading }) {
             </S.FilterButton>
 
             <S.FilterButton
-              isClicked={filter && "1" === open}
+              clicked={filter && "1" === open}
               onClick={() => handleFilter("1")}
             >
               <S.CategoryButton>жанры</S.CategoryButton>
@@ -62,17 +73,32 @@ export function MenuFilterDropdown({ data, isLoading }) {
 
           <S.CenterBlockFilter>
             <S.FilterTitle>Сортировка по:</S.FilterTitle>
+            <Select
+              value={selectedSort}
+              onChange={sortTracks}
+              defaultValue="По умолчанию"
+              options={[
+                { value: "new", name: "Сначала новые" },
+                { value: "old", name: "Сначала старые" },
+              ]}
+            />
 
             <S.FilterButton
-              isClicked={filter && "2" === open}
+              clicked={filter && "2" === open}
               onClick={() => handleFilter("2")}
             >
               <S.CategoryButton>По умолчанию</S.CategoryButton>
+
               {filter && "2" === open ? (
                 <S.FilterPupUp>
                   <S.FilterPupUpList>
                     {years.map((option) => (
-                      <S.FilterItem key={option}>{option}</S.FilterItem>
+                      <S.FilterItem
+                        value={option}
+                        key={option}
+                      >
+                        {option}
+                      </S.FilterItem>
                     ))}
                   </S.FilterPupUpList>
                 </S.FilterPupUp>
@@ -83,4 +109,4 @@ export function MenuFilterDropdown({ data, isLoading }) {
       )}
     </>
   );
-}
+};

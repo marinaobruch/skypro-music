@@ -4,7 +4,7 @@ import { NavBarItem } from "../NavBarItem/NavBarItem";
 import { userLogout } from "../../../redux/store/userSlice.js";
 import { useDispatch } from "react-redux";
 
-export function NavBarMenu() {
+export const NavBarMenu = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
@@ -32,4 +32,4 @@ export function NavBarMenu() {
       </S.MenuList>
     </S.NavMenu>
   );
-}
+};

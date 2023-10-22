@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import * as S from "./TrackBarPlayer.styles.js";
 
-export function TrackBarPlayer() {
+export const TrackBarPlayer = () => {
   const currentTrack = useSelector((state) => state.audioplayer.track);
 
   return (
@@ -35,4 +35,4 @@ export function TrackBarPlayer() {
       </S.TrackPlayLikeDis>
     </S.PlayerTrackPlay>
   );
-}
+};

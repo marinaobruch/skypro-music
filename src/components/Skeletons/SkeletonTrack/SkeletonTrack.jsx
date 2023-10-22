@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./SkeletonTrack.styles.js";
 
-export function SkeletonTrack() {
+export const SkeletonTrack = () => {
   return (
     <S.TrackPlayContainSkeleton>
       <S.TrackPlayImgSkeleton></S.TrackPlayImgSkeleton>
@@ -11,4 +11,4 @@ export function SkeletonTrack() {
       <S.TrackPlayAlbomSkeleton></S.TrackPlayAlbomSkeleton>
     </S.TrackPlayContainSkeleton>
   );
-}
+};

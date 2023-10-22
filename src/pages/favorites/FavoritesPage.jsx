@@ -7,7 +7,7 @@ import {
 } from "../../redux/services/playlists.js";
 import { useEffect } from "react";
 import { setAccessToken } from "../../redux/store/tokenSlice.js";
-import { addMyTracks, setCurrentPage } from "../../redux/store/playerSlice.js";
+import { addMyTracks } from "../../redux/store/playerSlice.js";
 import * as S from "./FavoritesPage.styles.js";
 
 export const FavoritesPage = () => {
@@ -39,10 +39,6 @@ export const FavoritesPage = () => {
           });
       });
   }, [refresh, data]);
-
-  useEffect(() => {
-    if (myFavTracks) dispatch(setCurrentPage("Favorites"));
-  }, [data]);
 
   return (
     <>

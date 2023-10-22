@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./SkeletonPlaylist.styles.js";
 
-export function SkeletonPlaylist() {
+export const SkeletonPlaylist = () => {
   return (
     <S.PlaylistSkeleton>
       <S.SkeletonTrack></S.SkeletonTrack>
@@ -10,4 +10,4 @@ export function SkeletonPlaylist() {
       <S.SkeletonAlbom></S.SkeletonAlbom>
     </S.PlaylistSkeleton>
   );
-}
+};

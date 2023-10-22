@@ -12,9 +12,6 @@ const playerSlice = createSlice({
   },
 
   reducers: {
-    setCurrentPage: (state, action) => {
-      state.currentPage = action.payload;
-    },
     addAllTracks(state, action) {
       state.playlist = action.payload;
     },
@@ -83,7 +80,6 @@ export const {
   previousTrack,
   togglePlayer,
   shuffledHandlePlaylist,
-  setCurrentPage,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

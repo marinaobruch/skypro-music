@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as S from "./NavBar.styles.js";
 import { NavBarMenu } from "./NavBarMenu/NavBarMenu.jsx";
 
-export function NavBar() {
+export const NavBar = () => {
   const [open, setOpen] = useState(false);
   function toggleOpen() {
     setOpen(!open);
@@ -26,4 +26,4 @@ export function NavBar() {
       {open ? <NavBarMenu /> : null}
     </S.MainNav>
   );
-}
+};

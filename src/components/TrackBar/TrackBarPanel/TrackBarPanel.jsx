@@ -7,7 +7,7 @@ import {
   togglePlayer,
 } from "../../../redux/store/playerSlice.js";
 
-export function TrackBarPanel({ repeat, handleRepeat }) {
+export const TrackBarPanel = ({ repeat, handleRepeat }) => {
   const dispatch = useDispatch();
 
   const isPlaying = useSelector((state) => state.audioplayer.playing);
@@ -79,4 +79,4 @@ export function TrackBarPanel({ repeat, handleRepeat }) {
       </S.BtnShuffle>
     </S.Controls>
   );
-}
+};

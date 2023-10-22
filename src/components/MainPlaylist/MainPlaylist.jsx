@@ -9,10 +9,20 @@ import {
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../redux/store/userSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
+import { sortTracks } from "../../utils/sort.js";
+import { tracksArray } from "../../utils/sort.js";
 
-export function MainPlaylist({ getAllTracksError, tracks, isLoading }) {
+export const MainPlaylist = ({
+  getAllTracksError,
+  tracks,
+  isLoading,
+  selectedSort,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const sortArray = sortTracks(tracksArray, selectedSort);
+  // console.log(sortArray);
 
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
@@ -176,4 +186,4 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading }) {
       </S.PlaylistItem>
     </S.ContentPlaylist>
   );
-}
+};
