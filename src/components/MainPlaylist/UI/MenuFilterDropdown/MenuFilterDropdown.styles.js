@@ -56,6 +56,10 @@ export const FilterItem = styled.option`
 `;
 
 export const FilterButton = styled.div`
+  position: relative;
+`;
+
+export const CategoryButton = styled.div`
   color: ${(props) => (props.isClicked ? "#b672ff" : "#ffffff")};
   border: ${(props) =>
     props.isClicked ? "1px solid #b672ff" : "1px solid #ffffff"};

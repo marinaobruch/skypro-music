@@ -27,35 +27,33 @@ export function MenuFilterDropdown() {
           isClicked={filter && "0" === open}
           onClick={() => handleFilter("0")}
         >
-          исполнителю
+          <S.CategoryButton>исполнителю</S.CategoryButton>
+          {filter && "0" === open ? (
+            <S.FilterPupUp>
+              <S.FilterPupUpList>
+                {arrayOfArtist.map((option) => (
+                  <S.FilterItem key={option}>{option}</S.FilterItem>
+                ))}
+              </S.FilterPupUpList>
+            </S.FilterPupUp>
+          ) : null}
         </S.FilterButton>
-
-        {filter && "0" === open ? (
-          <S.FilterPupUp>
-            <S.FilterPupUpList>
-              {arrayOfArtist.map((option) => (
-                <S.FilterItem key={option}>{option}</S.FilterItem>
-              ))}
-            </S.FilterPupUpList>
-          </S.FilterPupUp>
-        ) : null}
 
         <S.FilterButton
           isClicked={filter && "1" === open}
           onClick={() => handleFilter("1")}
         >
-          жанры
+          <S.CategoryButton>жанры</S.CategoryButton>
+          {filter && "1" === open ? (
+            <S.FilterPupUp>
+              <S.FilterPupUpList>
+                {arrayOfGenre.map((option) => (
+                  <S.FilterItem key={option}>{option}</S.FilterItem>
+                ))}
+              </S.FilterPupUpList>
+            </S.FilterPupUp>
+          ) : null}
         </S.FilterButton>
-
-        {filter && "1" === open ? (
-          <S.FilterPupUp>
-            <S.FilterPupUpList>
-              {arrayOfGenre.map((option) => (
-                <S.FilterItem key={option}>{option}</S.FilterItem>
-              ))}
-            </S.FilterPupUpList>
-          </S.FilterPupUp>
-        ) : null}
       </S.CenterBlockFilter>
       <S.CenterBlockFilter>
         <S.FilterTitle>Сортировка по:</S.FilterTitle>
@@ -64,18 +62,17 @@ export function MenuFilterDropdown() {
           isClicked={filter && "2" === open}
           onClick={() => handleFilter("2")}
         >
-          По умолчанию
+          <S.CategoryButton>По умолчанию</S.CategoryButton>
+          {filter && "2" === open ? (
+            <S.FilterPupUp>
+              <S.FilterPupUpList>
+                {arrayOfGenre.map((option) => (
+                  <S.FilterItem key={option}>{option}</S.FilterItem>
+                ))}
+              </S.FilterPupUpList>
+            </S.FilterPupUp>
+          ) : null}
         </S.FilterButton>
-
-        {filter && "2" === open ? (
-          <S.FilterPupUp>
-            <S.FilterPupUpList>
-              {arrayOfGenre.map((option) => (
-                <S.FilterItem key={option}>{option}</S.FilterItem>
-              ))}
-            </S.FilterPupUpList>
-          </S.FilterPupUp>
-        ) : null}
       </S.CenterBlockFilter>
     </S.MainCenterBlockFilter>
   );
