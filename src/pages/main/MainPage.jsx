@@ -5,7 +5,7 @@ import { MenuFilterDropdown } from "../../components/MainPlaylist/UI/MenuFilterD
 import * as S from "./MainPage.styles.js";
 
 export const MainPage = ({ getAllTracksError }) => {
-  const [selectedSort, setSelectedSort] = useState("");
+  const [selectedSort, setSelectedSort] = useState("default");
 
   const { data, error, isLoading } = useGetAllTracksQuery();
 

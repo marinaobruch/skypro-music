@@ -1,16 +1,16 @@
-import * as S from "./MainPlaylist.styles.js";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import * as S from "./MainPlaylist.styles.js";
 import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
 import { addCurrentTrack } from "../../redux/store/playerSlice.js";
 import {
   useSetLikeMutation,
   useSetUnlikeMutation,
 } from "../../redux/services/playlists.js";
-import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../redux/store/userSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
 import { sortTracks } from "../../utils/sort.js";
-import { tracksArray } from "../../utils/sort.js";
 
 export const MainPlaylist = ({
   getAllTracksError,
@@ -20,9 +20,10 @@ export const MainPlaylist = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isSort, setIsSort] = useState(false);
 
-  // const sortArray = sortTracks(tracksArray, selectedSort);
-  // console.log(sortArray);
+  // const sortedTracks = sortTracks(tracks, selectedSort);
+  // console.log(sortedTracks);
 
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
@@ -103,7 +104,7 @@ export const MainPlaylist = ({
           </>
         ) : (
           <>
-            {tracks.map((track) => (
+            {sortTracks(tracks, selectedSort)?.map((track) => (
               <S.PlaylistTrack
                 key={track.id}
                 onClick={() =>
@@ -172,7 +173,7 @@ export const MainPlaylist = ({
                         />
                       </svg>
                     ) : (
-                      <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
                     )}
                   </S.TrackTimeSvg>
                   <span className="track__time-text">

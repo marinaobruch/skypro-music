@@ -4,11 +4,12 @@ const playerSlice = createSlice({
   name: "audioplayer",
   initialState: {
     playing: false,
+    track: null,
     playlist: [{}],
     playlistFavorite: [{}],
-    track: null,
-    shuffled: false,
     shuffledPlaylist: [{}],
+    shuffled: false,
+    isSorted: false,
   },
 
   reducers: {

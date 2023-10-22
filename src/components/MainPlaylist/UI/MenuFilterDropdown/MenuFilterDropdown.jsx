@@ -1,24 +1,21 @@
 import React, { useState } from "react";
 import * as S from "./MenuFilterDropdown.styles.js";
-import Select from "../Select/Select.jsx";
 
-export const MenuFilterDropdown = ({
-  data,
-  isLoading,
-  selectedSort,
-  setSelectedSort,
-}) => {
+export const MenuFilterDropdown = ({ data, isLoading, setSelectedSort }) => {
   const [filter, setFilter] = useState(false);
-
   const [open, setOpen] = useState("");
 
-  // const authorTrack = data.map((item) => item.author);
-  // const author = Array.from(new Set(authorTrack));
+  const authorTrack = data?.map((item) => item.author);
+  const author = Array.from(new Set(authorTrack));
 
-  // const genreTrack = data.map((item) => item.genre);
-  // const genre = Array.from(new Set(genreTrack));
+  const genreTrack = data?.map((item) => item.genre);
+  const genre = Array.from(new Set(genreTrack));
 
-  const years = ["По умолчанию", "Сначала новые", "Сначала старые"];
+  const years = [
+    { value: "default", name: "По умолчанию" },
+    { value: "new", name: "Сначала новые" },
+    { value: "old", name: "Сначала старые" },
+  ];
 
   const handleFilter = (i) => {
     setFilter(!filter);
@@ -31,9 +28,7 @@ export const MenuFilterDropdown = ({
 
   return (
     <>
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : (
+      {isLoading ? null : (
         <S.MainCenterBlockFilter>
           <S.CenterBlockFilter>
             <S.FilterTitle>Искать по:</S.FilterTitle>
@@ -47,7 +42,12 @@ export const MenuFilterDropdown = ({
                 <S.FilterPupUp>
                   <S.FilterPupUpList>
                     {author.map((option) => (
-                      <S.FilterItem key={option}>{option}</S.FilterItem>
+                      <S.FilterItem
+                        key={option}
+                        onClick={() => "author"}
+                      >
+                        {option}
+                      </S.FilterItem>
                     ))}
                   </S.FilterPupUpList>
                 </S.FilterPupUp>
@@ -63,7 +63,12 @@ export const MenuFilterDropdown = ({
                 <S.FilterPupUp>
                   <S.FilterPupUpList>
                     {genre.map((option) => (
-                      <S.FilterItem key={option}>{option}</S.FilterItem>
+                      <S.FilterItem
+                        key={option}
+                        onClick={() => "genre"}
+                      >
+                        {option}
+                      </S.FilterItem>
                     ))}
                   </S.FilterPupUpList>
                 </S.FilterPupUp>
@@ -73,15 +78,6 @@ export const MenuFilterDropdown = ({
 
           <S.CenterBlockFilter>
             <S.FilterTitle>Сортировка по:</S.FilterTitle>
-            <Select
-              value={selectedSort}
-              onChange={sortTracks}
-              defaultValue="По умолчанию"
-              options={[
-                { value: "new", name: "Сначала новые" },
-                { value: "old", name: "Сначала старые" },
-              ]}
-            />
 
             <S.FilterButton
               clicked={filter && "2" === open}
@@ -94,10 +90,11 @@ export const MenuFilterDropdown = ({
                   <S.FilterPupUpList>
                     {years.map((option) => (
                       <S.FilterItem
-                        value={option}
-                        key={option}
+                        onClick={() => sortTracks(option.value)}
+                        value={option.value}
+                        key={option.name}
                       >
-                        {option}
+                        {option.name}
                       </S.FilterItem>
                     ))}
                   </S.FilterPupUpList>
