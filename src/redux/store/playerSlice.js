@@ -9,8 +9,6 @@ const playerSlice = createSlice({
     track: null,
     shuffled: false,
     shuffledPlaylist: [{}],
-    currentPage: "",
-    currentPlaylist: [],
   },
 
   reducers: {
@@ -24,21 +22,8 @@ const playerSlice = createSlice({
       state.playlistFavorite = action.payload;
     },
     addCurrentTrack(state, action) {
-      if (state.currentPage === "Main") {
-        state.currentPlaylist = state.playlist;
-      }
-      if (state.currentPage === "Favorites") {
-        state.currentPlaylist = state.playlistFavorite; // action.payload
-      }
-
-      let currentTrackIndex = null;
-      const setStateCurrentPlaylist = state.currentPlaylist;
-
-      currentTrackIndex = setStateCurrentPlaylist.findIndex(
-        (track) => track.id === action.payload.id
-      );
-
-      state.track = setStateCurrentPlaylist[currentTrackIndex];
+      state.track = action.payload.track;
+      state.playlist = action.payload.tracks;
     },
     togglePlayer(state, action) {
       if (state.playing === action.payload) {
@@ -48,7 +33,9 @@ const playerSlice = createSlice({
     },
     nextTrack(state) {
       const curTrack = state.track;
-      const curPlaylist = state.currentPlaylist;
+      const curPlaylist = state.shuffled
+        ? state.shuffledPlaylist
+        : state.playlist;
 
       const currentTrackIdInList = curPlaylist.findIndex(
         (track) => track.id == curTrack.id
@@ -62,7 +49,9 @@ const playerSlice = createSlice({
     },
     previousTrack(state) {
       const curTrack = state.track;
-      const curPlaylist = state.currentPlaylist;
+      const curPlaylist = state.shuffled
+        ? state.shuffledPlaylist
+        : state.playlist;
 
       const currentTrackIdInList = curPlaylist.findIndex(
         (track) => track.id == curTrack.id
@@ -77,17 +66,10 @@ const playerSlice = createSlice({
     shuffledHandlePlaylist(state, action) {
       state.shuffled = action.payload;
       if (state.shuffled) {
-        state.shuffledPlaylist = state.currentPlaylist.sort(
+        const newShuffledArray = state.playlist.map((track) => track);
+        state.shuffledPlaylist = newShuffledArray.sort(
           () => Math.random() - 0.5
         );
-      }
-      if (!state.shuffled) {
-        if (state.currentPage === "Main") {
-          state.currentPlaylist = state.playlist;
-        }
-        if (state.currentPage === "Favorites") {
-          state.currentPlaylist = state.playlistFavorite;
-        }
       }
     },
   },

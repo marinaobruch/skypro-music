@@ -41,10 +41,7 @@ export const FilterItem = styled.li`
   font-size: 19px;
   font-style: normal;
   font-weight: 400;
-
   line-height: 24px;
-  padding-left: 34px;
-  padding-right: 34px;
   padding-bottom: 28px;
   color: #ffffff;
 
@@ -57,17 +54,10 @@ export const FilterItem = styled.li`
     color: #b672ff;
     cursor: pointer;
   }
-
-  /* &:first-child {
-    padding-top: 36px;
-  } */
 `;
 
 export const FilterButton = styled.div`
   position: relative;
-`;
-
-export const CategoryButton = styled.div`
   color: ${(props) => (props.isClicked ? "#b672ff" : "#ffffff")};
   border: ${(props) =>
     props.isClicked ? "1px solid #b672ff" : "1px solid #ffffff"};
@@ -78,7 +68,9 @@ export const CategoryButton = styled.div`
   border-radius: 60px;
   padding: 6px 20px;
   margin-right: 10px;
+`;
 
+export const CategoryButton = styled.div`
   &:hover {
     border-color: #d9b6ff;
     color: #d9b6ff;

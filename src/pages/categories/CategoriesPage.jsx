@@ -14,8 +14,6 @@ export const CategoriesPage = () => {
   const album = ALBUMS.find((album) => album.id === Number(params.id));
 
   const { data, error, isLoading } = useGetSelectionsQuery(Number(params.id));
-  // console.log(data);
-  // console.log(isLoading);
 
   useEffect(() => {
     if (data) dispatch(setCurrentPage("Category"));

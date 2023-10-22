@@ -61,4 +61,13 @@ export const VolumeProgressLine = styled.input`
     transform: scale(1.2);
     background-color: #b672ff;
   }
+
+  &::-moz-range-thumb {
+    height: 12px;
+    width: 12px;
+    background-color: #f50;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    transition: 0.2s ease-in-out;
+  }
 `;

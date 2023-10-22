@@ -30,7 +30,6 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading }) {
 
   const toggleStarred = (track) => {
     if ((track.stared_user ?? []).find((user) => user.id === userId)) {
-      console.log("dislike");
       setUnlike(track)
         .unwrap()
         .catch((error) => {
@@ -39,7 +38,6 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading }) {
           logout();
         });
     } else if (!track.stared_user) {
-      console.log("dislike");
       setUnlike(track)
         .unwrap()
         .catch((error) => {
@@ -48,7 +46,6 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading }) {
           logout();
         });
     } else {
-      console.log("like");
       setLike(track)
         .unwrap()
         .catch((error) => {
@@ -99,7 +96,9 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading }) {
             {tracks.map((track) => (
               <S.PlaylistTrack
                 key={track.id}
-                onClick={() => dispatch(addCurrentTrack(track))}
+                onClick={() =>
+                  dispatch(addCurrentTrack({ track: track, tracks: tracks }))
+                }
               >
                 <S.TrackTitle>
                   <S.TrackTitleImg>

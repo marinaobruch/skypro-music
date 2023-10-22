@@ -9,7 +9,7 @@ import * as S from "./MainPage.styles.js";
 export const MainPage = ({ getAllTracksError }) => {
   const { data, error, isLoading } = useGetAllTracksQuery();
   const dispatch = useDispatch();
-  dispatch(addAllTracks(data));
+  // dispatch(addAllTracks(data));
 
   useEffect(() => {
     if (data) dispatch(setCurrentPage("Main"));
@@ -18,7 +18,10 @@ export const MainPage = ({ getAllTracksError }) => {
   return (
     <>
       <S.MainCenterblockH2>Треки</S.MainCenterblockH2>
-      <MenuFilterDropdown />
+      <MenuFilterDropdown
+        data={data}
+        isLoading={isLoading}
+      />
 
       <MainPlaylist
         getAllTracksError={getAllTracksError}
