@@ -1,9 +1,7 @@
-import React, { useState } from "react";
 import * as S from "./MainPlaylist.styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { SkeletonPlaylist } from "../Skeletons/SkeletonPlaylist/SkeletonPlaylist.jsx";
 import { addCurrentTrack } from "../../redux/store/playerSlice.js";
-import { Filter } from "../Filter/Filter.jsx";
 import {
   useSetLikeMutation,
   useSetUnlikeMutation,
@@ -12,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../redux/store/userSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
 
-export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
+export function MainPlaylist({ getAllTracksError, tracks, isLoading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,11 +23,7 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
 
   const logout = () => {
     dispatch(userLogout());
-
-    localStorage.removeItem("user");
     localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("email");
     localStorage.removeItem("refreshToken");
     navigate("/login");
   };
@@ -67,8 +61,6 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
 
   return (
     <S.ContentPlaylist>
-      <S.MainCenterblockH2>{title}</S.MainCenterblockH2>
-      <Filter />
       <S.ContentTitle>
         <S.PlaylistTitleCol1>Трек</S.PlaylistTitleCol1>
         <S.PlaylistTitleCol2>ИСПОЛНИТЕЛЬ</S.PlaylistTitleCol2>
@@ -81,11 +73,12 @@ export function MainPlaylist({ getAllTracksError, tracks, isLoading, title }) {
       </S.ContentTitle>
 
       <S.PlaylistItem>
-        {getAllTracksError !== null ? (
+        {getAllTracksError ? (
           <p>
             Не удалось загрузить плейлист, попробуйте позже: {getAllTracksError}
           </p>
         ) : null}
+
         {isLoading ? (
           <>
             <SkeletonPlaylist />

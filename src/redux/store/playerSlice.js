@@ -28,7 +28,7 @@ const playerSlice = createSlice({
         state.currentPlaylist = state.playlist;
       }
       if (state.currentPage === "Favorites") {
-        state.currentPlaylist = state.playlistFavorite;
+        state.currentPlaylist = state.playlistFavorite; // action.payload
       }
 
       let currentTrackIndex = null;
