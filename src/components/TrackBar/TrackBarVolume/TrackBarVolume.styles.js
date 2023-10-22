@@ -40,5 +40,25 @@ export const VolumeProgress = styled.div`
 `;
 
 export const VolumeProgressLine = styled.input`
-  width: 109px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 110px;
+  cursor: pointer;
+  outline: none;
+  height: 2px;
+  background: #797979;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 12px;
+    width: 12px;
+    background-color: #1a1a1a;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: 0.2s ease-in-out;
+  }
+  &::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background-color: #b672ff;
+  }
 `;

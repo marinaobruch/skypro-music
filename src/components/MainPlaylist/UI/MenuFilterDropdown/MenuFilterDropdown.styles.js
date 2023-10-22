@@ -58,9 +58,9 @@ export const FilterItem = styled.li`
     cursor: pointer;
   }
 
-  &:first-child {
+  /* &:first-child {
     padding-top: 36px;
-  }
+  } */
 `;
 
 export const FilterButton = styled.div`

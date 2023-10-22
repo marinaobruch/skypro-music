@@ -55,6 +55,7 @@ export function MenuFilterDropdown() {
           ) : null}
         </S.FilterButton>
       </S.CenterBlockFilter>
+
       <S.CenterBlockFilter>
         <S.FilterTitle>Сортировка по:</S.FilterTitle>
 
