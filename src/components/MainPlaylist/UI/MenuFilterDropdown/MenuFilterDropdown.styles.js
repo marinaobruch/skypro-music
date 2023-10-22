@@ -37,13 +37,21 @@ export const FilterPupUpList = styled.div`
   overflow-y: auto;
 `;
 
-export const FilterItem = styled.option`
-  font-size: 20px;
+export const FilterItem = styled.li`
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 400;
+
   line-height: 24px;
   padding-left: 34px;
   padding-right: 34px;
   padding-bottom: 28px;
   color: #ffffff;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 
   &:hover {
     color: #b672ff;
