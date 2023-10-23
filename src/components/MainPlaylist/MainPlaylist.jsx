@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./MainPlaylist.styles.js";
@@ -20,10 +19,16 @@ export const MainPlaylist = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isSort, setIsSort] = useState(false);
 
-  // const sortedTracks = sortTracks(tracks, selectedSort);
-  // console.log(sortedTracks);
+  const sortInitTracks = () => {
+    let sortedTracks = tracks;
+    if (selectedSort !== "default") {
+      sortedTracks = sortTracks(tracks, selectedSort);
+    }
+    return sortedTracks;
+  };
+
+  const sortedTracks = sortInitTracks();
 
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
@@ -104,11 +109,13 @@ export const MainPlaylist = ({
           </>
         ) : (
           <>
-            {sortTracks(tracks, selectedSort)?.map((track) => (
+            {sortedTracks?.map((track) => (
               <S.PlaylistTrack
                 key={track.id}
                 onClick={() =>
-                  dispatch(addCurrentTrack({ track: track, tracks: tracks }))
+                  dispatch(
+                    addCurrentTrack({ track: track, tracks: sortedTracks })
+                  )
                 }
               >
                 <S.TrackTitle>

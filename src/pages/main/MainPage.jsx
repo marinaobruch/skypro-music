@@ -6,6 +6,7 @@ import * as S from "./MainPage.styles.js";
 
 export const MainPage = ({ getAllTracksError }) => {
   const [selectedSort, setSelectedSort] = useState("default");
+  const [selectedSortName, setSelectedSortName] = useState("По умолчанию");
 
   const { data, error, isLoading } = useGetAllTracksQuery();
 
@@ -17,6 +18,8 @@ export const MainPage = ({ getAllTracksError }) => {
         isLoading={isLoading}
         selectedSort={selectedSort}
         setSelectedSort={setSelectedSort}
+        selectedSortName={selectedSortName}
+        setSelectedSortName={setSelectedSortName}
       />
 
       <MainPlaylist

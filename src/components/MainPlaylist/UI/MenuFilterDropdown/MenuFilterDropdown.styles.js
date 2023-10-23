@@ -20,41 +20,7 @@ export const FilterTitle = styled.div`
   margin-right: 15px;
 `;
 
-export const FilterPupUp = styled.div`
-  background: #313131;
-  border-radius: 12px;
-  box-sizing: border-box;
-  left: 0;
-  min-width: 269px;
-  padding: 32px;
-  position: absolute;
-  top: 50px;
-`;
-
-export const FilterPupUpList = styled.div`
-  max-height: 212px;
-  max-width: 242px;
-  overflow-y: auto;
-`;
-
-export const FilterItem = styled.li`
-  font-size: 19px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-  padding-bottom: 28px;
-  color: #ffffff;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-
-  &:hover {
-    color: #b672ff;
-    cursor: pointer;
-  }
-`;
+export const MainButton = styled.div``;
 
 export const FilterButton = styled.div`
   position: relative;
@@ -68,12 +34,64 @@ export const FilterButton = styled.div`
   border-radius: 60px;
   padding: 6px 20px;
   margin-right: 10px;
-`;
 
-export const CategoryButton = styled.div`
   &:hover {
     border-color: #d9b6ff;
     color: #d9b6ff;
     cursor: pointer;
+  }
+`;
+
+export const FilterPupUp = styled.div`
+  background: #313131;
+  border-radius: 12px;
+  box-sizing: border-box;
+  min-width: 269px;
+  padding: 32px;
+  position: absolute;
+`;
+
+export const FilterPupUpList = styled.div`
+  max-height: 212px;
+  max-width: 242px;
+  overflow-y: auto;
+`;
+
+export const FilterCounter = styled.span`
+  color: white;
+  background-color: rgb(173, 97, 255);
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  font-family: StratosSkyeng;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13px;
+`;
+
+export const FilterItem = styled.li`
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  padding-bottom: 28px;
+  color: ${(props) => (props.clicked ? "#b672ff" : "#ffffff")};
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+
+  &:hover {
+    color: #b672ff;
+    cursor: pointer;
+    text-decoration: underline #b672ff;
   }
 `;
