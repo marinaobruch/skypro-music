@@ -17,7 +17,7 @@ export const TrackBarPanel = ({ repeat, handleRepeat }) => {
     <S.Controls>
       <S.BtnPrev>
         <S.BtnPrevSvg onClick={() => dispatch(previousTrack())}>
-          <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
+          <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
         </S.BtnPrevSvg>
       </S.BtnPrev>
 
@@ -44,23 +44,23 @@ export const TrackBarPanel = ({ repeat, handleRepeat }) => {
               />
             </svg>
           ) : (
-            <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+            <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
           )}
         </S.BtnPlaySvg>
       </S.BtnPlay>
       <S.BtnNext>
         <S.BtnNextSvg onClick={() => dispatch(nextTrack())}>
-          <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
+          <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
         </S.BtnNextSvg>
       </S.BtnNext>
       <S.BtnRepeat onClick={handleRepeat}>
         {repeat ? (
           <S.BtnRepeatActiveSvg alt="repeat">
-            <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+            <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
           </S.BtnRepeatActiveSvg>
         ) : (
           <S.BtnRepeatSvg alt="repeat">
-            <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+            <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
           </S.BtnRepeatSvg>
         )}
       </S.BtnRepeat>
@@ -69,11 +69,11 @@ export const TrackBarPanel = ({ repeat, handleRepeat }) => {
       >
         {isShuffled ? (
           <S.BtnShuffleActiveSvg>
-            <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+            <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
           </S.BtnShuffleActiveSvg>
         ) : (
           <S.BtnShuffleSvg>
-            <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+            <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
           </S.BtnShuffleSvg>
         )}
       </S.BtnShuffle>

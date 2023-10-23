@@ -89,7 +89,7 @@ export const TrackBarPlayer = () => {
                 />
               </svg>
             ) : (
-              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
             )}
           </S.TrackPlayLikeSvg>
         </S.TrackPlayLike>

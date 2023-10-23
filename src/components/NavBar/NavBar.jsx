@@ -12,7 +12,7 @@ export const NavBar = () => {
     <S.MainNav>
       <S.Logo>
         <S.LogoImg
-          src="./img/logo.png"
+          src="/img/logo.png"
           alt="logo"
         />
       </S.Logo>

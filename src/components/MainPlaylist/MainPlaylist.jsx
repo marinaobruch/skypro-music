@@ -23,7 +23,9 @@ export const MainPlaylist = ({
   const sortInitTracks = () => {
     let sortedTracks = tracks;
     if (selectedSort !== "default") {
-      sortedTracks = sortTracks(tracks, selectedSort);
+      if (selectedSort) {
+        sortedTracks = sortTracks(tracks, selectedSort);
+      }
     }
     return sortedTracks;
   };
@@ -78,7 +80,7 @@ export const MainPlaylist = ({
         <S.PlaylistTitleCol3>АЛЬБОМ</S.PlaylistTitleCol3>
         <S.PlaylistTitleCol4>
           <S.PlaylistTitleSvg alt="time">
-            <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
+            <use xlinkHref="/img/icon/sprite.svg#icon-watch"></use>
           </S.PlaylistTitleSvg>
         </S.PlaylistTitleCol4>
       </S.ContentTitle>
@@ -126,7 +128,7 @@ export const MainPlaylist = ({
                       )
                     ) : (
                       <S.TrackTitleSvg alt="music">
-                        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
                       </S.TrackTitleSvg>
                     )}
                   </S.TrackTitleImg>

@@ -5,7 +5,7 @@ export const Search = () => {
   return (
     <S.CentreBlockSearch>
       <S.SearchSvg>
-        <use xlinkHref="img/icon/sprite.svg#icon-search"></use>
+        <use xlinkHref="/img/icon/sprite.svg#icon-search"></use>
       </S.SearchSvg>
       <S.SearchText
         className="search__text"
