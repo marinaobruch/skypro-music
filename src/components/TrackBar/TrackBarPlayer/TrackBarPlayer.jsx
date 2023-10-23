@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as S from "./TrackBarPlayer.styles.js";
 import {
   useSetLikeMutation,
   useSetUnlikeMutation,
 } from "../../../redux/services/playlists.js";
 import { useNavigate } from "react-router-dom";
+import { userLogout } from "../../../redux/store/userSlice.js";
 
 export const TrackBarPlayer = () => {
   const currentTrack = useSelector((state) => state.audioplayer.track);
@@ -13,6 +14,12 @@ export const TrackBarPlayer = () => {
   const [setLike, {}] = useSetLikeMutation();
   const [setUnlike, {}] = useSetUnlikeMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(userLogout());
+    navigate("/login");
+  };
 
   const toggleStarred = () => {
     if ((currentTrack.stared_user ?? []).find((user) => user.id === userId)) {
@@ -60,12 +67,7 @@ export const TrackBarPlayer = () => {
         </S.TrackPlayAlbum>
       </S.TrackPlayContain>
       <S.TrackPlayLikeDis>
-        <S.TrackPlayLike
-          onClick={(e) => {
-            toggleStarred();
-            e.stopPropagation();
-          }}
-        >
+        <S.TrackPlayLike onClick={() => toggleStarred()}>
           <S.TrackPlayLikeSvg alt="like">
             {(currentTrack.stared_user ?? []).find(
               (user) => user.id === userId

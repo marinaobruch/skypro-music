@@ -8,7 +8,7 @@ import {
   usePostTokenMutation,
 } from "../../redux/services/playlists";
 import { userLogin } from "../../redux/store/userSlice";
-import { setAccessToken } from "../../redux/store/tokenSlice";
+import { setAccessToken, setRefreshToken } from "../../redux/store/tokenSlice";
 
 export const LoginPage = ({ isLoginMode = false }) => {
   const [email, setEmail] = useState("");
@@ -32,9 +32,6 @@ export const LoginPage = ({ isLoginMode = false }) => {
     await postToken({ email, password })
       .unwrap()
       .then((token) => {
-        localStorage.setItem("token", token.access);
-        localStorage.setItem("refreshToken", token.refresh);
-
         postLogin({ email, password })
           .unwrap()
           .then((response) => {
@@ -48,9 +45,16 @@ export const LoginPage = ({ isLoginMode = false }) => {
             dispatch(
               setAccessToken({
                 token: token.access,
+              })
+            );
+            dispatch(
+              setRefreshToken({
                 refreshToken: token.refresh,
               })
             );
+            localStorage.setItem("token", token.access);
+            localStorage.setItem("refreshToken", token.refresh);
+
             if (response.email) {
               navigate("/");
             }

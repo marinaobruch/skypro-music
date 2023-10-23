@@ -86,14 +86,18 @@ export const TrackPlayLikeDis = styled.div`
   margin-left: 26%;
   cursor: pointer;
 `;
+
 export const TrackPlayLike = styled.div`
   padding: 5px;
   cursor: pointer;
+  padding-right: 10px;
 `;
+
 export const TrackPlayDislike = styled.div`
   padding: 5px;
   margin-left: 28.5px;
 `;
+
 export const TrackPlayLikeSvg = styled.svg`
   width: 14px;
   height: 12px;

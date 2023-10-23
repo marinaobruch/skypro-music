@@ -15,7 +15,10 @@ export const FavoritesPage = () => {
 
   const { data, isLoading } = useGetFavTracksQuery();
   const [fetchFavorite] = useLazyGetFavTracksQuery();
-  const refresh = window.localStorage.getItem("refreshToken");
+  // нужно убрать
+  // const refresh = window.localStorage.getItem("token");
+  // console.log(refresh);
+  // нужно убрать
   const [postTokenRefresh, {}] = usePostTokenRefreshMutation();
 
   const favoriteError = null;
@@ -24,6 +27,8 @@ export const FavoritesPage = () => {
   );
 
   useEffect(() => {
+    const refresh = window.localStorage.getItem("refreshToken");
+
     postTokenRefresh({ refresh })
       .unwrap()
       .then((newToken) => {
@@ -38,7 +43,7 @@ export const FavoritesPage = () => {
             favoriteError = error;
           });
       });
-  }, [refresh, data]);
+  }, [data]);
 
   return (
     <>

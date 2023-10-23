@@ -39,8 +39,6 @@ export const MainPlaylist = ({
 
   const logout = () => {
     dispatch(userLogout());
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
     navigate("/login");
   };
 
