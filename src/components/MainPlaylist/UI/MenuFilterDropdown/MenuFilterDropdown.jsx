@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import * as S from "./MenuFilterDropdown.styles.js";
 
 export const MenuFilterDropdown = ({
@@ -8,8 +8,10 @@ export const MenuFilterDropdown = ({
   setSelectedSort,
   selectedSortName,
   setSelectedSortName,
+  filter,
+  setFilter,
 }) => {
-  const [filter, setFilter] = useState(false);
+  const [isActiveMenu, setIsActiveMenu] = useState(false);
   const [open, setOpen] = useState("");
 
   const authorTrack = data?.map((item) => item.author);
@@ -25,7 +27,7 @@ export const MenuFilterDropdown = ({
   ];
 
   const handleFilter = (i) => {
-    setFilter(!filter);
+    setIsActiveMenu(!isActiveMenu);
     setOpen(i);
   };
 
@@ -34,25 +36,42 @@ export const MenuFilterDropdown = ({
     setSelectedSortName(sort.name);
   };
 
+  const handlerClickOption = (option) => {
+    if (filter.activeOptions.includes(option)) {
+      setFilter({
+        ...filter,
+        activeOptions: filter.activeOptions.filter((item) => item !== option),
+      });
+      return;
+    }
+    setFilter({
+      ...filter,
+      activeOptions: [...filter.activeOptions, option],
+    });
+  };
+  console.log(filter);
+
   return (
     <>
       {isLoading ? null : (
         <S.MainCenterBlockFilter>
           <S.CenterBlockFilter>
             <S.FilterTitle>Искать по:</S.FilterTitle>
+            <div>
+              <S.FilterButton
+                clicked={isActiveMenu && "0" === open}
+                onClick={() => handleFilter("0")}
+              >
+                исполнителю
+              </S.FilterButton>
 
-            <S.FilterButton
-              clicked={filter && "0" === open}
-              onClick={() => handleFilter("0")}
-            >
-              исполнителю
-              {filter && "0" === open ? (
+              {isActiveMenu && "0" === open ? (
                 <S.FilterPupUp>
                   <S.FilterPupUpList>
                     {author.map((option) => (
                       <S.FilterItem
                         key={option}
-                        onClick={() => "author"}
+                        onClick={() => handlerClickOption(option)}
                       >
                         {option}
                       </S.FilterItem>
@@ -60,20 +79,21 @@ export const MenuFilterDropdown = ({
                   </S.FilterPupUpList>
                 </S.FilterPupUp>
               ) : null}
-            </S.FilterButton>
-
-            <S.FilterButton
-              clicked={filter && "1" === open}
-              onClick={() => handleFilter("1")}
-            >
-              жанры
-              {filter && "1" === open ? (
+            </div>
+            <div>
+              <S.FilterButton
+                clicked={isActiveMenu && "1" === open}
+                onClick={() => handleFilter("1")}
+              >
+                жанры
+              </S.FilterButton>
+              {isActiveMenu && "1" === open ? (
                 <S.FilterPupUp>
                   <S.FilterPupUpList>
                     {genre.map((option) => (
                       <S.FilterItem
                         key={option}
-                        onClick={() => "genre"}
+                        onClick={() => handlerClickOption(option)}
                       >
                         {option}
                       </S.FilterItem>
@@ -81,7 +101,7 @@ export const MenuFilterDropdown = ({
                   </S.FilterPupUpList>
                 </S.FilterPupUp>
               ) : null}
-            </S.FilterButton>
+            </div>
           </S.CenterBlockFilter>
 
           <S.CenterBlockFilter>
@@ -89,7 +109,7 @@ export const MenuFilterDropdown = ({
 
             <div>
               <S.FilterButton
-                clicked={filter && "2" === open}
+                clicked={isActiveMenu && "2" === open}
                 onClick={() => handleFilter("2")}
               >
                 {selectedSortName}
@@ -97,7 +117,7 @@ export const MenuFilterDropdown = ({
                   <S.FilterCounter>1 </S.FilterCounter>
                 ) : null}
               </S.FilterButton>
-              {filter && "2" === open ? (
+              {isActiveMenu && "2" === open ? (
                 <S.FilterPupUp>
                   <S.FilterPupUpList>
                     {years.map((option) => (

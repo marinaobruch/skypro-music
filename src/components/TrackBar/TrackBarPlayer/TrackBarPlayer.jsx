@@ -1,20 +1,35 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./TrackBarPlayer.styles.js";
 import {
   useSetLikeMutation,
   useSetUnlikeMutation,
+  useGetTrackByIdQuery,
 } from "../../../redux/services/playlists.js";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../../redux/store/userSlice.js";
 
 export const TrackBarPlayer = () => {
+  const [isLike, setIsLike] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const userId = Number(useSelector((state) => state.user.id));
 
   const [setLike, {}] = useSetLikeMutation();
   const [setUnlike, {}] = useSetUnlikeMutation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const { data } = useGetTrackByIdQuery(Number(currentTrack?.id));
+  console.log(data?.stared_user);
+
+  useEffect(() => {
+    if (userId && currentTrack) {
+      setIsLike(
+        (currentTrack.stared_user ?? []).some((user) => user.id === userId)
+      );
+    }
+  }, [userId, currentTrack?.stared_user, currentTrack]);
 
   const logout = () => {
     dispatch(userLogout());
@@ -30,14 +45,7 @@ export const TrackBarPlayer = () => {
           navigate("/login");
           logout();
         });
-    } else if (!currentTrack.stared_user) {
-      setUnlike(currentTrack)
-        .unwrap()
-        .catch((error) => {
-          console.log(error);
-          navigate("/login");
-          logout();
-        });
+      setIsLike(false);
     } else {
       setLike(currentTrack)
         .unwrap()
@@ -46,6 +54,7 @@ export const TrackBarPlayer = () => {
           navigate("/login");
           logout();
         });
+      setIsLike(true);
     }
   };
 
@@ -69,9 +78,7 @@ export const TrackBarPlayer = () => {
       <S.TrackPlayLikeDis>
         <S.TrackPlayLike onClick={() => toggleStarred()}>
           <S.TrackPlayLikeSvg alt="like">
-            {(currentTrack.stared_user ?? []).find(
-              (user) => user.id === userId
-            ) || !currentTrack.stared_user ? (
+            {isLike ? (
               <svg
                 width="16"
                 height="14"

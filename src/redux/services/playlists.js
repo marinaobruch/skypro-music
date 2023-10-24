@@ -41,6 +41,10 @@ export const playlistApi = createApi({
           : [{ type: "Tracks", id: "LIST" }],
     }),
 
+    getTrackById: builder.query({
+      query: (id) => `catalog/track/${id}`,
+    }),
+
     getSelections: builder.query({
       query: (id) => `catalog/selection/${id}/`,
       providesTags: (result) =>
@@ -124,6 +128,7 @@ export const {
   useGetFavTracksQuery,
   useLazyGetAllTracksQuery,
   useLazyGetFavTracksQuery,
+  useGetTrackByIdQuery,
 
   useGetSelectionsQuery,
 
