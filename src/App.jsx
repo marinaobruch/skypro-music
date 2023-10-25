@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { setAccessToken, setRefreshToken } from "./redux/store/tokenSlice";
 
 function App() {
-  const [getAllTracksError, setGetAllTracksError] = useState(null);
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("token");
@@ -23,7 +22,7 @@ function App() {
       <GlobalStyle />
       <div className="App">
         <div>
-          <AppRoutes getAllTracksError={getAllTracksError} />
+          <AppRoutes />
         </div>
       </div>
     </>

@@ -7,7 +7,10 @@ import {
 } from "../../redux/services/playlists.js";
 import { useEffect } from "react";
 import { setAccessToken } from "../../redux/store/tokenSlice.js";
-import { addMyTracks } from "../../redux/store/playerSlice.js";
+import {
+  addAllTracksInit,
+  addMyTracks,
+} from "../../redux/store/playerSlice.js";
 import * as S from "./FavoritesPage.styles.js";
 
 export const FavoritesPage = () => {
@@ -15,10 +18,6 @@ export const FavoritesPage = () => {
 
   const { data, isLoading } = useGetFavTracksQuery();
   const [fetchFavorite] = useLazyGetFavTracksQuery();
-  // нужно убрать
-  // const refresh = window.localStorage.getItem("token");
-  // console.log(refresh);
-  // нужно убрать
   const [postTokenRefresh, {}] = usePostTokenRefreshMutation();
 
   const favoriteError = null;
@@ -44,6 +43,8 @@ export const FavoritesPage = () => {
           });
       });
   }, [data]);
+
+  dispatch(addAllTracksInit(myFavTracks));
 
   return (
     <>

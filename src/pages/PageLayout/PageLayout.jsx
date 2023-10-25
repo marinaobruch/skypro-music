@@ -6,9 +6,11 @@ import * as S from "./PageLayout.styles";
 import { TrackBar } from "../../components/TrackBar/TrackBar";
 import { Search } from "../../components/Search/Search";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export const PageLayout = ({ loading }) => {
   const currentTrack = useSelector((state) => state.audioplayer.track);
+  const [searchQuery, setSearchQuery] = useState();
 
   return (
     <>
@@ -18,8 +20,11 @@ export const PageLayout = ({ loading }) => {
           <S.Main>
             <NavBar />
             <S.MainCenterblock>
-              <Search />
-              <Outlet />
+              <Search
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
+              <Outlet searchQuery={searchQuery} />
             </S.MainCenterblock>
             <SideBar
               loading={loading}

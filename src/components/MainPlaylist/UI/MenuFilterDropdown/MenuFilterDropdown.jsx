@@ -13,7 +13,6 @@ export const MenuFilterDropdown = ({
 }) => {
   const [isActiveMenu, setIsActiveMenu] = useState(false);
   const [open, setOpen] = useState("");
-  const [countGenre, setCountGenre] = useState(null);
 
   const authorTrack = data?.map((item) => item.author);
   const author = Array.from(new Set(authorTrack));
@@ -88,9 +87,6 @@ export const MenuFilterDropdown = ({
                 onClick={() => handleFilter("1")}
               >
                 жанры
-                {filter.activeOptions.length !== 0 ? (
-                  <S.FilterCounter> v </S.FilterCounter>
-                ) : null}
               </S.FilterButton>
               {isActiveMenu && "1" === open ? (
                 <S.FilterPupUp>

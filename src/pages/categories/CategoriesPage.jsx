@@ -4,13 +4,17 @@ import { ALBUMS } from "../../data.js";
 import { useGetSelectionsQuery } from "../../redux/services/playlists.js";
 import { MainPlaylist } from "../../components/MainPlaylist/MainPlaylist.jsx";
 import * as S from "./CategoriesPage.styles.js";
+import { useDispatch } from "react-redux";
+import { addAllTracksInit } from "../../redux/store/playerSlice.js";
 
 export const CategoriesPage = () => {
   const params = useParams();
+  const dispatch = useDispatch;
 
   const album = ALBUMS.find((album) => album.id === Number(params.id));
 
   const { data, error, isLoading } = useGetSelectionsQuery(Number(params.id));
+  dispatch(addAllTracksInit(data?.items));
 
   return (
     <>

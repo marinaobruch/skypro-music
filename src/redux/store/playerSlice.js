@@ -6,16 +6,23 @@ const playerSlice = createSlice({
     playing: false,
     track: null,
     playlist: [{}],
+    playlistInit: [{}],
     playlistFavorite: [{}],
     shuffledPlaylist: [{}],
     shuffled: false,
     isSorted: false,
+    searchTrackList: [],
   },
 
   reducers: {
     addAllTracks(state, action) {
       state.playlist = action.payload;
     },
+
+    addAllTracksInit(state, action) {
+      state.playlistInit = action.payload;
+    },
+
     addMyTracks(state, action) {
       state.playlistFavorite = action.payload;
     },
@@ -70,11 +77,27 @@ const playerSlice = createSlice({
         );
       }
     },
+
+    handlerSearchTrack: (store, action) => {
+      const listForSearch = [...store.playlistInit];
+
+      const result = listForSearch.filter(
+        (track) =>
+          track?.name.toLowerCase().startsWith(action.payload.toLowerCase()) ||
+          track?.author
+            .toLowerCase()
+            .startsWith(action.payload.toLowerCase()) ||
+          track?.name.toLowerCase().startsWith(action.payload.toLowerCase())
+      );
+
+      store.searchTrackList = result;
+    },
   },
 });
 
 export const {
   addAllTracks,
+  addAllTracksInit,
   addMyTracks,
   addCurrentTrack,
   nextTrack,
