@@ -13,6 +13,7 @@ export const MenuFilterDropdown = ({
 }) => {
   const [isActiveMenu, setIsActiveMenu] = useState(false);
   const [open, setOpen] = useState("");
+  const [countGenre, setCountGenre] = useState(null);
 
   const authorTrack = data?.map((item) => item.author);
   const author = Array.from(new Set(authorTrack));
@@ -25,11 +26,6 @@ export const MenuFilterDropdown = ({
     { value: "new", name: "Сначала новые" },
     { value: "old", name: "Сначала старые" },
   ];
-
-  const checkOnGenre = () => {
-    filter.activeOptions.includes(genre);
-    console.log(1);
-  };
 
   const handleFilter = (i) => {
     setIsActiveMenu(!isActiveMenu);
@@ -47,6 +43,7 @@ export const MenuFilterDropdown = ({
         ...filter,
         activeOptions: filter.activeOptions.filter((item) => item !== option),
       });
+      // setCountGenre = [...(countGenre + 1)];
       return;
     }
     setFilter({
@@ -92,7 +89,7 @@ export const MenuFilterDropdown = ({
               >
                 жанры
                 {filter.activeOptions.length !== 0 ? (
-                  <S.FilterCounter> 1 </S.FilterCounter>
+                  <S.FilterCounter> v </S.FilterCounter>
                 ) : null}
               </S.FilterButton>
               {isActiveMenu && "1" === open ? (

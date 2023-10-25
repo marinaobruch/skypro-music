@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./TrackBarPlayer.styles.js";
 import {
@@ -10,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../../redux/store/userSlice.js";
 
 export const TrackBarPlayer = () => {
-  const [isLike, setIsLike] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,14 +19,7 @@ export const TrackBarPlayer = () => {
   const [setUnlike, {}] = useSetUnlikeMutation();
 
   const { data } = useGetTrackByIdQuery(Number(currentTrack?.id));
-
-  useEffect(() => {
-    if (userId && currentTrack) {
-      setIsLike(
-        (currentTrack.stared_user ?? []).some((user) => user.id === userId)
-      );
-    }
-  }, [userId, currentTrack?.stared_user, currentTrack]);
+  const isLike = (data?.stared_user ?? []).find(({ id }) => id === userId);
 
   const logout = () => {
     dispatch(userLogout());
@@ -36,7 +27,9 @@ export const TrackBarPlayer = () => {
   };
 
   const toggleStarred = () => {
-    if ((currentTrack.stared_user ?? []).find((user) => user.id === userId)) {
+    if (isLike) {
+      console.log("dislike");
+
       setUnlike(currentTrack)
         .unwrap()
         .catch((error) => {
@@ -44,8 +37,9 @@ export const TrackBarPlayer = () => {
           navigate("/login");
           logout();
         });
-      setIsLike(false);
     } else {
+      console.log("like");
+
       setLike(currentTrack)
         .unwrap()
         .catch((error) => {
@@ -53,7 +47,6 @@ export const TrackBarPlayer = () => {
           navigate("/login");
           logout();
         });
-      setIsLike(true);
     }
   };
 

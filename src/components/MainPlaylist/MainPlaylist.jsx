@@ -17,7 +17,6 @@ export const MainPlaylist = ({
   isLoading,
   selectedSort,
   filter,
-  setFilter,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,9 +31,9 @@ export const MainPlaylist = ({
           selectedSort
         );
       } else {
-        sortedTracks = filtrationTracks(tracks, filter);
+        return sortedTracks;
       }
-    } else {
+    } else if (filter.activeOptions.length) {
       sortedTracks = filtrationTracks(tracks, filter);
     }
     return sortedTracks;

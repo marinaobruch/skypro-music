@@ -43,6 +43,7 @@ export const playlistApi = createApi({
 
     getTrackById: builder.query({
       query: (id) => `catalog/track/${id}`,
+      providesTags: [{ type: "Tracks", id: "LIST" }],
     }),
 
     getSelections: builder.query({
