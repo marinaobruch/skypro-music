@@ -26,6 +26,11 @@ export const MenuFilterDropdown = ({
     { value: "old", name: "Сначала старые" },
   ];
 
+  const checkOnGenre = () => {
+    filter.activeOptions.includes(genre);
+    console.log(1);
+  };
+
   const handleFilter = (i) => {
     setIsActiveMenu(!isActiveMenu);
     setOpen(i);
@@ -49,7 +54,6 @@ export const MenuFilterDropdown = ({
       activeOptions: [...filter.activeOptions, option],
     });
   };
-  console.log(filter);
 
   return (
     <>
@@ -72,6 +76,7 @@ export const MenuFilterDropdown = ({
                       <S.FilterItem
                         key={option}
                         onClick={() => handlerClickOption(option)}
+                        clicked={filter.activeOptions.includes(option)}
                       >
                         {option}
                       </S.FilterItem>
@@ -86,6 +91,9 @@ export const MenuFilterDropdown = ({
                 onClick={() => handleFilter("1")}
               >
                 жанры
+                {filter.activeOptions.length !== 0 ? (
+                  <S.FilterCounter> 1 </S.FilterCounter>
+                ) : null}
               </S.FilterButton>
               {isActiveMenu && "1" === open ? (
                 <S.FilterPupUp>
@@ -94,6 +102,7 @@ export const MenuFilterDropdown = ({
                       <S.FilterItem
                         key={option}
                         onClick={() => handlerClickOption(option)}
+                        clicked={filter.activeOptions.includes(option)}
                       >
                         {option}
                       </S.FilterItem>

@@ -9,23 +9,33 @@ import {
 } from "../../redux/services/playlists.js";
 import { userLogout } from "../../redux/store/userSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
-import { sortTracks } from "../../utils/sort.js";
+import { sortTracks, filtrationTracks } from "../../utils/sort.js";
 
 export const MainPlaylist = ({
   getAllTracksError,
   tracks,
   isLoading,
   selectedSort,
+  filter,
+  setFilter,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const sortInitTracks = () => {
     let sortedTracks = tracks;
+
     if (selectedSort !== "default") {
       if (selectedSort) {
-        sortedTracks = sortTracks(tracks, selectedSort);
+        sortedTracks = sortTracks(
+          filtrationTracks(tracks, filter),
+          selectedSort
+        );
+      } else {
+        sortedTracks = filtrationTracks(tracks, filter);
       }
+    } else {
+      sortedTracks = filtrationTracks(tracks, filter);
     }
     return sortedTracks;
   };

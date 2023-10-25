@@ -35,6 +35,8 @@ export const MainPage = ({ getAllTracksError }) => {
         isLoading={isLoading}
         selectedSort={selectedSort}
         setSelectedSort={setSelectedSort}
+        filter={filter}
+        setFilter={setFilter}
       />
     </>
   );

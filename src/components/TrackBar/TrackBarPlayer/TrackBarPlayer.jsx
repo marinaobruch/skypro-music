@@ -21,7 +21,6 @@ export const TrackBarPlayer = () => {
   const [setUnlike, {}] = useSetUnlikeMutation();
 
   const { data } = useGetTrackByIdQuery(Number(currentTrack?.id));
-  console.log(data?.stared_user);
 
   useEffect(() => {
     if (userId && currentTrack) {
