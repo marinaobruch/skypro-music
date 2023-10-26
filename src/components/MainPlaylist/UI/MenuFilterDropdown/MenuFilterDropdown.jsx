@@ -64,6 +64,15 @@ export const MenuFilterDropdown = ({
     });
   };
 
+  // for icon-counter
+  const matchedAuthor = filter.activeOptions.filter(
+    (el) => author.indexOf(el) > -1
+  );
+
+  const matchedGenre = filter.activeOptions.filter(
+    (el) => genre.indexOf(el) > -1
+  );
+
   return (
     <>
       {isLoading ? null : (
@@ -76,30 +85,41 @@ export const MenuFilterDropdown = ({
                 onClick={() => handleFilter("0")}
               >
                 исполнителю
+                {matchedAuthor.length === 0 ? null : (
+                  <S.FilterCounter> {matchedAuthor.length} </S.FilterCounter>
+                )}
               </S.FilterButton>
 
               {isActiveMenu && "0" === open ? (
                 <S.FilterPupUp>
-                  <S.FilterPupUpList>
-                    {sortedTracksAuthor?.map((option) => (
-                      <S.FilterItem
-                        key={option}
-                        onClick={() => handlerClickOption(option)}
-                        clicked={filter.activeOptions.includes(option)}
-                      >
-                        {option}
-                      </S.FilterItem>
-                    ))}
-                  </S.FilterPupUpList>
+                  {sortedTracksAuthor.length === 0 ? (
+                    "Треков с таким исполнителем не найдено"
+                  ) : (
+                    <S.FilterPupUpList>
+                      {sortedTracksAuthor?.map((option) => (
+                        <S.FilterItem
+                          key={option}
+                          onClick={() => handlerClickOption(option)}
+                          clicked={filter.activeOptions.includes(option)}
+                        >
+                          {option}
+                        </S.FilterItem>
+                      ))}
+                    </S.FilterPupUpList>
+                  )}
                 </S.FilterPupUp>
               ) : null}
             </div>
+
             <div>
               <S.FilterButton
                 clicked={isActiveMenu && "1" === open}
                 onClick={() => handleFilter("1")}
               >
                 жанры
+                {matchedGenre.length === 0 ? null : (
+                  <S.FilterCounter> {matchedGenre.length} </S.FilterCounter>
+                )}
               </S.FilterButton>
               {isActiveMenu && "1" === open ? (
                 <S.FilterPupUp>
@@ -129,7 +149,7 @@ export const MenuFilterDropdown = ({
               >
                 {selectedSortName}
                 {selectedSort !== "default" ? (
-                  <S.FilterCounter>1 </S.FilterCounter>
+                  <S.FilterCounter> 1 </S.FilterCounter>
                 ) : null}
               </S.FilterButton>
               {isActiveMenu && "2" === open ? (
