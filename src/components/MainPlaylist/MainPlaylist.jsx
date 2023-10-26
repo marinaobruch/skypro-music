@@ -9,7 +9,8 @@ import {
 } from "../../redux/services/playlists.js";
 import { userLogout } from "../../redux/store/userSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
-import { sortTracks, filtrationTracks } from "../../utils/sort.js";
+import { sortTracks, filtrationTracks } from "../../utils/sortFunc.js";
+// import { searchTracks } from "../../utils/searchFunc.js";
 
 export const MainPlaylist = ({
   getAllTracksError,
@@ -20,6 +21,9 @@ export const MainPlaylist = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentSearch = useSelector(
+    (state) => state.audioplayer.searchTrackList
+  );
 
   const sortInitTracks = () => {
     let sortedTracks = tracks;
@@ -36,10 +40,22 @@ export const MainPlaylist = ({
     } else if (filter.activeOptions.length) {
       sortedTracks = filtrationTracks(tracks, filter);
     }
+
     return sortedTracks;
   };
-
   const sortedTracks = sortInitTracks();
+
+  const sortAndSearchTracks = () => {
+    if (!currentSearch) {
+      return sortedTracks;
+    }
+    return sortedTracks?.filter(
+      (track) =>
+        track?.name.toLowerCase().includes(currentSearch?.toLowerCase()) ||
+        track?.author.toLowerCase().startsWith(currentSearch?.toLowerCase())
+    );
+  };
+  const sortedAndSearchedTracks = sortAndSearchTracks();
 
   const currentTrack = useSelector((state) => state.audioplayer.track);
   const isPlaying = useSelector((state) => state.audioplayer.playing);
@@ -118,7 +134,7 @@ export const MainPlaylist = ({
           </>
         ) : (
           <>
-            {sortedTracks?.map((track) => (
+            {sortedAndSearchedTracks?.map((track) => (
               <S.PlaylistTrack
                 key={track.id}
                 onClick={() =>
@@ -204,3 +220,9 @@ export const MainPlaylist = ({
     </S.ContentPlaylist>
   );
 };
+// sortedTracks?.filter(
+//   (track) =>
+//     track?.name.toLowerCase().startsWith(handSearch.toLowerCase()) ||
+//     track?.author.toLowerCase().startsWith(handSearch.toLowerCase()) ||
+//     track?.name.toLowerCase().startsWith(handSearch.toLowerCase())
+// );

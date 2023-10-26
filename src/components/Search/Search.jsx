@@ -1,7 +1,11 @@
+import { useDispatch } from "react-redux";
 import * as S from "./Search.styles.js";
+import { handlerSearchTrack } from "../../redux/store/playerSlice.js";
 
-export const Search = (searchQuery, setSearchQuery) => {
-  // console.log(searchQuery);
+export const Search = ({ searchQuery, setSearchQuery }) => {
+  const dispatch = useDispatch();
+
+  dispatch(handlerSearchTrack(searchQuery));
 
   return (
     <S.CentreBlockSearch>

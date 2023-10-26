@@ -24,7 +24,7 @@ export const PageLayout = ({ loading }) => {
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
               />
-              <Outlet searchQuery={searchQuery} />
+              <Outlet />
             </S.MainCenterblock>
             <SideBar
               loading={loading}

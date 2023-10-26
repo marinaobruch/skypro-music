@@ -31,11 +31,3 @@ export const filtrationTracks = (trackList, filter) =>
       filter.activeOptions.includes(item.author)
     );
   });
-
-export const searchTracks = (trackList, search) =>
-  trackList.filter(
-    (track) =>
-      track?.name.toLowerCase().startsWith(search.toLowerCase()) ||
-      track?.author.toLowerCase().startsWith(search.toLowerCase()) ||
-      track?.name.toLowerCase().startsWith(search.toLowerCase())
-  );

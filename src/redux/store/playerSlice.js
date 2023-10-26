@@ -11,7 +11,7 @@ const playerSlice = createSlice({
     shuffledPlaylist: [{}],
     shuffled: false,
     isSorted: false,
-    searchTrackList: [],
+    searchTrackList: null,
   },
 
   reducers: {
@@ -79,18 +79,7 @@ const playerSlice = createSlice({
     },
 
     handlerSearchTrack: (store, action) => {
-      const listForSearch = [...store.playlistInit];
-
-      const result = listForSearch.filter(
-        (track) =>
-          track?.name.toLowerCase().startsWith(action.payload.toLowerCase()) ||
-          track?.author
-            .toLowerCase()
-            .startsWith(action.payload.toLowerCase()) ||
-          track?.name.toLowerCase().startsWith(action.payload.toLowerCase())
-      );
-
-      store.searchTrackList = result;
+      store.searchTrackList = action.payload;
     },
   },
 });
@@ -104,6 +93,7 @@ export const {
   previousTrack,
   togglePlayer,
   shuffledHandlePlaylist,
+  handlerSearchTrack,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;
