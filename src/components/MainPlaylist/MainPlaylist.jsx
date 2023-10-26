@@ -9,7 +9,7 @@ import {
 } from "../../redux/services/playlists.js";
 import { userLogout } from "../../redux/store/userSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
-import { sortTracks, filtrationTracks } from "../../utils/sortFunc.js";
+import { sortTracks, filtrationTracks } from "../../utils/sortAndFilterFunc.js";
 import { searchTracks } from "../../utils/searchFunc.js";
 
 export const MainPlaylist = ({
@@ -130,7 +130,7 @@ export const MainPlaylist = ({
           </>
         ) : (
           <>
-            {sortedAndSearchedTracks.length === 0 ? (
+            {sortedAndSearchedTracks?.length === 0 ? (
               <h1>Треков не найдено</h1>
             ) : (
               <>
