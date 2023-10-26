@@ -10,7 +10,7 @@ import {
 import { userLogout } from "../../redux/store/userSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
 import { sortTracks, filtrationTracks } from "../../utils/sortFunc.js";
-// import { searchTracks } from "../../utils/searchFunc.js";
+import { searchTracks } from "../../utils/searchFunc.js";
 
 export const MainPlaylist = ({
   getAllTracksError,
@@ -49,11 +49,7 @@ export const MainPlaylist = ({
     if (!currentSearch) {
       return sortedTracks;
     }
-    return sortedTracks?.filter(
-      (track) =>
-        track?.name.toLowerCase().includes(currentSearch?.toLowerCase()) ||
-        track?.author.toLowerCase().startsWith(currentSearch?.toLowerCase())
-    );
+    return searchTracks(sortedTracks, currentSearch);
   };
   const sortedAndSearchedTracks = sortAndSearchTracks();
 

@@ -42,7 +42,6 @@ export const MenuFilterDropdown = ({
         ...filter,
         activeOptions: filter.activeOptions.filter((item) => item !== option),
       });
-      // setCountGenre = [...(countGenre + 1)];
       return;
     }
     setFilter({
