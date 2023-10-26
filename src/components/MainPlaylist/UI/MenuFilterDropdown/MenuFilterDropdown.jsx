@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import * as S from "./MenuFilterDropdown.styles.js";
+import { useSelector } from "react-redux";
 
 export const MenuFilterDropdown = ({
   data,
@@ -11,11 +12,24 @@ export const MenuFilterDropdown = ({
   filter,
   setFilter,
 }) => {
+  const currentSearch = useSelector(
+    (state) => state.audioplayer.searchTrackList
+  );
+
   const [isActiveMenu, setIsActiveMenu] = useState(false);
   const [open, setOpen] = useState("");
 
   const authorTrack = data?.map((item) => item.author);
   const author = Array.from(new Set(authorTrack));
+  const searchTracksAuthor = () => {
+    if (!currentSearch) {
+      return author;
+    }
+    return author?.filter((item) =>
+      item?.toLowerCase().includes(currentSearch?.toLowerCase())
+    );
+  };
+  const sortedTracksAuthor = searchTracksAuthor();
 
   const genreTrack = data?.map((item) => item.genre);
   const genre = Array.from(new Set(genreTrack));
@@ -67,7 +81,7 @@ export const MenuFilterDropdown = ({
               {isActiveMenu && "0" === open ? (
                 <S.FilterPupUp>
                   <S.FilterPupUpList>
-                    {author.map((option) => (
+                    {sortedTracksAuthor?.map((option) => (
                       <S.FilterItem
                         key={option}
                         onClick={() => handlerClickOption(option)}
