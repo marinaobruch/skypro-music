@@ -47,12 +47,14 @@ export const GlobalStyle = createGlobalStyle`
   height: 0px; /* высота для горизонтального скролла */
   background-color: #4b4949;
   }
-
+  ::-webkit-scrollbar-track {
+      background-color: #000;
+  }
+  
   /* ползунок скроллбара */
   ::-webkit-scrollbar-thumb {
   background-color: #4b4949;
   border-radius: 9em;
-  box-shadow: inset 1px 1px 10px #ffffff;
   }
 
 

@@ -1,21 +1,68 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // m.obr@mail.ru
-export const playlistApi = createApi({
-  reducerPath: "playlistApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://skypro-music-api.skyeng.tech/",
-    tagTypes: ["Tracks"],
+import { userLogin } from "../store/userSlice";
+
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  const baseQuery = fetchBaseQuery({
+    baseUrl: "https://skypro-music-api.skyeng.tech",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().token.accessToken;
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
-
       return headers;
     },
-  }),
+  });
+
+  const result = await baseQuery(args, api, extraOptions);
+
+  if (result?.error?.status !== 401) {
+    return result;
+  }
+  const forceLogout = () => {
+    api.dispatch(userLogin(null));
+    window.location.navigate("/login");
+  };
+
+  const { token } = api.getState();
+
+  if (!token.refreshToken) {
+    return forceLogout();
+  }
+
+  const refreshResult = await baseQuery(
+    {
+      url: "/user/token/refresh/",
+      method: "POST",
+      body: {
+        refresh: token.refreshToken,
+      },
+    },
+    api,
+    extraOptions
+  );
+
+  if (!refreshResult.data.access) {
+    return forceLogout();
+  }
+
+  // доступ к токену, другой запрос
+  api.dispatch(userLogin({ ...auth, access: refreshResult.data.access }));
+
+  const retryResult = await baseQuery(args, api, extraOptions);
+
+  if (retryResult?.error?.status === 401) {
+    return forceLogout();
+  }
+
+  return retryResult;
+};
+
+export const playlistApi = createApi({
+  reducerPath: "playlistApi",
+  baseQuery: baseQueryWithReauth,
 
   endpoints: (builder) => ({
     // Requests for work with tracks
