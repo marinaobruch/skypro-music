@@ -23,7 +23,6 @@ export const filtrationTracks = (trackList, filter) => {
     }
     return filter.activeOptions.includes(item.author);
   });
-  console.log(findAuthor);
 
   const findGenre = trackList?.filter((item) => {
     if (filter.activeOptions.length === 0) {
@@ -31,7 +30,6 @@ export const filtrationTracks = (trackList, filter) => {
     }
     return filter.activeOptions.includes(item.genre);
   });
-  console.log(findGenre);
 
   const matchAuthorAndGenre = () => {
     if (findAuthor.length === 0) {
