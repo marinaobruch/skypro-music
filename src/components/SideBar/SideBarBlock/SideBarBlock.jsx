@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as S from "./SideBarBlock.styles.js";
 import { SkeletonSidebar } from "../../Skeletons/SkeletonSidebar/SkeletonSidebar.jsx";
 
-export function SideBarBlock({ loading, albums }) {
+export const SideBarBlock = ({ loading, albums }) => {
   return (
     <S.SidebarBlock>
       {albums.map((album) => (
@@ -26,4 +26,4 @@ export function SideBarBlock({ loading, albums }) {
       ))}
     </S.SidebarBlock>
   );
-}
+};

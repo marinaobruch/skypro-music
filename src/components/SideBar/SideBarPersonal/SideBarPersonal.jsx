@@ -4,7 +4,7 @@ import * as S from "./SideBarPersonal.styles.js";
 import { userLogout } from "../../../redux/store/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
-export function SideBarPersonal({ loading }) {
+export const SideBarPersonal = ({ loading }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -12,8 +12,6 @@ export function SideBarPersonal({ loading }) {
 
   const logout = () => {
     dispatch(userLogout());
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
     navigate("/login");
   };
 
@@ -26,9 +24,9 @@ export function SideBarPersonal({ loading }) {
       )}
       <S.SidebarIcon onClick={logout}>
         <svg alt="logout">
-          <use xlinkHref="img/icon/sprite.svg#logout"></use>
+          <use xlinkHref="/img/icon/sprite.svg#logout"></use>
         </svg>
       </S.SidebarIcon>
     </S.SidebarPersonal>
   );
-}
+};

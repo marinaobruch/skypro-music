@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { togglePlayer, nextTrack } from "../../redux/store/playerSlice.js";
 import { formatTimeTool } from "../../utils/formatTime";
 
-export function TrackBar() {
+export const TrackBar = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentDuration, setCurrentDuration] = useState(0);
   const [volume, setVolume] = useState(60);
@@ -115,4 +115,4 @@ export function TrackBar() {
       ) : null}
     </>
   );
-}
+};

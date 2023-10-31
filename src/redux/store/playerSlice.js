@@ -4,41 +4,31 @@ const playerSlice = createSlice({
   name: "audioplayer",
   initialState: {
     playing: false,
-    playlist: [{}],
-    playlistFavorite: [{}],
     track: null,
-    shuffled: false,
+    playlist: [{}],
+    playlistInit: [{}],
+    playlistFavorite: [{}],
     shuffledPlaylist: [{}],
-    currentPage: "",
-    currentPlaylist: [],
+    shuffled: false,
+    isSorted: false,
+    searchTrackList: null,
   },
 
   reducers: {
-    setCurrentPage: (state, action) => {
-      state.currentPage = action.payload;
-    },
     addAllTracks(state, action) {
       state.playlist = action.payload;
     },
+
+    addAllTracksInit(state, action) {
+      state.playlistInit = action.payload;
+    },
+
     addMyTracks(state, action) {
       state.playlistFavorite = action.payload;
     },
     addCurrentTrack(state, action) {
-      if (state.currentPage === "Main") {
-        state.currentPlaylist = state.playlist;
-      }
-      if (state.currentPage === "Favorites") {
-        state.currentPlaylist = state.playlistFavorite;
-      }
-
-      let currentTrackIndex = null;
-      const setStateCurrentPlaylist = state.currentPlaylist;
-
-      currentTrackIndex = setStateCurrentPlaylist.findIndex(
-        (track) => track.id === action.payload.id
-      );
-
-      state.track = setStateCurrentPlaylist[currentTrackIndex];
+      state.track = action.payload.track;
+      state.playlist = action.payload.tracks;
     },
     togglePlayer(state, action) {
       if (state.playing === action.payload) {
@@ -48,7 +38,9 @@ const playerSlice = createSlice({
     },
     nextTrack(state) {
       const curTrack = state.track;
-      const curPlaylist = state.currentPlaylist;
+      const curPlaylist = state.shuffled
+        ? state.shuffledPlaylist
+        : state.playlist;
 
       const currentTrackIdInList = curPlaylist.findIndex(
         (track) => track.id == curTrack.id
@@ -62,7 +54,9 @@ const playerSlice = createSlice({
     },
     previousTrack(state) {
       const curTrack = state.track;
-      const curPlaylist = state.currentPlaylist;
+      const curPlaylist = state.shuffled
+        ? state.shuffledPlaylist
+        : state.playlist;
 
       const currentTrackIdInList = curPlaylist.findIndex(
         (track) => track.id == curTrack.id
@@ -77,31 +71,29 @@ const playerSlice = createSlice({
     shuffledHandlePlaylist(state, action) {
       state.shuffled = action.payload;
       if (state.shuffled) {
-        state.shuffledPlaylist = state.currentPlaylist.sort(
+        const newShuffledArray = state.playlist.map((track) => track);
+        state.shuffledPlaylist = newShuffledArray.sort(
           () => Math.random() - 0.5
         );
       }
-      if (!state.shuffled) {
-        if (state.currentPage === "Main") {
-          state.currentPlaylist = state.playlist;
-        }
-        if (state.currentPage === "Favorites") {
-          state.currentPlaylist = state.playlistFavorite;
-        }
-      }
+    },
+
+    handlerSearchTrack: (store, action) => {
+      store.searchTrackList = action.payload;
     },
   },
 });
 
 export const {
   addAllTracks,
+  addAllTracksInit,
   addMyTracks,
   addCurrentTrack,
   nextTrack,
   previousTrack,
   togglePlayer,
   shuffledHandlePlaylist,
-  setCurrentPage,
+  handlerSearchTrack,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

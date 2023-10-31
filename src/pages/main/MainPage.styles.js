@@ -8,6 +8,7 @@ export const MainCenterblockH2 = styled.div`
   letter-spacing: -0.8px;
   margin-bottom: 45px;
 `;
+
 export const GlobalStyle = createGlobalStyle`
   * {
   margin: 0;

@@ -10,6 +10,7 @@ export const ContentPlaylist = styled.div`
   flex-direction: column;
 
   width: 100%;
+  height: 75vh;
 
   overflow-y: auto;
   overflow-x: auto;
@@ -43,10 +44,13 @@ export const simpledot = styled.div`
 `;
 
 export const PlaylistItem = styled.div`
-  width: 100%;
-  display: block;
-  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 60px;
+  scrollbar-width: none;
 `;
+
 export const PlaylistTrack = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;

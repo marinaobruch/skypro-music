@@ -1,3 +1,5 @@
+// не используется в коде, для примера
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLogin } from "../store/userSlice";
 

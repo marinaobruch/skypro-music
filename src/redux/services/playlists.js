@@ -5,7 +5,7 @@ export const playlistApi = createApi({
   reducerPath: "playlistApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://skypro-music-api.skyeng.tech/",
-    tagTypes: ["Tracks", "Favorites"],
+    tagTypes: ["Tracks"],
     prepareHeaders: (headers, { getState }) => {
       const token = getState().token.accessToken;
 
@@ -35,14 +35,26 @@ export const playlistApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Favorites", id })),
-              { type: "Favorites", id: "LIST" },
+              ...result.map(({ id }) => ({ type: "Tracks", id })),
+              { type: "Tracks", id: "LIST" },
             ]
-          : [{ type: "Favorites", id: "LIST" }],
+          : [{ type: "Tracks", id: "LIST" }],
+    }),
+
+    getTrackById: builder.query({
+      query: (id) => `catalog/track/${id}`,
+      providesTags: [{ type: "Tracks", id: "LIST" }],
     }),
 
     getSelections: builder.query({
       query: (id) => `catalog/selection/${id}/`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.items.map(({ id }) => ({ type: "Tracks", id })),
+              { type: "Tracks", id: "LIST" },
+            ]
+          : [{ type: "Tracks", id: "LIST" }],
     }),
 
     // Requests for like/dislike
@@ -51,10 +63,7 @@ export const playlistApi = createApi({
         url: `/catalog/track/${track.id}/favorite/`,
         method: "POST",
       }),
-      invalidatesTags: [
-        { type: "Favorites", id: "LIST" },
-        { type: "Tracks", id: "LIST" },
-      ],
+      invalidatesTags: [{ type: "Tracks", id: "LIST" }],
     }),
 
     setUnlike: builder.mutation({
@@ -62,10 +71,7 @@ export const playlistApi = createApi({
         url: `/catalog/track/${track.id}/favorite/`,
         method: "DELETE",
       }),
-      invalidatesTags: [
-        { type: "Favorites", id: "LIST" },
-        { type: "Tracks", id: "LIST" },
-      ],
+      invalidatesTags: [{ type: "Tracks", id: "LIST" }],
     }),
 
     // Requests for auth/reg
@@ -123,6 +129,7 @@ export const {
   useGetFavTracksQuery,
   useLazyGetAllTracksQuery,
   useLazyGetFavTracksQuery,
+  useGetTrackByIdQuery,
 
   useGetSelectionsQuery,
 

@@ -37,6 +37,8 @@ const userSlice = createSlice({
       state.username = null;
 
       localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
     },
   },
 });
