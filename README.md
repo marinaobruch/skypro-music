@@ -50,3 +50,47 @@ The following technologies were used to develop this project / Технолог�
 
 ## How to start a project / Как запустить проект
 
+Local start project
+To clone the repository, run the command:
+
+```
+git clone https://github.com/marinaobruch/skypro-music.git
+```
+
+Before development, you must install the project package.
+
+```
+cd avito-project
+npm i
+```
+
+Running a local server with a project.
+
+```
+npm run dev
+```
+
+The project will be launched at: http://localhost:3000
+
+### Локальный запуск проекта
+Для клонирования репозитория выполните команду:
+
+```
+git clone https://github.com/marinaobruch/skypro-music.git
+```
+
+Перед разработкой необходимо проинсталировать пакет проекта.
+
+```
+cd avito-project
+npm i
+```
+
+Запуск локального сервера с проектом.
+
+```
+npm run dev
+```
+
+Проект будет запущен по адресу: http://localhost:3000
+
