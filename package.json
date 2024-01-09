@@ -2,7 +2,7 @@
   "name": "skypro-music",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://marinaobruch.github.io/skypro-music/",
+  "homepage": "https://github.com/marinaobruch/skypro-music/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.6",
     "@testing-library/jest-dom": "^5.17.0",
