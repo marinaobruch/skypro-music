@@ -19,13 +19,13 @@ export const PageLayout = ({ loading }) => {
 				<S.Container>
 					<S.Main>
 						<NavBar />
-						<S.MainCenterblock>
+						<S.MainCenterBlock>
 							<Search
 								searchQuery={searchQuery}
 								setSearchQuery={setSearchQuery}
 							/>
 							<Outlet />
-						</S.MainCenterblock>
+						</S.MainCenterBlock>
 						<SideBar loading={loading} albums={ALBUMS} />
 					</S.Main>
 					{currentTrack ? <TrackBar /> : null}

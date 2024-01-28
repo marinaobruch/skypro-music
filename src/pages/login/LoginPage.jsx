@@ -149,7 +149,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
 			<S.ModalForm>
 				<Link to={'/login'}>
 					<S.LoginModalLogo>
-						<S.LoginModalLogoImg src='../img/logo_modal.png' alt='logo' />
+						<S.LoginModalLogoImg src='img/logo_modal.png' alt='logo' />
 					</S.LoginModalLogo>
 				</Link>
 				{isLoginMode ? (
