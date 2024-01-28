@@ -1,146 +1,146 @@
 // старая реализация работы с запросами
 
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // m.obr@mail.ru
 export const playlistApi = createApi({
-  reducerPath: "playlistApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://skypro-music-api.skyeng.tech/",
-    tagTypes: ["Tracks"],
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().token.accessToken;
+	reducerPath: 'playlistApi',
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'https://skypro-music-api.skyeng.tech/',
+		tagTypes: ['Tracks'],
+		prepareHeaders: (headers, { getState }) => {
+			const token = getState().token.accessToken
 
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
+			if (token) {
+				headers.set('authorization', `Bearer ${token}`)
+			}
 
-      return headers;
-    },
-  }),
+			return headers
+		},
+	}),
 
-  endpoints: (builder) => ({
-    // Requests for work with tracks
-    getAllTracks: builder.query({
-      query: () => "catalog/track/all/",
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "Tracks", id })),
-              { type: "Tracks", id: "LIST" },
-            ]
-          : [{ type: "Tracks", id: "LIST" }],
-    }),
+	endpoints: (builder) => ({
+		// Requests for work with tracks
+		getAllTracks: builder.query({
+			query: () => 'catalog/track/all/',
+			providesTags: (result) =>
+				result
+					? [
+							...result.map(({ id }) => ({ type: 'Tracks', id })),
+							{ type: 'Tracks', id: 'LIST' },
+					  ]
+					: [{ type: 'Tracks', id: 'LIST' }],
+		}),
 
-    getFavTracks: builder.query({
-      query: () => "catalog/track/favorite/all/",
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "Tracks", id })),
-              { type: "Tracks", id: "LIST" },
-            ]
-          : [{ type: "Tracks", id: "LIST" }],
-    }),
+		getFavTracks: builder.query({
+			query: () => 'catalog/track/favorite/all/',
+			providesTags: (result) =>
+				result
+					? [
+							...result.map(({ id }) => ({ type: 'Tracks', id })),
+							{ type: 'Tracks', id: 'LIST' },
+					  ]
+					: [{ type: 'Tracks', id: 'LIST' }],
+		}),
 
-    getTrackById: builder.query({
-      query: (id) => `catalog/track/${id}`,
-      providesTags: [{ type: "Tracks", id: "LIST" }],
-    }),
+		getTrackById: builder.query({
+			query: (id) => `catalog/track/${id}`,
+			providesTags: [{ type: 'Tracks', id: 'LIST' }],
+		}),
 
-    getSelections: builder.query({
-      query: (id) => `catalog/selection/${id}/`,
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.items.map(({ id }) => ({ type: "Tracks", id })),
-              { type: "Tracks", id: "LIST" },
-            ]
-          : [{ type: "Tracks", id: "LIST" }],
-    }),
+		getSelections: builder.query({
+			query: (id) => `catalog/selection/${id}/`,
+			providesTags: (result) =>
+				result
+					? [
+							...result.items.map(({ id }) => ({ type: 'Tracks', id })),
+							{ type: 'Tracks', id: 'LIST' },
+					  ]
+					: [{ type: 'Tracks', id: 'LIST' }],
+		}),
 
-    // Requests for like/dislike
-    setLike: builder.mutation({
-      query: (track) => ({
-        url: `/catalog/track/${track.id}/favorite/`,
-        method: "POST",
-      }),
-      invalidatesTags: [{ type: "Tracks", id: "LIST" }],
-    }),
+		// Requests for like/dislike
+		setLike: builder.mutation({
+			query: (track) => ({
+				url: `/catalog/track/${track.id}/favorite/`,
+				method: 'POST',
+			}),
+			invalidatesTags: [{ type: 'Tracks', id: 'LIST' }],
+		}),
 
-    setUnlike: builder.mutation({
-      query: (track) => ({
-        url: `/catalog/track/${track.id}/favorite/`,
-        method: "DELETE",
-      }),
-      invalidatesTags: [{ type: "Tracks", id: "LIST" }],
-    }),
+		setUnlike: builder.mutation({
+			query: (track) => ({
+				url: `/catalog/track/${track.id}/favorite/`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: [{ type: 'Tracks', id: 'LIST' }],
+		}),
 
-    // Requests for auth/reg
-    postReg: builder.mutation({
-      query: (body) => ({
-        url: "user/signup/",
-        method: "POST",
-        body,
-        headers: {
-          "content-type": "application/json",
-        },
-      }),
-    }),
+		// Requests for auth/reg
+		postReg: builder.mutation({
+			query: (body) => ({
+				url: 'user/signup/',
+				method: 'POST',
+				body,
+				headers: {
+					'content-type': 'application/json',
+				},
+			}),
+		}),
 
-    postLogin: builder.mutation({
-      query: (body) => ({
-        url: "user/login/",
-        method: "POST",
-        body,
-        headers: {
-          "content-type": "application/json",
-        },
-      }),
-    }),
+		postLogin: builder.mutation({
+			query: (body) => ({
+				url: 'user/login/',
+				method: 'POST',
+				body,
+				headers: {
+					'content-type': 'application/json',
+				},
+			}),
+		}),
 
-    // Requests for works with token
-    postToken: builder.mutation({
-      query: (body) => ({
-        url: "user/token/",
-        method: "POST",
-        body,
-        headers: {
-          "content-type": "application/json",
-        },
-        invalidatesTags: [{ type: "Tracks", id: "LIST" }],
-      }),
-    }),
+		// Requests for works with token
+		postToken: builder.mutation({
+			query: (body) => ({
+				url: 'user/token/',
+				method: 'POST',
+				body,
+				headers: {
+					'content-type': 'application/json',
+				},
+				invalidatesTags: [{ type: 'Tracks', id: 'LIST' }],
+			}),
+		}),
 
-    postTokenRefresh: builder.mutation({
-      query: (body) => ({
-        url: "user/token/refresh/",
-        method: "POST",
-        body,
-        headers: {
-          "content-type": "application/json",
-        },
-        invalidatesTags: [{ type: "Tracks", id: "LIST" }],
-      }),
-    }),
-  }),
-});
+		postTokenRefresh: builder.mutation({
+			query: (body) => ({
+				url: 'user/token/refresh/',
+				method: 'POST',
+				body,
+				headers: {
+					'content-type': 'application/json',
+				},
+				invalidatesTags: [{ type: 'Tracks', id: 'LIST' }],
+			}),
+		}),
+	}),
+})
 
 export const {
-  useGetAllTracksQuery,
-  useGetFavTracksQuery,
-  useLazyGetAllTracksQuery,
-  useLazyGetFavTracksQuery,
-  useGetTrackByIdQuery,
+	useGetAllTracksQuery,
+	useGetFavTracksQuery,
+	useLazyGetAllTracksQuery,
+	useLazyGetFavTracksQuery,
+	useGetTrackByIdQuery,
 
-  useGetSelectionsQuery,
+	useGetSelectionsQuery,
 
-  useSetLikeMutation,
-  useSetUnlikeMutation,
+	useSetLikeMutation,
+	useSetUnlikeMutation,
 
-  usePostRegMutation,
-  usePostLoginMutation,
+	usePostRegMutation,
+	usePostLoginMutation,
 
-  usePostTokenMutation,
-  usePostTokenRefreshMutation,
-} = playlistApi;
+	usePostTokenMutation,
+	usePostTokenRefreshMutation,
+} = playlistApi

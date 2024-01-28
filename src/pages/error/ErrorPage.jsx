@@ -1,9 +1,9 @@
-import * as S from "./ErrorPage.styles";
+import * as S from './ErrorPage.styles'
 
 export const ErrorPage = () => {
-  return (
-    <div>
-      <S.ErrorHeader>ErrorPage</S.ErrorHeader>
-    </div>
-  );
-};
+	return (
+		<div>
+			<S.ErrorHeader>ErrorPage</S.ErrorHeader>
+		</div>
+	)
+}

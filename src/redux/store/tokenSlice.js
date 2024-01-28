@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const tokenSlice = createSlice({
-  name: "token",
+	name: 'token',
 
-  initialState: {
-    accessToken: null,
-    refreshToken: null,
-  },
+	initialState: {
+		accessToken: null,
+		refreshToken: null,
+	},
 
-  reducers: {
-    setAccessToken: (state, action) => {
-      state.accessToken = action.payload.token;
-    },
-    setRefreshToken: (state, action) => {
-      state.refreshToken = action.payload.refreshToken;
-    },
-  },
-});
+	reducers: {
+		setAccessToken: (state, action) => {
+			state.accessToken = action.payload.token
+		},
+		setRefreshToken: (state, action) => {
+			state.refreshToken = action.payload.refreshToken
+		},
+	},
+})
 
-export const { setAccessToken, setRefreshToken } = tokenSlice.actions;
+export const { setAccessToken, setRefreshToken } = tokenSlice.actions
 
-export default tokenSlice.reducer;
+export default tokenSlice.reducer
