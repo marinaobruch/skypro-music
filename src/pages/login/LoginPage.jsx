@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
 	usePostLoginMutation,
 	usePostRegMutation,
@@ -56,7 +56,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
 						localStorage.setItem('refreshToken', token.refresh)
 
 						if (response.email) {
-							navigate('/')
+							navigate('/skypro-music/')
 						}
 					})
 					.catch((error) => {
@@ -103,7 +103,7 @@ export const LoginPage = ({ isLoginMode = false }) => {
 					}),
 				)
 				if (response.email) {
-					navigate('/login')
+					navigate('/skypro-music/login')
 				}
 			})
 			.catch((error) => {
@@ -147,11 +147,9 @@ export const LoginPage = ({ isLoginMode = false }) => {
 	return (
 		<S.PageContainer>
 			<S.ModalForm>
-				<Link to={'/login'}>
-					<S.LoginModalLogo>
-						<S.LoginModalLogoImg src='img/logo_modal.png' alt='logo' />
-					</S.LoginModalLogo>
-				</Link>
+				<S.LoginModalLogo onClick={() => navigate('/skypro-music/login')}>
+					<S.LoginModalLogoImg src='img/logo_modal.png' alt='logo' />
+				</S.LoginModalLogo>
 				{isLoginMode ? (
 					<>
 						<S.Inputs>
@@ -177,9 +175,11 @@ export const LoginPage = ({ isLoginMode = false }) => {
 						<S.LoginError>{textError}</S.LoginError>
 						<S.Buttons>
 							<S.PrimaryButton onClick={handleAuth}>Войти</S.PrimaryButton>
-							<Link to='/register'>
-								<S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
-							</Link>
+							<S.SecondaryButton
+								onClick={() => navigate('/skypro-music/register')}
+							>
+								Зарегистрироваться
+							</S.SecondaryButton>
 						</S.Buttons>
 					</>
 				) : (

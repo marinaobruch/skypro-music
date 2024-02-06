@@ -62,7 +62,7 @@ export const MainPlaylist = ({
 
 	const logout = () => {
 		dispatch(userLogout())
-		navigate('/login')
+		navigate('/skypro-music/login')
 	}
 
 	const toggleStarred = (track) => {
@@ -71,7 +71,7 @@ export const MainPlaylist = ({
 				.unwrap()
 				.catch((error) => {
 					console.log(error)
-					navigate('/login')
+					navigate('/skypro-music/login')
 					logout()
 				})
 		} else if (!track.stared_user) {
@@ -79,7 +79,7 @@ export const MainPlaylist = ({
 				.unwrap()
 				.catch((error) => {
 					console.log(error)
-					navigate('/login')
+					navigate('/skypro-music/login')
 					logout()
 				})
 		} else {
@@ -87,7 +87,7 @@ export const MainPlaylist = ({
 				.unwrap()
 				.catch((error) => {
 					console.log(error)
-					navigate('/login')
+					navigate('/skypro-music/login')
 					logout()
 				})
 		}
@@ -101,7 +101,7 @@ export const MainPlaylist = ({
 				<S.PlaylistTitleCol3>АЛЬБОМ</S.PlaylistTitleCol3>
 				<S.PlaylistTitleCol4>
 					<S.PlaylistTitleSvg alt='time'>
-						<use xlinkHref='/img/icon/sprite.svg#icon-watch'></use>
+						<use xlinkHref='img/icon/sprite.svg#icon-watch'></use>
 					</S.PlaylistTitleSvg>
 				</S.PlaylistTitleCol4>
 			</S.ContentTitle>
@@ -153,7 +153,7 @@ export const MainPlaylist = ({
 													)
 												) : (
 													<S.TrackTitleSvg alt='music'>
-														<use xlinkHref='/img/icon/sprite.svg#icon-note'></use>
+														<use xlinkHref='img/icon/sprite.svg#icon-note'></use>
 													</S.TrackTitleSvg>
 												)}
 											</S.TrackTitleImg>
@@ -207,7 +207,7 @@ export const MainPlaylist = ({
 														/>
 													</svg>
 												) : (
-													<use xlinkHref='/img/icon/sprite.svg#icon-like'></use>
+													<use xlinkHref='img/icon/sprite.svg#icon-like'></use>
 												)}
 											</S.TrackTimeSvg>
 											<span className='track__time-text'>

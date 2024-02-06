@@ -11,7 +11,7 @@ export const NavBar = () => {
 	return (
 		<S.MainNav>
 			<S.Logo>
-				<S.LogoImg src='/img/logo.png' alt='logo' />
+				<S.LogoImg src='img/logo.png' alt='logo' />
 			</S.Logo>
 
 			<S.Burger onClick={toggleOpen}>

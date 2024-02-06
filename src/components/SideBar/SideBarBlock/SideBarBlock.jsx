@@ -12,7 +12,7 @@ export const SideBarBlock = ({ loading, albums }) => {
 						{loading ? (
 							<SkeletonSidebar />
 						) : (
-							<Link to={`category/${album.id}`}>
+							<Link to={`/skypro-music/category/${album.id}`}>
 								<S.SidebarLink href={album.src}>
 									<S.SidebarImgItem src={album.src} alt={album.playlistAlt} />
 								</S.SidebarLink>

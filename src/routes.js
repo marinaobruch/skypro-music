@@ -11,22 +11,25 @@ export const AppRoutes = () => {
 	return (
 		<Routes>
 			<Route
-				path='/login'
+				path='/skypro-music/login'
 				element={<LoginPage isLoginMode={true}></LoginPage>}
 			></Route>
 
 			<Route
-				path='/register'
+				path='/skypro-music/register'
 				element={<LoginPage isLoginMode={false}></LoginPage>}
 			></Route>
 
 			<Route element={<ProtectedRoute />}>
 				<Route element={<PageLayout />}>
-					<Route path='/' element={<MainPage />} />
+					<Route path='/skypro-music/' element={<MainPage />} />
 
-					<Route path='/favorites' element={<FavoritesPage />} />
+					<Route path='/skypro-music/favorites' element={<FavoritesPage />} />
 
-					<Route path='/category/:id' element={<CategoriesPage />} />
+					<Route
+						path='/skypro-music/category/:id'
+						element={<CategoriesPage />}
+					/>
 				</Route>
 			</Route>
 

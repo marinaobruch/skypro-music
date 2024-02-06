@@ -9,19 +9,19 @@ export const NavBarMenu = () => {
 
 	const logout = () => {
 		dispatch(userLogout())
-		navigate('/login')
+		navigate('/skypro-music/login')
 	}
 
 	return (
 		<S.NavMenu>
 			<S.MenuList>
-				<NavLink to='/'>
+				<NavLink to='/skypro-music/'>
 					<NavBarItem menuName='Главная' />
 				</NavLink>
-				<NavLink to='/favorites'>
+				<NavLink to='/skypro-music/favorites'>
 					<NavBarItem menuName='Мой плейлист' />
 				</NavLink>
-				<NavLink onClick={logout} to='/login'>
+				<NavLink onClick={logout} to='/skypro-music/login'>
 					<NavBarItem menuName='Выйти' />
 				</NavLink>
 			</S.MenuList>

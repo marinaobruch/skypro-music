@@ -23,7 +23,7 @@ export const TrackBarPlayer = () => {
 
 	const logout = () => {
 		dispatch(userLogout())
-		navigate('/login')
+		navigate('/skypro-music/login')
 	}
 
 	const toggleStarred = () => {
@@ -34,7 +34,7 @@ export const TrackBarPlayer = () => {
 				.unwrap()
 				.catch((error) => {
 					console.log(error)
-					navigate('/login')
+					navigate('/skypro-music/login')
 					logout()
 				})
 		} else {
@@ -44,7 +44,7 @@ export const TrackBarPlayer = () => {
 				.unwrap()
 				.catch((error) => {
 					console.log(error)
-					navigate('/login')
+					navigate('/skypro-music/login')
 					logout()
 				})
 		}
@@ -88,7 +88,7 @@ export const TrackBarPlayer = () => {
 								/>
 							</svg>
 						) : (
-							<use xlinkHref='/img/icon/sprite.svg#icon-like'></use>
+							<use xlinkHref='img/icon/sprite.svg#icon-like'></use>
 						)}
 					</S.TrackPlayLikeSvg>
 				</S.TrackPlayLike>
