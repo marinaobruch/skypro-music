@@ -2,7 +2,7 @@ export const ALBUMS = [
 	{
 		id: 1,
 		name: 'Плейлист дня',
-		src: 'img/playlist03.png',
+		src: 'img/playlist01.png',
 	},
 	{
 		id: 2,

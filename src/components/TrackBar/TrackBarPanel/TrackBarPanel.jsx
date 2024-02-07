@@ -5,6 +5,14 @@ import {
 	shuffledHandlePlaylist,
 	togglePlayer,
 } from '../../../redux/store/playerSlice.js'
+import { ReactComponent as SvgNext } from './../../../assets/images/icon/next.svg'
+import { ReactComponent as SvgPlay } from './../../../assets/images/icon/play.svg'
+import { ReactComponent as SvgPrev } from './../../../assets/images/icon/prev.svg'
+import { ReactComponent as SvgRepeatAct } from './../../../assets/images/icon/repeat-active.svg'
+import { ReactComponent as SvgRepeat } from './../../../assets/images/icon/repeat.svg'
+import { ReactComponent as SvgShuffleAct } from './../../../assets/images/icon/shuffle-active.svg'
+import { ReactComponent as SvgShuffle } from './../../../assets/images/icon/shuffle.svg'
+import { ReactComponent as SvgStop } from './../../../assets/images/icon/stop.svg'
 import * as S from './TrackBarPanel.styles.js'
 
 export const TrackBarPanel = ({ repeat, handleRepeat }) => {
@@ -17,56 +25,27 @@ export const TrackBarPanel = ({ repeat, handleRepeat }) => {
 		<S.Controls>
 			<S.BtnPrev>
 				<S.BtnPrevSvg onClick={() => dispatch(previousTrack())}>
-					<use xlinkHref='img/icon/sprite.svg#icon-prev'></use>
+					<SvgPrev />
 				</S.BtnPrevSvg>
 			</S.BtnPrev>
 
 			<S.BtnPlay onClick={() => dispatch(togglePlayer())}>
 				<S.BtnPlaySvg alt='play'>
-					{isPlaying ? (
-						<svg
-							width='15'
-							height='19'
-							viewBox='0 0 15 19'
-							fill='none'
-							xmlns='http://www.w3.org/2000/svg'
-						>
-							<rect width='5' height='19' fill='#D9D9D9' />
-							<rect x='10' width='5' height='19' fill='#D9D9D9' />
-						</svg>
-					) : (
-						<use xlinkHref='img/icon/sprite.svg#icon-play'></use>
-					)}
+					{isPlaying ? <SvgStop /> : <SvgPlay />}
 				</S.BtnPlaySvg>
 			</S.BtnPlay>
 			<S.BtnNext>
 				<S.BtnNextSvg onClick={() => dispatch(nextTrack())}>
-					<use xlinkHref='img/icon/sprite.svg#icon-next'></use>
+					<SvgNext />
 				</S.BtnNextSvg>
 			</S.BtnNext>
 			<S.BtnRepeat onClick={handleRepeat}>
-				{repeat ? (
-					<S.BtnRepeatActiveSvg alt='repeat'>
-						<use xlinkHref='img/icon/sprite.svg#icon-repeat'></use>
-					</S.BtnRepeatActiveSvg>
-				) : (
-					<S.BtnRepeatSvg alt='repeat'>
-						<use xlinkHref='img/icon/sprite.svg#icon-repeat'></use>
-					</S.BtnRepeatSvg>
-				)}
+				{repeat ? <SvgRepeatAct /> : <SvgRepeat />}
 			</S.BtnRepeat>
 			<S.BtnShuffle
 				onClick={() => dispatch(shuffledHandlePlaylist(!isShuffled))}
 			>
-				{isShuffled ? (
-					<S.BtnShuffleActiveSvg>
-						<use xlinkHref='img/icon/sprite.svg#icon-shuffle'></use>
-					</S.BtnShuffleActiveSvg>
-				) : (
-					<S.BtnShuffleSvg>
-						<use xlinkHref='img/icon/sprite.svg#icon-shuffle'></use>
-					</S.BtnShuffleSvg>
-				)}
+				{isShuffled ? <SvgShuffleAct /> : <SvgShuffle />}
 			</S.BtnShuffle>
 		</S.Controls>
 	)

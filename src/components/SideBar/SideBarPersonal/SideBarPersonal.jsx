@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { userLogout } from '../../../redux/store/userSlice.js'
+import { ReactComponent as SvgLogout } from './../../../assets/images/icon/logout.svg'
 import * as S from './SideBarPersonal.styles.js'
 
 export const SideBarPersonal = ({ loading }) => {
@@ -23,9 +24,7 @@ export const SideBarPersonal = ({ loading }) => {
 				<S.SidebarPersonalName>{currentUser}</S.SidebarPersonalName>
 			)}
 			<S.SidebarIcon onClick={logout}>
-				<svg alt='logout'>
-					<use xlinkHref='img/icon/sprite.svg#logout'></use>
-				</svg>
+				<SvgLogout />
 			</S.SidebarIcon>
 		</S.SidebarPersonal>
 	)

@@ -2,6 +2,8 @@ import { useDispatch } from 'react-redux'
 import { handlerSearchTrack } from '../../redux/store/playerSlice.js'
 import * as S from './Search.styles.js'
 
+import { ReactComponent as SvgSearch } from './../../assets/images/icon/search.svg'
+
 export const Search = ({ searchQuery, setSearchQuery }) => {
 	const dispatch = useDispatch()
 
@@ -9,9 +11,7 @@ export const Search = ({ searchQuery, setSearchQuery }) => {
 
 	return (
 		<S.CentreBlockSearch>
-			<S.SearchSvg>
-				<use xlinkHref='img/icon/sprite.svg#icon-search'></use>
-			</S.SearchSvg>
+			<SvgSearch />
 			<S.SearchText
 				value={searchQuery}
 				onChange={(e) => setSearchQuery(e.target.value)}

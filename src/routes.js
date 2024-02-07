@@ -13,12 +13,12 @@ export const AppRoutes = () => {
 			<Route
 				path='/skypro-music/login'
 				element={<LoginPage isLoginMode={true}></LoginPage>}
-			></Route>
+			/>
 
 			<Route
 				path='/skypro-music/register'
 				element={<LoginPage isLoginMode={false}></LoginPage>}
-			></Route>
+			/>
 
 			<Route element={<ProtectedRoute />}>
 				<Route element={<PageLayout />}>
@@ -33,7 +33,7 @@ export const AppRoutes = () => {
 				</Route>
 			</Route>
 
-			<Route path='*' element={<ErrorPage />}></Route>
+			<Route path='*' element={<ErrorPage />} />
 		</Routes>
 	)
 }

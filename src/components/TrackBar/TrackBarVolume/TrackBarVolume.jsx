@@ -1,4 +1,5 @@
 import React from 'react'
+import { ReactComponent as SvgVolume } from './../../../assets/images/icon/volume.svg'
 import * as S from './TrackBarVolume.styles.js'
 
 export const TrackBarVolume = ({ volume, setVolume }) => {
@@ -6,9 +7,7 @@ export const TrackBarVolume = ({ volume, setVolume }) => {
 		<S.BarVolumeBlock>
 			<S.VolumeContent>
 				<S.VolumeImg>
-					<S.VolumeSvg alt='volume'>
-						<use xlinkHref='img/icon/sprite.svg#icon-volume'></use>
-					</S.VolumeSvg>
+					<SvgVolume />
 				</S.VolumeImg>
 				<S.VolumeProgress>
 					<S.VolumeProgressLine
