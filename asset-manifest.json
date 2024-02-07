@@ -1,10 +1,25 @@
 {
   "files": {
-    "main.js": "/static/js/main.fe3d949a.js",
-    "index.html": "/index.html",
-    "main.fe3d949a.js.map": "/static/js/main.fe3d949a.js.map"
+    "main.js": "/skypro-music/static/js/main.bd45785f.js",
+    "static/media/shuffle-active.svg": "/skypro-music/static/media/shuffle-active.6b0a48248763417558fcadcc1d202f0f.svg",
+    "static/media/shuffle.svg": "/skypro-music/static/media/shuffle.ac652bea2a29fb4c9393e5d9ee440460.svg",
+    "static/media/volume.svg": "/skypro-music/static/media/volume.fbde54cb4d7a2578c0578206901e7f84.svg",
+    "static/media/fav.svg": "/skypro-music/static/media/fav.06e53f5ba3968072edc4814c47a1e5f8.svg",
+    "static/media/repeat-active.svg": "/skypro-music/static/media/repeat-active.6f9cf85df8f1107ed58226ab3c70f6fc.svg",
+    "static/media/repeat.svg": "/skypro-music/static/media/repeat.89cf5e5e63e155909307e7b040431dc9.svg",
+    "static/media/logout.svg": "/skypro-music/static/media/logout.cb78a25a8164b647036dace84bbc3912.svg",
+    "static/media/like.svg": "/skypro-music/static/media/like.09379fe9515799ef885fccf628a0c498.svg",
+    "static/media/search.svg": "/skypro-music/static/media/search.fabef4217f07f6c540692261c13782ad.svg",
+    "static/media/note.svg": "/skypro-music/static/media/note.c9fc495b0ded64799f976421feb45627.svg",
+    "index.html": "/skypro-music/index.html",
+    "static/media/stop.svg": "/skypro-music/static/media/stop.2e07154f99b7b1787776d1216154de1d.svg",
+    "static/media/next.svg": "/skypro-music/static/media/next.021d029223253ec8c34660683aa328ca.svg",
+    "static/media/prev.svg": "/skypro-music/static/media/prev.82e4249f10b3a62002dea5474bf05f31.svg",
+    "static/media/watch.svg": "/skypro-music/static/media/watch.6ad3267968f6ed592b2c620aeeed11d7.svg",
+    "static/media/play.svg": "/skypro-music/static/media/play.6c8520a0bbe83b0907164be9d1f01518.svg",
+    "main.bd45785f.js.map": "/skypro-music/static/js/main.bd45785f.js.map"
   },
   "entrypoints": [
-    "static/js/main.fe3d949a.js"
+    "static/js/main.bd45785f.js"
   ]
 }
